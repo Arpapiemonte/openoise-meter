@@ -1,9 +1,5 @@
 # openoise-meter-ionic
-OPENOISE - APP TO MEASURE NOISE
-
-This repository contains the IONIC 2 source files (src folder).
-
-RELEASED APPS:
+OPENOISE - APP TO MEASURE NOISE: This repository contains the IONIC 2 source files (src folder). See the released apps in the official markets:
 - Android: https://play.google.com/store/apps/details?id=it.piemonte.arpa.openoise
 - iOS: https://itunes.apple.com/us/app/openoise/id1387499991?l=it&ls=1&mt=8
     
