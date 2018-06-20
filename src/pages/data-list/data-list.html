@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'DATA.TITLE' | translate}}</ion-title>
+
+    <ion-buttons *ngIf="show_all" right>
+      <!-- <ion-checkbox *ngIf="show" disabled="true"></ion-checkbox> -->
+      <!-- <button ion-button icon-only >
+          <ion-icon *ngIf="show" name="checkbox-outline">select</ion-icon>
+        </button> -->
+      <button ion-button icon-only (click)="shareSelected()">
+        <ion-icon  name="share"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="deleteSelected()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card id="no_file" *ngIf="show_no_file">
+    {{'DATA.NO_FILES' | translate}}
+  </ion-card>
+
+
+  <div *ngIf="show_list" >
+
+    <ion-item >
+      <ion-label>{{'DATA.FILE_LIST' | translate}}:</ion-label>
+      <ion-label *ngIf="!show_all" float-right style="text-align:right; font-size:small" (click)="modificaMolti()">{{'DATA.ALL' | translate}}</ion-label>
+      <ion-checkbox *ngIf="show_all" [(ngModel)]="allChecked" item-end id="" color="dark"></ion-checkbox>
+    </ion-item>
+
+    <ion-item id='{{fileObject.name}}_item'  *ngFor="let fileObject of list" (click)="openMenu(fileObject)" (press)="pressEvent(fileObject)">
+      <ion-label >{{fileObject.name}}</ion-label>
+      <ion-checkbox id='{{fileObject.name}}' class="checkbox" *ngIf="show_all" item-end color="dark" checked='{{allChecked}}' [(ngModel)]='fileObject.checked'></ion-checkbox>
+    </ion-item>
+
+  </div>
+
+</ion-content>

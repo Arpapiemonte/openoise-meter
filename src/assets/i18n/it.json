@@ -1,0 +1,191 @@
+{
+  "MENU": {
+          "HOME": "Fonometro",
+          "SETTINGS": "Impostazioni",
+          "DATA": "Dati salvati",
+          "INFO": "Informazioni",
+          "EXIT": "Esci"
+        },
+
+  "PRE-HOME": {
+          "DISCLAIMER1": "OpeNoise consente di misurare il livello di rumore in tempo reale.",
+          "WARNING": "ATTENZIONE",
+          "DISCLAIMER2": "Prima di considerare attendibili i valori rilevati è necessario procedere alla calibrazione del dispositivo. <br> Per un corretto utilizzo di OpeNoise si invita a consultare le sezioni <i>Tutorial e Glossario</i>.",
+          "NOMORE": "Ho capito, non mostrare più",
+          "CONFIGURATION": "Configurazione",
+          "STYLE": "Scegliere la tipologia di interfaccia",
+          "SIMPLE": "Semplice",
+          "ADVANCED": "Avanzata",
+          "ADVANCEDWITHSAVE": "Avanzata con salvataggio dati",
+          "READY": "Pronto a misurare?",
+          "START": "INIZIA"
+        },
+
+  "HOME": {
+          "TITLE": "OpeNoise",
+          "NOISE_LEVEL": "LIVELLO SONORO",
+          "START": "Inizio",
+          "DURATION": "Durata (t)",
+          "DAYS": "giorni",
+          "GLOBALS": "Globali",
+          "OCTAVES": "1/3 Ottava",
+          "SONOGRAM": "Sonogramma",
+          "FFT": "FFT",
+          "SAVE_LABEL": "Salvare i dati",
+          "SAVED_DATA": "Dati salvati nel file",
+          "SAVE_START":"Salvataggio dati iniziato",
+          "AXIS_DB": "Livello sonoro (dB)",
+          "AXIS_DBA": "Livello sonoro (dBA)",
+          "AXIS_DB_DBA": "Livello sonoro (dB o dBA)",
+          "AXIS_TIME": "Tempo (s)",
+          "AXIS_FREQUENCY_OCTAVES": "Frequenze in Terzi di Ottava (Hz)",
+          "AXIS_FREQUENCY_FFT": "Frequenze (Hz)"
+        },
+
+  "SETTINGS": {
+              "TITLE": "Impostazioni",
+              "DISPLAY": "VISUALIZZAZIONE",
+              "STYLE": {
+                        "TITLE": "Tipologia",
+                        "SIMPLE": "Semplice",
+                        "ADVANCED": "Avanzata"
+                      },
+              "COLOR": {
+                        "TITLE": "Colore",
+                        "LIGHT": "Chiaro",
+                        "DARK": "Scuro",
+                        "BLACK": "Scuro ad alto contrasto"
+                      },
+              "LANGUAGE": {
+                          "TITLE": "Lingua"
+                          },
+              "NOISE_METER": "FONOMETRO",
+              "CALIBRATION": "Calibrazione",
+              "RANGE": {
+                        "TITLE": "Asse del livello sonoro nei grafici",
+                        "FROM": "Da",
+                        "TO": "a"
+                      },
+              "SAVING": {
+                        "TITLE": "Salvataggio dati",
+                        "YES": "Abilitato",
+                        "NO": "Non abilitato"
+                      },
+              "CANCEL": "Annulla",
+              "OK": "Ok"
+            },
+
+  "CALIBRATION": {
+          "TITLE": "Calibrazione",
+          "TEXT1": "Per calibrare il dispositivo occorre confrontare il livello sonoro LAeq con un valore noto misurato da un fonometro professionale.",
+          "TEXT2": "Utilizzando la barra o i pulsanti + (più) e - (meno), impostare la calibrazione in modo che il valore misurato da OpeNoise e il valore noto siano uguali.",
+          "CALIBRATION": "Calibrazione"
+        },
+
+  "RANGE": {
+          "TITLE": "Asse del livello sonoro",
+          "FROM": "Da",
+          "TO": "a",
+          "TEXT": "Impostare il valore minimo e il valore massimo dell'asse del livello sonoro nei grafici."
+        },
+
+  "DATA": {
+            "TITLE": "Dati salvati",
+            "NO_FILES": "Nessun file salvato finora",
+            "FILE_LIST": "Elenco dei file",
+            "ALL":"Modifica molti",
+            "OPENMENU": {
+                        "OPEN": "Apri",
+                        "SHARE": "Condividi",
+                        "SHARE_MESSAGE": "Condivisione dati da OpeNoise",
+                        "SHARE_SUBJECT": "Condivisione dati da OpeNoise",
+                        "SHARE_CHOOSER_TITLE": "Scegli una app",
+                        "DELETE": "Elimina",
+                        "DELETE_TITLE": "Eliminazione file",
+                        "DELETE_MESSAGE": "Sei sicuro di voler eliminare il file",
+                        "CANCEL": "Annulla"
+                      },
+            "MULTI_SHARE": {"MESSAGE": "Condivisione file da OpeNoise",
+                            "SUBJECT": "Condivisione file da OpeNoise",
+                            "CHOOSER_TITLE": "Scegli una app"
+                          },
+            "MULTI_DELETE": {"TITLE": "Eliminazione multipla file",
+                             "MESSAGE": "Sei sicuro di eliminare i file selezionati",
+                             "CANCEL": "Annulla",
+                             "DELETE": "Elimina"
+                            }
+          },
+
+    "INFO": {
+            "TITLE":"Informazioni",
+            "WARNING": {
+                        "TITLE": "Avvertenze",
+                        "OPENOISE_TITLE": "OPENOISE",
+                        "OPENOISE_TEXT": "OpeNoise consente di misurare il livello di rumore in tempo reale.",
+                        "TERM_TITLE": "CONDIZIONI DI UTILIZZO",
+                        "TERM_TEXT": "Questa app non è progettata per usi professionali in quanto non garantisce una misurazione del rumore sufficientemente accurata.<br>Prima di considerare attendibili i valori rilevati è necessario un confronto con un fonometro professionale nel range di livelli di interesse, in quanto ogni apparecchio ha una specifica risposta al rumore.<br>Per utilizzare i dati acquisiti è comunque necessario avere adeguate conoscenze e competenze tecniche; una misura estemporanea e di breve durata nella maggior parte dei casi può non essere significativa.<br>In caso di dubbi, si prega di consultare, nella sezione <i>Tutorial</i>, le parti relative alla calibrazione del dispositivo e alla verifica della dinamica.",
+                        "SPECIFICS_TITLE": "SPECIFICHE TECNICHE",
+                        "SPECIFICS_TEXT": " - Misurazione in tempo reale del livello equivalente di pressione sonora ponderato A<br> - Indicazione livello minimo e massimo<br> - Analisi in terzi di ottava e FFT<br> - Salvataggio dati in un file di testo<br> - Calibrazione"
+                        },
+            "TUTORIAL": {
+                        "TITLE": "Tutorial",
+                        "MEASURE_TITLE": "ESEGUIRE UNA MISURA",
+                        "MEASURE_TEXT": "La misura del rumore inizia automaticamente con l'apertura di OpeNoise. Premendo il pulsante di reset si azzerano tutti i livelli e si inizia una nuova misura. <br>Per Android: La misura si interrompe selezionando 'Esci' nel menù principale oppure digitando il pulsante 'Indietro' del dispositivo (digitando il pulsante 'Home' la misura continua in background) oppure premendo il pulsante più a destra nella barra principale. <br>Per iPhone: La misura si interrompe digitando il pulsante 'Home' del dispositivo.",
+                        "CALIBRATION_TITLE": "CALIBRARE IL DISPOSITIVO",
+                        "CALIBRATION_TEXT": "Ogni dispositivo risponde in maniera diversa ai segnali acustici, per cui è necessario effettuare una calibrazione.<br>Per calibrare il dispositivo occorre confrontare il livello sonoro con un valore noto misurato da un fonometro professionale. Nella pagina <i>Calibrazione</i> (raggiungibile dalle <i>Impostazioni</i>) regolare la barra in modo che i due valori siano uguali.",
+                        "RANGE_TITLE": "VERIFICARE LA DINAMICA",
+                        "RANGE_TEXT": "Seppur calibrati, i dispositivi non sono in grado di misurare correttamente al di sopra di un valore massimo e al di sotto di un valore minimo. Verificare la dinamica significa individuare questi valori. Dopo aver effettuato la calibrazione bisogna dunque cercare il livello massimo e il livello minimo misurabili, sempre attraverso un confronto con un fonometro professionale. Al di fuori di tali soglie le misurazioni non sono attendibili.",
+                        "SAVING_TITLE": "SALVARE I DATI",
+                        "SAVING_TEXT": "L'opzione viene attivata selezionando in <i>Impostazioni</i> la configurazione di interfaccia 'Avanzata' e selezionando nell'opzione 'Salvataggio dati' il valore 'Abilitato'. Viene così visualizzato il pulsante che consente di salvare un file di testo con i dati misurati (non viene registrato l'audio). I file possono essere aperti nella sezione 'Dati salvati'. <br>Per Android: i file vengono salvati nella cartella 'openoise' della memoria locale (non nella SD esterna).",
+                        "PLOTS_TITLE": "GRAFICI",
+                        "PLOTS_TEXT": "Nella configurazione di interfaccia 'Semplice' è visualizzato un solo grafico con rappresentati i livelli LAmin, LAeq(1s) e LAmax.<br>Nella configurazione di interfaccia 'Avanzata' sono visualizzati 4 grafici nel seguente ordine:<br> - Globali: Andamento temporale dei livelli globali <br> - 1/3 Ottava: Spettro delle frequenze in terzi di ottava<br> - Sonogramma:  Spettro delle frequenze in terzi di ottava nel tempo<br> - FFT: Spettro delle frequenze in banda costante calcolato con FFT"
+                        },
+            "GLOSSARY": {
+                        "TITLE": "Glossario",
+                        "dB_TITLE": "dB",
+                        "dB_TEXT": "E' il parametro di misura del livello sonoro.",
+                        "dBA_TITLE": "dBA",
+                        "dBA_TEXT": "E' il parametro di misura del livello sonoro ponderato in frequenza secondo la risposta dell'orecchio umano (ponderazione 'A').",
+                        "LMin_TITLE": "Lmin",
+                        "LMin_TEXT": "E' il livello sonoro minimo rilevato dall'inizio della misura, espresso in dB.",
+                        "LAMin_TITLE": "LAmin",
+                        "LAMin_TEXT": "E' il livello sonoro minimo rilevato dall'inizio della misura, espresso in dBA.",
+                        "LMax_TITLE": "Lmax",
+                        "LMax_TEXT": "E' il livello sonoro massimo rilevato dall'inizio della misura, espresso in dB.",
+                        "LAMax_TITLE": "LAmax",
+                        "LAMax_TEXT": "E' il livello sonoro massimo rilevato dall'inizio della misura, espresso in dBA.",
+                        "LAeq_TITLE": "LAeq(1s)",
+                        "LAeq_TEXT": "E' il livello sonoro equivalente dell'ultimo secondo, espresso in dBA.",
+                        "LAeq_t_TITLE": "LAeq(t)",
+                        "LAeq_t_TEXT": "E' il livello sonoro equivalente rilevato dall'inizio della misura, espresso in dBA.",
+                        "GLOBAL_TITLE": "LIVELLO GLOBALE",
+                        "GLOBAL_TEXT": "Livello sonoro calcolato tenendo conto di tutte le frequenze dello spettro.",
+                        "SPECTRUM_TITLE": "SPETTRO",
+                        "SPECTRUM_TEXT": "Distribuzione in frequenza del livello sonoro.",
+                        "OCTAVES_TITLE": "TERZI DI OTTAVA",
+                        "OCTAVES_TEXT": "Rappresentazione dello spettro delle frequenze con una larghezza di banda percentuale costante. I dati rappresentati sono espressi in dB.",
+                        "FFT_TITLE": "FFT",
+                        "FFT_TEXT": "La FFT (Fast Fourier Transform - Trasformata veloce di Fourier) è una tecnica per calcolare lo spettro delle frequenze con una larghezza di banda costante. I dati rappresentati sono espressi in dB e dBA."
+                      },
+            "PRIVACY": {
+                        "TITLE": "Privacy",
+                        "PRIVACY_TITLE": "OPENOISE",
+                        "PRIVACY_TEXT": "L'app non memorizza né condivide alcun dato personale.<br>L'utente può, utilizzando la app, salvare i livelli sonori in forma numerica in un file di testo e, eventualmente, condividere questi dati.<br>Non viene effettuata nessuna registrazione audio né vengono acquisite informazioni sulla localizzazione del dispositivo utilizzato."
+                      },
+            "VERSION": {
+                        "TITLE": "Versione",
+                        "VERSION_TITLE": "OPENOISE",
+                        "VERSION_TEXT": "Versione 2.0.3<br>GNU General Public License v.3 o successive"
+                      },
+            "ARPA": {
+                        "TITLE": "Arpa Piemonte",
+                        "ARPA_TITLE": "ARPA PIEMONTE",
+                        "ARPA_TEXT": "Agenzia Regionale per la Protezione Ambientale<br>- Italia -"
+                      },
+            "CONTACTS": {
+                        "TITLE": "Contatti",
+                        "CONTACTS_TITLE": "CONTATTI",
+                        "CONTACTS_TEXT": "In caso di segnalazioni, errori o commenti si prega di inviare una mail a:<br>openoise@arpa.piemonte.it"
+                      }
+            }
+}

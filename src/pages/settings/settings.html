@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'SETTINGS.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">{{'SETTINGS.DISPLAY' | translate}}</ion-item-divider>
+      <ion-item id="doStyle1" (click)="doStyle()">
+        <h2 id="doStyle2" >{{'SETTINGS.STYLE.TITLE' | translate}}</h2>
+        <h3 id="doStyle3" >{{styleValue}}</h3>
+      </ion-item>
+      <ion-item (click)="doColor()">
+        <h2>{{'SETTINGS.COLOR.TITLE' | translate}}</h2>
+        <h3>{{colorValue}}</h3>
+      </ion-item>
+      <ion-item (click)="doLanguage()">
+        <h2>{{'SETTINGS.LANGUAGE.TITLE' | translate}}</h2>
+        <h3>{{languageValue}}</h3>
+      </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">{{'SETTINGS.NOISE_METER' | translate}}</ion-item-divider>
+      <ion-item (click)="doCalibraton()">
+        <h2>{{'SETTINGS.CALIBRATION' | translate}}</h2>
+        <h3>{{calibrationValue}}</h3>
+      </ion-item>
+      <ion-item (click)="doRange()">
+        <h2>{{'SETTINGS.RANGE.TITLE' | translate}}</h2>
+        <h3>{{'SETTINGS.RANGE.FROM' | translate}} {{rangeMinValue}} {{'SETTINGS.RANGE.TO' | translate}} {{rangeMaxValue}} dBA</h3>
+      </ion-item>
+      <ion-item *ngIf="savingShow" (click)="doSaving()">
+        <h2>{{'SETTINGS.SAVING.TITLE' | translate}}</h2>
+        <h3>{{savingValue}}</h3>
+      </ion-item>
+  </ion-item-group>
+
+  <!-- <ion-item-group>
+    <ion-item-divider color="light">{{'SETTINGS.INFORMATIONS' | translate}}</ion-item-divider>
+      <ion-item>opeNoise</ion-item>
+      <ion-item>Arpa Piemonte</ion-item>
+      <ion-item>Credits</ion-item>
+  </ion-item-group> -->
+</ion-content>

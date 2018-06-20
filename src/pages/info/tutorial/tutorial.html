@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'INFO.TUTORIAL.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="tutorial">
+
+  <ion-card>
+    <ion-card-header [innerHTML]="'INFO.TUTORIAL.MEASURE_TITLE' | translate">
+    </ion-card-header>
+    <ion-card-content [innerHTML]="'INFO.TUTORIAL.MEASURE_TEXT' | translate">
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header [innerHTML]="'INFO.TUTORIAL.CALIBRATION_TITLE' | translate">
+    </ion-card-header>
+    <ion-card-content [innerHTML]="'INFO.TUTORIAL.CALIBRATION_TEXT' | translate">
+    </ion-card-content>
+  </ion-card>
+
+    <ion-card>
+      <ion-card-header [innerHTML]="'INFO.TUTORIAL.RANGE_TITLE' | translate">
+      </ion-card-header>
+      <ion-card-content [innerHTML]="'INFO.TUTORIAL.RANGE_TEXT' | translate">
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header [innerHTML]="'INFO.TUTORIAL.SAVING_TITLE' | translate">
+      </ion-card-header>
+      <ion-card-content [innerHTML]="'INFO.TUTORIAL.SAVING_TEXT' | translate">
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header [innerHTML]="'INFO.TUTORIAL.PLOTS_TITLE' | translate">
+      </ion-card-header>
+      <ion-card-content [innerHTML]="'INFO.TUTORIAL.PLOTS_TEXT' | translate">
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>

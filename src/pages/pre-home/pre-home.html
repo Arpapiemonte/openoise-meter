@@ -1,0 +1,67 @@
+<!-- <ion-header>
+
+</ion-header> -->
+
+<ion-content class="tutorial-page">
+
+  <ion-slides pager>
+
+    <ion-slide>
+      <ion-card class="card-pre-home" >
+
+        <img id="logo_opeNoise" src="./assets/imgs/openoise_icona_400x400.png" alt="opeNoise">
+
+        <div id="disclaimer" [innerHTML]="'PRE-HOME.DISCLAIMER1' | translate"></div>
+
+        <h2 style="padding-top:20px;"><b>{{'PRE-HOME.WARNING' | translate}}:</b></h2>
+
+        <div id="disclaimer" [innerHTML]="'PRE-HOME.DISCLAIMER2' | translate"></div>
+
+        <ion-item>
+          <ion-label id="nomore">{{'PRE-HOME.NOMORE' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="nomore"></ion-checkbox>
+        </ion-item>
+
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide *ngIf="showStyle">
+
+      <ion-card class="card-pre-home">
+
+
+          <h1 >{{'PRE-HOME.CONFIGURATION' | translate}}</h1>
+
+          <div id="styleSet">{{'PRE-HOME.STYLE' | translate}}:</div>
+
+
+          <ion-list radio-group [(ngModel)]='style'>
+            <ion-item>
+              <ion-label>{{'PRE-HOME.SIMPLE' | translate}}</ion-label>
+                <ion-radio value="simple"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{'PRE-HOME.ADVANCED' | translate}}</ion-label>
+              <ion-radio value="advanced"></ion-radio>
+            </ion-item>
+          </ion-list>
+
+
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card class="card-pre-home">
+
+            <h1  [innerHTML]="'PRE-HOME.READY' | translate"></h1>
+            <button ion-button large clear icon-end color="primary" (click)="goHome()">
+              {{'PRE-HOME.START' | translate}}
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

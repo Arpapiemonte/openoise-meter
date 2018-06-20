@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'RANGE.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="ion-content" padding>
+
+  <ion-card class="range_card">
+    <ion-grid>
+
+      {{'RANGE.FROM' | translate}} {{range.lower}} {{'RANGE.TO' | translate}} {{range.upper}} dBA
+
+       <ion-range dualKnobs="true" [(ngModel)]="range" color="secondary" step="10" min="0" max="110" snaps="true">
+          <ion-icon range-left big name="remove"></ion-icon>
+          <ion-icon range-right big name="add"></ion-icon>
+      </ion-range>
+
+    </ion-grid>
+    <ion-card-content id="range_text">
+      {{'RANGE.TEXT' | translate}}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

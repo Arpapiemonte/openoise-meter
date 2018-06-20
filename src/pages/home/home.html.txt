@@ -1,0 +1,234 @@
+<ion-header id="ion-header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'HOME.TITLE' | translate}}</ion-title>
+    <ion-buttons right>
+      <!-- <button *ngIf="savingShow"  ion-button icon-only (click)="savedFileAlert()">
+        <ion-icon name="recording"></ion-icon>
+      </button> -->
+      <button ion-button icon-only (click)="rotate()">
+        <ion-icon name="phone-portrait"></ion-icon>
+      </button>
+      <button *ngIf="exitShow" ion-button icon-only (click)="exit()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="ion-content" >
+
+
+<div id="simple-content" *ngIf="styleSimple">
+  <ion-card id="card_reset" (click)='reset();'>
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-5 id="refresh_icon_simple">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-col>
+        <ion-col col-1 >
+        </ion-col>
+        <ion-col col-6 id="refresh_text_simple">
+          RESET
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+
+
+  <ion-card id="card_simple">
+    <div id="LAeq_label_simple">{{'HOME.NOISE_LEVEL' | translate}}</div>
+    <!-- <div id="LAeq_level_simple">{{home_dbATime}}</div> -->
+    <ion-grid id="grid_simple">
+      <ion-row align-items-center>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col col-4 id="LAeq_level_simple">
+          {{home_dbATime}}
+        </ion-col>
+        <ion-col col-4 id="dBA">
+          dBA
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card>
+    <div id="chartSimple_card">
+      <div id="chartSimple"></div>
+    </div>
+  </ion-card>
+
+</div>
+
+
+
+
+
+
+<div id="advance-content" *ngIf="styleAdvanced">
+  <ion-card  id="card_reset"  (click)='reset();'>
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col id="refresh_icon">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-col>
+        <ion-col col-auto id="refresh_text">
+          <div>{{'HOME.START' | translate}}: {{home_timeStart}}</div>
+          <div>{{'HOME.DURATION' | translate}}: {{home_timeElapsed}}</div>
+        </ion-col>
+        <ion-col  >
+          <ion-card>
+            <ion-icon *ngIf="savingShow" id="save_icon" (click)="savedFileAlert()" name="recording"></ion-icon>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-grid class="no_padding">
+    <ion-row class="no_padding" align-items-center>
+      <ion-col>
+        <ion-card id="refresh_text">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+
+                <div>{{'HOME.START' | translate}}: {{home_timeStart}}</div>
+                <div>{{'HOME.DURATION' | translate}}: {{home_timeElapsed}}</div>
+
+              </ion-col>
+            </ion-row >
+          </ion-grid >
+        </ion-card>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-card id="refresh_icon">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="refresh"></ion-icon>
+              </ion-col>
+            </ion-row >
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+      <ion-col *ngIf="savingShow" col-auto>
+        <ion-card id="save_icon" >
+            <ion-icon name="recording"></ion-icon>
+        </ion-card>
+      </ion-col>
+
+          <!-- <ion-grid>
+            <ion-row align-items-center>
+              <ion-col id="refresh_icon" col-auto>
+                <ion-icon name="refresh"></ion-icon>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+      <ion-col class="no_padding" col-auto>
+        <ion-card *ngIf="savingShow">
+          <ion-icon id="save_icon" (click)="savedFileAlert()" name="recording"></ion-icon>
+        </ion-card>
+      </ion-col> -->
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="levels_label">LAmin</div> <div class="levels_level">{{home_dbATimeStartMin}}</div>
+        </ion-col>
+        <ion-col id="LAeqt" >
+            <div class="levels_label">LAeq(t)</div> <div class="levels_level">{{home_dBARunning}}</div>
+        </ion-col>
+        <ion-col>
+            <div class="levels_label">LAmax</div> <div class="levels_level">{{home_dbATimeStartMax}}</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row id="LAeq" align-items-center>
+        <ion-col col-4 id="LAeq_label">
+          LAeq(1s)
+        </ion-col>
+        <ion-col col-4 id="LAeq_level">
+          {{home_dbATime}}
+        </ion-col>
+        <ion-col col-4 id="dBA">
+          dBA
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+
+  <ion-card id="char">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div id="chartLAeqRunning_card1">
+              <div id="chartLAeqRunning"></div>
+          </div>
+          <div id="chartThirdOctaves_card1">
+              <div id="chartThirdOctaves"></div>
+          </div>
+          <div id="chartSonogram_card1">
+              <div id="chartSonogram"></div>
+          </div>
+          <div id="chartFFT_card1">
+              <div id="chartFFT"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row align-items-center>
+        <ion-col class="chartButtons" >
+          <div id="chartButtonLAeq" class="chartButton" (click)='chartToViewLAeqRunning();'>{{'HOME.GLOBALS' | translate}}</div>
+        </ion-col>
+        <ion-col class="chartButtons" >
+          <div id="chartButtonOctaves" class="chartButton" (click)='chartToViewThirdOctaves();'>{{'HOME.OCTAVES' | translate}}</div>
+        </ion-col>
+        <ion-col class="chartButtons" >
+          <div id="chartButtonSonogram" class="chartButton" (click)='chartToViewSonogram();'>{{'HOME.SONOGRAM' | translate}}</div>
+        </ion-col>
+        <ion-col class="chartButtons" >
+          <div id="chartButtonFFT" class="chartButton" (click)='chartToViewFFT();'>{{'HOME.FFT' | translate}}</div>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+
+
+
+    <!-- <ion-card *ngIf="savingShow" >
+
+      <ion-grid id='save_grid' >
+        <ion-row align-items-center>
+          <ion-col col-3 id="save_item">
+            <ion-item >
+              <ion-toggle item-start [(ngModel)]="save" color="danger" checked="false" (ngModelChange)='savedFileAlert();' ></ion-toggle>
+            </ion-item>
+          </ion-col>
+          <ion-col col-9 id="refresh_text">
+            {{home_save_label}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+     </ion-card> -->
+
+
+</div>
+
+
+</ion-content>

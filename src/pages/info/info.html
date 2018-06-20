@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'INFO.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+      <ion-item (click)="doWarning()">
+        <h2>{{'INFO.WARNING.TITLE' | translate}}</h2>
+      </ion-item>
+      <ion-item (click)="doTutorial()">
+        <h2>{{'INFO.TUTORIAL.TITLE' | translate}}</h2>
+      </ion-item>
+      <ion-item (click)="doGlossary()">
+        <h2>{{'INFO.GLOSSARY.TITLE' | translate}}</h2>
+      </ion-item>
+      <ion-item (click)="doPrivacy()">
+        <h2>{{'INFO.PRIVACY.TITLE' | translate}}</h2>
+      </ion-item>
+      <ion-item (click)="doVersion()">
+        <h2>{{'INFO.VERSION.TITLE' | translate}}</h2>
+      </ion-item>
+      <!-- <ion-item (click)="doArpa()">
+        <h2>{{'INFO.ARPA.TITLE' | translate}}</h2>
+      </ion-item> -->
+      <ion-item (click)="doContacts()">
+        <h2>{{'INFO.CONTACTS.TITLE' | translate}}</h2>
+      </ion-item>
+  </ion-item-group>
+
+</ion-content>

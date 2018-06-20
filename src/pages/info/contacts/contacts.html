@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'INFO.CONTACTS.TITLE' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="contacts">
+
+  <ion-card >
+    <img class="image" src="./assets/imgs/logo_arpa.png"/>
+    <!-- <ion-card-header   [innerHTML]="'INFO.ARPA.ARPA_TITLE' | translate"></ion-card-header> -->
+    <!-- <ion-card-content  [innerHTML]="'INFO.ARPA.ARPA_TEXT' | translate"></ion-card-content> -->
+      <ion-card-content>
+        <div  [innerHTML]="'INFO.ARPA.ARPA_TEXT' | translate"></div>
+        <a href="http://www.arpa.piemonte.it">www.arpa.piemonte.it</a>
+      </ion-card-content>
+  </ion-card>
+  
+  <ion-card >
+    <!-- <ion-card-header   [innerHTML]="'INFO.CONTACTS.CONTACTS_TITLE' | translate"></ion-card-header> -->
+    <ion-card-content  [innerHTML]="'INFO.CONTACTS.CONTACTS_TEXT' | translate"></ion-card-content>
+  </ion-card>
+
+</ion-content>
