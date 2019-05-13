@@ -14,6 +14,7 @@ softwareType: standalone/mobile
 platforms:
   - android
   - ios
+logo: logo/openoise.png
 usedBy:
   - Comune di Torino
 categories:
