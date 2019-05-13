@@ -1,0 +1,80 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: openoise meter ionic
+url: 'https://github.com/Arpapiemonte/openoise-meter-ionic'
+landingURL: >-
+  http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise
+softwareVersion: 2.0.3
+developmentStatus: stable
+releaseDate: '2018-06-26'
+softwareType: standalone/mobile
+platforms:
+  - android
+  - ios
+usedBy:
+  - Comune di Torino
+categories:
+  - data-analytics
+  - data-collection
+  - data-visualization
+  - geographic-information-systems
+maintenance:
+  type: internal
+  contacts:
+    - name: Stefano Masera
+      affiliation: Arpa Piemonte
+legal:
+  license: GPL-3.0-only
+  mainCopyrightOwner: Arpa Piemonte
+  repoOwner: Arpa Piemonte
+intendedAudience:
+  scope:
+    - environment
+    - science-and-technology
+  countries:
+    - it
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+it:
+  countryExtensionVersion: '0.2'
+  riuso:
+    codiceIPA: arlpa_to
+description:
+  it:
+    genericName: Applicazione mobile
+    shortDescription: Applicazione Android per rilevare il rumore attraverso smartphone e tablet
+    longDescription: >
+      OpeNoise è una applicazione Android per rilevare il rumore attraverso
+      smartphone e tablet, sviluppata da _Arpa Piemonte_.
+
+
+      **L’applicazione consente la misurazione del livello sonoro e la sua
+      composizione in frequenza**. È inoltre possibile memorizzare i risultati
+      di misura in un file di testo.
+
+      L’attendibilità di OpeNoise è stata verificata attraverso numerosi test in
+      laboratorio e sul campo condotti su diversi dispositivi, confrontando i
+      risultati con fonometri professionali. Pur con alcune differenze, tutti
+      gli apparecchi analizzati hanno fornito una buona risposta nella gamma di
+      livelli sonori tipica dei rumori ambientali (45 - 80 dBA) e nel range di
+      frequenza 200-5000 Hz.
+
+
+      **Attenzione** però, prima di considerare attendibili i livelli sonori
+      misurati con l’applicazione** è comunque necessario effettuare una
+      calibrazione del dispositivo utilizzato**, attraverso un confronto con
+      livelli noti, in quanto ogni apparecchio ha una propria risposta al
+      rumore.
+    documentation: >-
+      http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise#primo-avvio-di-openoise
+    features:
+      - Real-time A-weighted sound pressure level measurement
+      - Livello minimo e massimo
+      - Third octave and FFT analysis
+      - Salvataggio dati in file di testo
+      - Calibrazione
