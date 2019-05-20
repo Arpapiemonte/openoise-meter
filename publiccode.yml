@@ -84,7 +84,7 @@ description:
       - screenshots/7.png
       - screenshots/8.png
   en:
-    genericName: Applicazione mobile
+    genericName: Mobile Application 
     shortDescription: OpeNoise is a real-time noise level meter for Android and iOS smartphone and tablet
     longDescription: >
       TECHNICAL SPECIFICATIONS:
@@ -117,4 +117,3 @@ description:
       - screenshots/6.png
       - screenshots/7.png
       - screenshots/8.png
-
