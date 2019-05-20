@@ -41,7 +41,8 @@ intendedAudience:
 localisation:
   localisationReady: false
   availableLanguages:
-    - it, en
+    - it
+    - en
 it:
   countryExtensionVersion: '0.2'
   riuso:
