@@ -3,8 +3,8 @@
 # More info at https://github.com/italia/publiccode.yml
 
 publiccodeYmlVersion: '0.2'
-name: openoise meter ionic
-url: 'https://github.com/Arpapiemonte/openoise-meter-ionic'
+name: OpeNoise Meter - Android and iOS app
+url: 'https://github.com/Arpapiemonte/openoise-meter'
 landingURL: >-
   http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise
 softwareVersion: 2.0.3
@@ -26,6 +26,7 @@ maintenance:
   type: internal
   contacts:
     - name: Stefano Masera
+      email: opeonoise@arpa.piemonte.it
       affiliation: Arpa Piemonte
 legal:
   license: GPL-3.0-only
@@ -40,7 +41,7 @@ intendedAudience:
 localisation:
   localisationReady: false
   availableLanguages:
-    - it
+    - it, en
 it:
   countryExtensionVersion: '0.2'
   riuso:
@@ -48,36 +49,29 @@ it:
 description:
   it:
     genericName: Applicazione mobile
-    shortDescription: Applicazione Android per rilevare il rumore attraverso smartphone e tablet
+    shortDescription: Applicazione Android e iOS per rilevare il rumore attraverso smartphone e tablet
     longDescription: >
-      OpeNoise è una applicazione Android per rilevare il rumore attraverso
-      smartphone e tablet, sviluppata da _Arpa Piemonte_.
+      FUNZIONI
+      - Misurazione in tempo reale del livello equivalente di pressione sonora ponderato A
+      - Indicazione livello minimo e massimo
+      - Analisi in terzi di ottava e FFT
+      - Salvataggio dati in un file di testo
+      - Calibrazione
 
-
-      **L’applicazione consente la misurazione del livello sonoro e la sua
-      composizione in frequenza**. È inoltre possibile memorizzare i risultati
-      di misura in un file di testo.
-
-      L’attendibilità di OpeNoise è stata verificata attraverso numerosi test in
-      laboratorio e sul campo condotti su diversi dispositivi, confrontando i
-      risultati con fonometri professionali. Pur con alcune differenze, tutti
-      gli apparecchi analizzati hanno fornito una buona risposta nella gamma di
-      livelli sonori tipica dei rumori ambientali (45 - 80 dBA) e nel range di
-      frequenza 200-5000 Hz.
-
-
-      **Attenzione** però, prima di considerare attendibili i livelli sonori
-      misurati con l’applicazione** è comunque necessario effettuare una
-      calibrazione del dispositivo utilizzato**, attraverso un confronto con
-      livelli noti, in quanto ogni apparecchio ha una propria risposta al
-      rumore.
+      CONDIZIONI DI UTILIZZO
+      Questa app non è progettata per usi professionali in quanto non garantisce una misurazione del rumore 
+      sufficientemente accurata.
+      Prima di considerare attendibili i valori rilevati è necessario un confronto con un fonometro professionale 
+      nel range di livelli di interesse, in quanto ogni apparecchio ha una specifica risposta al rumore.
+      Per utilizzare i dati acquisiti è necessario avere adeguate conoscenze e competenze tecniche; 
+      una misura estemporanea e di breve durata nella maggior parte dei casi può non essere significativa.
     documentation: >-
       http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise#primo-avvio-di-openoise
     features:
-      - Real-time A-weighted sound pressure level measurement
-      - Livello minimo e massimo
-      - Third octave and FFT analysis
-      - Salvataggio dati in file di testo
+      - Misurazione in tempo reale del livello equivalente di pressione sonora ponderato A
+      - Indicazione livello minimo e massimo
+      - Analisi in terzi di ottava e FFT
+      - Salvataggio dati in un file di testo
       - Calibrazione
     screenshots:
       - screenshots/1.png
@@ -88,3 +82,38 @@ description:
       - screenshots/6.png
       - screenshots/7.png
       - screenshots/8.png
+  en:
+    genericName: Applicazione mobile
+    shortDescription: OpeNoise is a real-time noise level meter for Android and iOS smartphone and tablet
+    longDescription: >
+      TECHNICAL SPECIFICATIONS:
+      - Real-time A-weighted sound pressure level measurement
+      - Minimum and maximum level
+      - Third octave and FFT analysis
+      - Data saving in text file
+      - Calibration
+
+      TERM OF USE
+      This app is not intended for professional use, it does not necessarily guarantee an accurate noise measurement.
+      Since each device has a different response to noise, a comparison with a professional noise level meter 
+      in the measurement dynamic range is required.
+      The utilization of the app requires adequate technical knowledge and skill; 
+      an extemporary measurement might not be correct.
+    documentation: >-
+      http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise#primo-avvio-di-openoise
+    features:
+      - Real-time A-weighted sound pressure level measurement
+      - Minimum and maximum level
+      - Third octave and FFT analysis
+      - Data saving in text file
+      - Calibration
+    screenshots:
+      - screenshots/1.png
+      - screenshots/2.png
+      - screenshots/3.png
+      - screenshots/4.png
+      - screenshots/5.png
+      - screenshots/6.png
+      - screenshots/7.png
+      - screenshots/8.png
+
