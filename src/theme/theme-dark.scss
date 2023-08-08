@@ -1,0 +1,35 @@
+@import "variables-dark";
+
+body.dark {
+  @include dark-theme();
+}
+
+.ios body.dark {
+  @include dark-ios-body();
+}
+
+.ios body.dark ion-modal {
+  @include dark-ios-modal();
+}
+
+.md body.dark {
+  @include dark-android-body();
+}
+
+@media (prefers-color-scheme: dark) {
+  body.auto {
+    @include dark-theme();
+  }
+
+  .ios body.auto {
+    @include dark-ios-body();
+  }
+
+  .ios body.auto ion-modal {
+    @include dark-ios-modal();
+  }
+
+  .md body.auto {
+    @include dark-android-body();
+  }
+}

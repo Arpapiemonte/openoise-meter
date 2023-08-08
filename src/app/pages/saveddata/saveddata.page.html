@@ -1,0 +1,83 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>saveddata</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div *ngIf="files.length > 0">
+    <ion-item>
+      <ion-label>
+        {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TITLE}}
+      </ion-label>
+      <ion-icon *ngIf="!modificaMoltiVariable" name="create-outline" (click)="modificaMolti()"></ion-icon>
+      <ion-checkbox *ngIf="modificaMoltiVariable" (ionChange)="checkboxTutti($event)"></ion-checkbox>
+    </ion-item>
+
+    <ion-item-group>
+      <ion-list>
+        <ion-item *ngFor="let file of files">
+          <ion-label (click)="presentActionSheet(file.name)">
+            <h3>{{file.name}}</h3>
+            <p>{{file.size_kb}} kB</p>
+          </ion-label>
+          <ion-checkbox *ngIf="modificaMoltiVariable" slot="end" [checked]="file.checked" (ionChange)="checkboxChange(file.name,$event)"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-item-group>
+  </div>
+
+  <div *ngIf="files.length === 0" style="text-align: center; padding:30px;">
+    {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT3}}
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="setModalOpen(false)">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>File: {{fileOpen}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT8_TITLE}}</ion-card-title>
+            <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          </ion-card-header>
+          <ion-card-content innerHTML="{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT8}}">
+          </ion-card-content>
+        </ion-card>
+
+        <div style="padding:10px;">
+          <div *ngFor="let line of fileOpenArray">
+            {{line}}
+          </div>
+        </div>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>
+
+<ion-tab-bar *ngIf="modificaMoltiVariable">
+  <ion-tab-button (click)="eliminaMolti()">
+    <ion-icon name="trash-outline"></ion-icon>
+    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button (click)="condividiMolti()">
+    <ion-icon name="share-social-outline"></ion-icon>
+    <ion-label> {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT5}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button (click)="annulla()">
+    <ion-icon name="close-outline"></ion-icon>
+    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6}}</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

@@ -1,0 +1,7 @@
+{
+  "name": "openoise-meter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,5 +1,8 @@
 # openoise-meter-ionic
-OPENOISE - APP TO MEASURE NOISE: This repository contains the IONIC 2 source files (src folder). See the released apps in the official markets:
+OPENOISE METER - APP TO MEASURE NOISE
+This repository contains the ionic-capacitor source files. 
+
+See the released apps in the official markets:
 - Android: https://play.google.com/store/apps/details?id=it.piemonte.arpa.openoise
 - iOS: https://itunes.apple.com/us/app/openoise/id1387499991?l=it&ls=1&mt=8
     
@@ -24,3 +27,33 @@ Arpa Piemonte (Regional Agency for the Protection of the Environment of Piedmont
 
 CONTACTS: 
 openoise@arpa.piemonte.it
+
+
+REQUIREMENTS:
+```
+Ionic:
+
+   Ionic CLI                     : 7.1.1 (/Users/stefmase/.nvm/versions/node/v18.15.0/lib/node_modules/@ionic/cli)
+   Ionic Framework               : @ionic/angular 7.0.5
+   @angular-devkit/build-angular : 16.0.1
+   @angular-devkit/schematics    : 16.0.1
+   @angular/cli                  : 16.0.1
+   @ionic/angular-toolkit        : 9.0.0
+
+Capacitor:
+
+   Capacitor CLI      : 5.0.3
+   @capacitor/android : 5.0.3
+   @capacitor/core    : 5.0.3
+   @capacitor/ios     : 5.0.3
+
+Utility:
+
+   cordova-res : not installed globally
+   native-run  : 1.7.2
+
+System:
+
+   NodeJS : v18.15.0 
+   npm    : 9.5.0
+```

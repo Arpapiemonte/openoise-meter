@@ -1,192 +1,304 @@
 {
-  "MENU": {
-          "HOME": "Noise meter",
-          "SETTINGS": "Settings",
-          "DATA": "Saved data",
-          "INFO": "Information",
-          "EXIT": "Exit"
+  "TRANSLATION": {
+    "PREMETER": {
+      "HEADER_FIRST_TIME": "Welcome to OpeNoise!",
+      "MESSAGE_FIRST_TIME": "<p>OpeNoise is an app aimed at the measurement of real-time sound pressure level.</p><p>To consider measured data reliable it is necessary to calibrate the device.</p><p>For more information please refer to the <i>Tutorial</i> and <i>Glossary</i> sections.</p><p>Good measurements!</p><br><b>WARNING:</b> When upgrading from version 2.0.3, it is necessary to re-calibrate the device. We apologize for the inconvenience.",
+      "OK": "Ok"
+    },
+    "TABS": {
+      "NOISE_METER": "Noise Meter",
+      "SAVED_DATA": "Measures",
+      "SETTINGS": "Settings",
+      "INFO": "Info"
+    },
+    "NOISE_METER": {
+      "START": "Start",
+      "PAUSE": "Pause",
+      "STOP": "Stop",
+      "RESET": "Reset",
+      "SAVE": "Save",
+      "ROTATE": "Rotate"
+    },
+    "LEVELS": {
+      "DATE_START": "Start",
+      "DATE_NOW": "Now",
+      "ELAPSED_TIME": "Elapsed time",
+      "DAYS": "days",
+      "ROTATE": "Rotate"
+    },
+    "CHARTS": {
+      "GLOBALS": "Global",
+      "OCTAVES": "1/3 Octave",
+      "SONOGRAM": "Spectrum",
+      "FFT": "FFT",
+      "AXIS_DB": "Noise level (dB)",
+      "AXIS_DBA": "Noise level (dBA)",
+      "AXIS_DB_DBA": "Noise level (dB o dBA)",
+      "AXIS_TIME": "Time (s)",
+      "AXIS_FREQUENCY_OCTAVES": "1/3 Octave Frequency (Hz)",
+      "AXIS_FREQUENCY_FFT": "Frequency (Hz)"
+    },
+    "SETTINGS": {
+      "NOISE_METER": {
+        "NOISE_METER_TITLE": "NOISE METER",
+        "NOISE_METER_TEXT": "Some settings are disabled because a measurement is in progress"
+      },
+      "CALIBRATION": {
+        "CALIBRATION_TITLE": "Calibration",
+        "CALIBRATION_VALUE": "Value",
+        "CALIBRATION_TITLE1": "Instruction",
+        "CALIBRATION_TEXT_ANDROID": "In order to calibrate the device compare LAeq noise level with the value measured by a professional sound level meter.<br>Operating mode:<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +7.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation",
+        "CALIBRATION_TEXT_IOS": "In order to calibrate the device compare LAeq noise level with the value measured by a professional sound level meter.<br>Operating mode:<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +7.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation<br><br>For this device we recommended to use a calibration value of 24.0 dB.",
+        "CALIBRATION_OPENOISE_VALUE_TEXT": "OpeNoise level",
+        "CALIBRATION_VALUE_TEXT": "Calibration value",
+        "CALIBRATION_BUTTON": "CALIBRATE",
+        "CALIBRATION_VALUE_SENDTEXT": "Send calibration data to ARPA",
+        "CALIBRATION_SENDBUTTON": "SEND",
+        "CALIBRATION_CANCEL": "Cancel",
+        "CALIBRATION_OK": "Ok",
+        "CALIBRATION_YES": "Yes",
+        "CALIBRATION_INTEGER": "Integer:",
+        "CALIBRATION_DECIMAL": "Decimal:",
+        "CALIBRATION_WARNING": "Warning",
+        "CALIBRATION_CONFIRM_QUESTION": "Are you sure to change the calibration value?"
+      },
+      "YAXIS_RANGE": {
+        "YAXIS_RANGE_TITLE": "Sound level axes in graphs",
+        "YAXIS_RANGE_MIN": "Minimum",
+        "YAXIS_RANGE_MAX": "Maximum"
+      },
+      "LEVEL_EVIDENCE": {
+        "LEVEL_EVIDENCE_TITLE": "Level in evidence"
+      },
+      "COUNTDOWN_MEASURE": {
+        "COUNTDOWN_MEASURE_TITLE": "Countdown start measure"
+      },
+      "RANGE_FREQUENCE": {
+        "RANGE_FREQUENCE_TITLE": "Range frequence",
+        "RANGE_FREQUENCE_TEXT1": "recommended",
+        "RANGE_FREQUENCE_TEXT2": "NOT recommended",
+        "RANGE_FREQUENCE_TEXT3": "It is recommended to use the range"
+      },
+      "VIEW": {
+        "VIEW_LABEL": {
+          "VIEW_TITLE": "Visualization"
         },
-
-  "PRE-HOME": {
-          "DISCLAIMER1": "OpeNoise is an app aimed at the measurement of real-time sound pressure level.",
-          "WARNING": "WARNING",
-          "DISCLAIMER2": "To consider measured data reliable it is necessary to calibrate the device.<br> For more information please refer to the <i>Tutorial</i> and <i>Glossary</i> sections.</p>",
-          "NOMORE": "I understand, don't show it again",
-          "CONFIGURATION": "Configuration",
-          "STYLE": "Set the interface style",
-          "SIMPLE": "Simple",
-          "ADVANCED": "Advanced",
-          "ADVANCEDWITHSAVE": "Advanced with saving data",
-          "READY": "Ready to measure?",
-          "START": "START"
+        "ORIENTATION": {
+          "ORIENTATION_TITLE": "Rotate on startup",
+          "ORIENTATION_PORTRAIT_PRIMARY": "Not rotate",
+          "ORIENTATION_PORTRAIT_SECONDARY": "Rotate"
         },
-
-  "HOME": {
-          "TITLE": "OpeNoise",
-          "NOISE_LEVEL": "NOISE LEVEL",
-          "START": "Start",
-          "DURATION": "Duration (t)",
-          "DAYS": "days",
-          "GLOBALS": "Global",
-          "OCTAVES": "1/3 Octave",
-          "SONOGRAM": "Sonogram",
-          "FFT": "FFT",
-          "SAVE_LABEL": "Save data",
-          "SAVED_DATA": "Data ssving start",
-          "SAVE_START":"Start file saving data",
-          "AXIS_DB": "Noise level (dB)",
-          "AXIS_DBA": "Noise level (dBA)",
-          "AXIS_DB_DBA": "Noise level (dB o dBA)",
-          "AXIS_TIME": "Time (s)",
-          "AXIS_FREQUENCY_OCTAVES": "Third Octave Frequency (Hz)",
-          "AXIS_FREQUENCY_FFT": "Frequency (Hz)"
+        "LEVELS": {
+          "LEVELS_TITLE": "Visualization levels mode",
+          "LEVELS_HORIZONTAL": "Horizontal",
+          "LEVELS_VERTICAL": "Vertical"
         },
-
-  "SETTINGS": {
-              "TITLE": "Settings",
-              "DISPLAY": "DISPLAY",
-              "STYLE": {
-                        "TITLE": "Style",
-                        "SIMPLE": "Simple",
-                        "ADVANCED": "Advanced"
-                      },
-              "COLOR": {
-                        "TITLE": "Color",
-                        "LIGHT": "Light",
-                        "DARK": "Dark",
-                        "BLACK": "Dark with high contrast"
-                      },
-              "LANGUAGE": {
-                          "TITLE": "Language"
-                          },
-              "NOISE_METER": "NOISE METER",
-              "CALIBRATION": "Calibration",
-              "RANGE": {
-                        "TITLE": "Noise level axis range",
-                        "FROM": "From",
-                        "TO": "to"
-                      },
-              "SAVING": {
-                        "TITLE": "Saving data",
-                        "YES": "Enabled",
-                        "NO": "Not enabled"
-                      },
-              "CANCEL": "Cancel",
-              "OK": "Ok"
-            },
-
-  "CALIBRATION": {
-          "TITLE": "Calibration",
-          "TEXT1": "In order to calibrate the device compare LAeq noise level with the value measured by a professional sound level meter.",
-          "TEXT2": "Move the range bar or push + (plus) and - (minus) bottons to match the level measured by OpeNoise with the actual one.",
-          "CALIBRATION": "Calibration"
+        "VIEW_TYPE": {
+          "VIEW_TYPE_TITLE": "Type"
         },
-
-  "RANGE": {
-          "TITLE": "Noise level axis range",
-          "FROM": "From",
-          "TO": "to",
-          "TEXT": "Move the range bar or push + (plus) and - (minus) bottons to set the minimum and maximum value."
+        "COLOR": {
+          "COLOR_TITLE": "Color",
+          "COLOR_AUTO": "Auto",
+          "COLOR_LIGHT": "Light",
+          "COLOR_DARK": "Dark"
         },
-
-  "DATA": {
-            "TITLE": "Saved data",
-            "NO_FILES": "No file saved",
-            "FILE_LIST": "Files name list",
-            "ALL":"Multiple change",
-            "OPENMENU": {
-                        "OPEN": "Open",
-                        "SHARE": "Share",
-                        "SHARE_MESSAGE": "OpeNoise data sharing",
-                        "SHARE_SUBJECT": "OpeNoise data sharing",
-                        "SHARE_CHOOSER_TITLE": "Pick an app",
-                        "DELETE": "Delete",
-                        "DELETE_TITLE": "Delete File",
-                        "DELETE_MESSAGE": "Are you sure to delete the file",
-                        "CANCEL": "Cancel"
-                      },
-            "MULTI_SHARE": {"MESSAGE": "OpeNoise data sharing",
-                            "SUBJECT": "OpeNoise data sharing",
-                            "CHOOSER_TITLE": "Pick an app"
-                          },
-            "MULTI_DELETE": {"TITLE": "Delete multiple files",
-                             "MESSAGE": "Are you sure to delete the files selected",
-                             "CANCEL": "Cancel",
-                             "DELETE": "Delete"
-                            }
-          },
-
+        "LANGUAGE": {
+          "LANGUAGE_TITLE": "Language",
+          "LANGUAGE_IT": "Italian",
+          "LANGUAGE_EN": "English"
+        }
+      },
+      "SAVE_DATA": {
+        "SAVE_DATA_TITLE": "Data saving",
+        "SAVE_DATA_TEXT": "Settings are disabled because a measurement is being saved",
+        "TRUE": "Saved",
+        "FALSE": "Not saved",
+        "SAVE_DATA_BAND_LAEQ": "Save LZeq 1/3 octaves levels",
+        "SAVE_DATA_BAND_LZMIN": "Save LZmin 1/3 octaves levels",
+        "SEP_DEC": {
+          "SEP_DEC_TITLE": "Decimal separator",
+          "SEP_DEC_POINT": "Point",
+          "SEP_DEC_COMMA": "Comma"
+        },
+        "SEP_FIELDS": {
+          "SEP_FIELDS_TITLE": "Field separator",
+          "SEP_FIELDS_POINT_COMMA": "Semicolon",
+          "SEP_FIELDS_COMMA": "Comma",
+          "SEP_FIELDS_PIPE": "Pipe"
+        }
+      }
+    },
+    "SAVE_FILES": {
+      "SAVE_FILES_TITLE": "List of saved measurement files",
+      "SAVE_FILES_HEADER": "File:",
+      "SAVE_FILES_TEXT1": "Edit",
+      "SAVE_FILES_TEXT2": "many",
+      "SAVE_FILES_TEXT3": "No files saved",
+      "SAVE_FILES_TEXT4": "Delete",
+      "SAVE_FILES_TEXT4_2": "Permanently delete the file",
+      "SAVE_FILES_TEXT4_2b": "Permanently delete files",
+      "SAVE_FILES_TEXT4_2cA": "WARNING",
+      "SAVE_FILES_TEXT4_2cB": "Select at least one file",
+      "SAVE_FILES_TEXT5": "Share",
+      "SAVE_FILES_TEXT6": "Cancel",
+      "SAVE_FILES_TEXT7": "Open",
+      "SAVE_FILES_TEXT8_TITLE": "WARNING",
+      "SAVE_FILES_TEXT8": "A program such as LibreOffice Calc or Office Excel must be used to view the file correctly. This simple viewer is only used to perform rough checks on the correct execution of the measurement.",
+      "SAVE_BUTTON": {
+        "SAVE_BUTTON_TEXT1": "Data saved in the file:",
+        "SAVE_BUTTON_TEXT2": "WARNING",
+        "SAVE_BUTTON_TEXT3": "Start the measurement before doing a reset",
+        "SAVE_BUTTON_TEXT4": "File saving enabled: the next measurement will be saved in the log file.",
+        "SAVE_BUTTON_TEXT5": "File saving disabled.",
+        "SAVE_BUTTON_TEXT6": "Data saving in progress in the file: ",
+        "SAVE_BUTTON_TEXT7": "Start measurement before saving data"
+      }
+    },
     "INFO": {
-            "TITLE":"Information",
-            "WARNING": {
-                        "TITLE": "Disclaimer",
-                        "OPENOISE_TITLE": "OPENOISE",
-                        "OPENOISE_TEXT": "OpeNoise is an app aimed at the measurement of real-time sound pressure level.",
-                        "TERM_TITLE": "TERM OF USE",
-                        "TERM_TEXT": "This app is not intended for professional use, it does not necessarily guarantee an accurate noise measurement.<br> Since each device has a different response to noise, a comparison with a professional noise level meter in the measurement dynamic range is required.<br> The utilization of the app requires adequate technical knowledge and skill; an extemporary measurement might not be correct.<br> For more information, please refer to the device calibration and dynamic range specifications in the <i>Tutorial</i> section.",
-                        "SPECIFICS_TITLE": "TECHNICAL SPECIFICATIONS",
-                        "SPECIFICS_TEXT": "- Real-time A-weighted sound pressure level measurement<br> - Minimum and maximum level<br> - Third octave and FFT analysis<br> - Data saving in text file<br> - Calibration"
-                        },
-            "TUTORIAL": {
-                        "TITLE": "Tutorial",
-                        "MEASURE_TITLE": "TAKING A MEASUREMENT",
-                        "MEASURE_TEXT": "Noise measurement starts antomatically opening OpeNoise. Push the refresh button to start a new measurement and reset all levels. <br>Android: To stop the measurement push 'Exit' in the main menù or the 'Back' button of the device (pushing the 'Home' button the measurement keeps running in background) or pushing the button in the right of the main bar. <br>iPhone: To stop the measurement push 'Home' button.",
-                        "CALIBRATION_TITLE": "CALIBRATING THE DEVICE",
-                        "CALIBRATION_TEXT": "Since each device has a different response to noise, it is necessary a calibration.<br>To calibrate the device, a comparison with a professional noise level meter. In the <i>Calibration</i> page (from the <i>Settings</i> menù) tune the range bar to match the two values.",
-                        "RANGE_TITLE": "DYNAMIC RANGE",
-                        "RANGE_TEXT": "Although calibrated, the devices are not able to correctly measure beyond a certain dynamic range (above a maximum value and below a minimum value). After having calibrated the system, it is necessary to check these two values through a comparison with a professional noise level meter. Beyond these threshold, measurements might not be reliable.",
-                        "SAVING_TITLE": "DATA SAVING",
-                        "SAVING_TEXT": "This option is activated selecting in the <i>Settings</i> menu the 'Advanced' interface and selecting the 'Saving data' option to 'Enabled'. Thus, it's displayed the button which can be pushed to save data in a text file (audio is not recorded). Files can be opened in the 'Saved data' section.<br>Android: files are saved in the directory 'openoise' allocated in the local memory (not in external SD).",
-                        "PLOTS_TITLE": "PLOTS",
-                        "PLOTS_TEXT": "In the 'Simple' interface it is showed only a plot displaying LAmin, LAeq(1s) e LAmax levels.<br>In the 'Advanced' interface 4 plots in this order are showed:<br> - Global: Global levels time history<br> - 1/3 Octave: Third octave frequency spectrum<br> - Sonogram: Third octave frequency spectrum in time<br> - FFT: Constant band frequency spectrum calculated with FFT"
-                        },
-            "GLOSSARY": {
-                        "TITLE": "Glossary",
-                        "dB_TITLE": "dB",
-                        "dB_TEXT": "It is the parameter for the sound pressure level measurement.",
-                        "dBA_TITLE": "dB(A)",
-                        "dBA_TEXT": "It is the parameter for the sound pressure level measurement weighted in frequency according to the response of the human ear ('A' ponderation).",
-                        "LMin_TITLE": "Lmin",
-                        "LMin_TEXT": "Minimum level since the measurement starts, in dB.",
-                        "LAMin_TITLE": "LAmin",
-                        "LAMin_TEXT": "Minimum level since the measurement starts, in dB(A).",
-                        "LMax_TITLE": "Lmax",
-                        "LMax_TEXT": "Maximum level since the measurement starts, in dB.",
-                        "LAMax_TITLE": "LAmax",
-                        "LAMax_TEXT": "Maximum level since the measurement starts, in dB(A).",
-                        "LAeq_TITLE": "LAeq",
-                        "LAeq_TEXT": "Sound pressure level of the last second, in dB(A).",
-                        "LAeq_t_TITLE": "LAeq(t)",
-                        "LAeq_t_TEXT": "Sound pressure level since the measurement starts, in dB(A).",
-                        "GLOBAL_TITLE": "GLOBAL LEVEL",
-                        "GLOBAL_TEXT": "Sound pressure level calculated with all the frequency spectrum.",
-                        "SPECTRUM_TITLE": "SPECTRUM",
-                        "SPECTRUM_TEXT": "Frequency distribution of the sound pressure level.",
-                        "OCTAVES_TITLE": "THIRD OCTAVE",
-                        "OCTAVES_TEXT": "Rapresentation of the frequency spectrum in a constant percentage bandwidth. The data are showed in dB.",
-                        "FFT_TITLE": "FFT (Fast Fourier Transform)",
-                        "FFT_TEXT": "Technique for calculating the frequency spectrum with a constant bandwidth. The data are showed in dB and dB(A)."
-                        },
-            "PRIVACY": {
-                        "TITLE": "Privacy",
-                        "PRIVACY_TITLE": "OPENOISE",
-                        "PRIVACY_TEXT": "This app does not collect nor share any personal information.<br>If you want, you can save noise level as numeric data in a text file and you can share it.<br>No audio data nor any information about the localization of the device are recorded.<br>This privacy policy may change from time to time."
-                      },
-            "VERSION": {
-                        "TITLE": "Version",
-                        "VERSION_TITLE": "OPENOISE",
-                        "VERSION_TEXT": "Version 2.0.3<br>GNU General Public License v.3 or later"
-                      },
-            "ARPA": {
-                        "TITLE": "Arpa Piemonte",
-                        "ARPA_TITLE": "ARPA PIEMONTE",
-                        "ARPA_TEXT": "Regional Agency for the Protection of the Environment of Piedmont<br>Italy<br><a>www.arpa.piemonte.it</a>"
-                      },
-
-            "CONTACTS": {
-                        "TITLE": "Contacts",
-                        "CONTACTS_TITLE": "CONTACTS",
-                        "CONTACTS_TEXT": "To conctact us please send an email to:<br>openoise@arpa.piemonte.it"
-                      }
-            }
+      "INFO_LABEL": {
+        "INFO_LABEL_TECHNICAL": "Technical information",
+        "INFO_LABEL_PROJECT": "Project information",
+        "INFO_LABEL_DEVELOP": "Develop",
+        "INFO_LABEL_WARNING": "Warnings",
+        "INFO_LABEL_DISCLAIMER": "Disclaimer",
+        "INFO_LABEL_GLOSSARY": "Glossary",
+        "INFO_LABEL_ORIGIN": "Origin",
+        "INFO_LABEL_CONTACTS": "Contacts",
+        "INFO_LABEL_VERSION": "Version",
+        "INFO_LABEL_LICENCE": "Licence"
+      },
+      "WARNING": [
+        {
+          "OPENOISE_TITLE": "OPENOISE",
+          "OPENOISE_TEXT": "OpeNoise is an app aimed at the measurement of real-time sound pressure level."
+        },
+        {
+          "TERM_TITLE": "TERM OF USE",
+          "TERM_TEXT": "This app is not intended for professional use, it does not necessarily guarantee an accurate noise measurement.<br> Since each device has a different response to noise, a comparison with a professional noise level meter in the measurement dynamic range is required.<br> The utilization of the app requires adequate technical knowledge and skill; an extemporary measurement might not be correct.<br> For more information, please refer to the device calibration and dynamic range specifications in the <i>Tutorial</i> section."
+        },
+        {
+          "SPECIFICS_TITLE": "TECHNICAL SPECIFICATIONS",
+          "SPECIFICS_TEXT": "- Real-time linear Z and A-weighted sound pressure levels measurement<br> - Minimum and maximum level<br> - 1/3 octave and FFT analysis<br> - Data saving in text file<br> - Calibration"
+        }
+      ],
+      "TUTORIAL": [
+        {
+          "MEASURE_TITLE": "TIPS AND TRICKS",
+          "MEASURE_TEXT": "- Always remove the device cover when using OpeNoise, either to take a measurement or to calibrate.<br>- Direct the device so that the microphone is oriented toward the sound source. Typically, the microphone is positioned on the bottom of the device. The Rotate button allows easy reading of the screen even when rotated.<br>- Set the device to airplane mode while using OpeNoise."
+        },
+        {
+          "MEASURE_TITLE": "TAKING A MEASUREMENT",
+          "MEASURE_TEXT": "The noise measurement starts automatically with the opening of OpeNoise, after a settable countdown (0 to 10 seconds) in the Settings. Pressing the reset button resets all levels to zero and starts a new measurement.<br>The measurement can be stopped or paused at any time; removing the pause resumes recording, retaining the previous data."
+        },
+        {
+          "CALIBRATION_TITLE": "CALIBRATING THE DEVICE",
+          "CALIBRATION_TEXT": "Each device responds differently to acoustic signals, so calibration is necessary.<br>To calibrate the device, the sound level measured by OpeNoise must be compared with a known value measured by a professional sound level meter (or from an already calibrated device).<br><br>Operating mode:<br>- Go to Settings/Calibration when measurement is stopped<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +7.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation"
+        },
+        {
+          "RANGE_TITLE": "DYNAMIC RANGE",
+          "RANGE_TEXT": "Although calibrated, the devices are not able to correctly measure beyond a certain dynamic range (above a maximum value and below a minimum value). After having calibrated the system, it is necessary to check these two values through a comparison with a professional noise level meter. Beyond these threshold, measurements might not be reliable."
+        },
+        {
+          "SAVING_TITLE": "DATA SAVING",
+          "SAVING_TEXT": "The option is activated by selecting the Save button in the Noise Meter. This saves the data to a text file with the measured sound levels (no audio is recorded). Files can be opened in the Measures section. Under Settings, you can configure the formatting of the generated text file and which parameters to save."
+        },
+        {
+          "PLOTS_TITLE": "PLOTS",
+          "PLOTS_TEXT": "Four plots are displayed in the Sound Meter in the following order:<br>- Global: Time course of LAmin, LAeq(1s), LAmax and LAeq(t) levels<br>- 1/3 Octave: 1/3 octave frequency spectrum of the levels LZmax, LZeq(t), LZeq(1s) and LZmin<br>- Sonogram: 1/3 octave frequency spectrum of LZeq(1s) levels<br>- FFT: Constant-band frequency spectrum calculated with FFT LZeq(1s) and LAeq(1s)<br>With a touch on the graph legend, the various displayed parameters can be enabled or disabled."
+        }
+      ],
+      "GLOSSARY": [
+        {
+          "dB_TITLE": "dB",
+          "dB_TEXT": "Parameter for the sound pressure level measurement."
+        },
+        {
+          "dBA_TITLE": "dBA",
+          "dBA_TEXT": "Parameter for the sound pressure level measurement weighted in frequency according to the response of the human ear ('A' ponderation)."
+        },
+        {
+          "LMin_TITLE": "LZmin",
+          "LMin_TEXT": "Minimum level since the measurement starts, in dB."
+        },
+        {
+          "LAMin_TITLE": "LAmin",
+          "LAMin_TEXT": "Minimum level since the measurement starts, in dBA."
+        },
+        {
+          "LMax_TITLE": "LZmax",
+          "LMax_TEXT": "Maximum level since the measurement starts, in dB."
+        },
+        {
+          "LAMax_TITLE": "LAmax",
+          "LAMax_TEXT": "Maximum level since the measurement starts, in dBA."
+        },
+        {
+          "LZeq_TITLE": "LZeq(1s)",
+          "LZeq_TEXT": "Sound pressure level of the last second, in dB."
+        },
+        {
+          "LAeq_TITLE": "LAeq(1s)",
+          "LAeq_TEXT": "Sound pressure level of the last second, in dBA."
+        },
+        {
+          "LZeq_t_TITLE": "LZeq(t)",
+          "LZeq_t_TEXT": "Sound pressure level since the measurement starts, in dB."
+        },
+        {
+          "LAeq_t_TITLE": "LAeq(t)",
+          "LAeq_t_TEXT": "Sound pressure level since the measurement starts, in dBA."
+        },
+        {
+          "GLOBAL_TITLE": "GLOBAL LEVEL",
+          "GLOBAL_TEXT": "Sound pressure level calculated with all the frequency spectrum."
+        },
+        {
+          "SPECTRUM_TITLE": "SPECTRUM",
+          "SPECTRUM_TEXT": "Frequency distribution of the sound pressure level."
+        },
+        {
+          "OCTAVES_TITLE": "1/3 OCTAVE",
+          "OCTAVES_TEXT": "Rapresentation of the frequency spectrum in a constant percentage bandwidth. The data are showed in dB."
+        },
+        {
+          "FFT_TITLE": "FFT (Fast Fourier Transform)",
+          "FFT_TEXT": "Technique for calculating the frequency spectrum with a constant bandwidth. The data are showed in dB and dBA."
+        }
+      ],
+      "ORIGIN": [
+        {
+          "OPENOISE_METER_TITLE": "OPENOISE METER",
+          "OPENOISE_METER_TEXT": "OpeNoise Meter is the part of the OpeNoise project dedicated to measuring noise through mobile devices: it consists of an app that can be downloaded from the official Android and iOS stores and can emulate the operation of a sound level meter. The project has been under development since 2016."
+        },
+        {
+          "OPENOISE_PROJECT_TITLE": "OPENOISE PROJECT",
+          "OPENOISE_PROJECT_TEXT": "OpeNoise is a multi-platform, public and open source noise assessment project, implemented by the Environmental Protection Agency for the Piedmont Region (Arpa Piemonte - Italy), with the support of the Municipality of Turin and the Metropolitan City of Turin.<br>The goal is to provide a first-level and free access tool for public administrations, consultants, universities and companies in the field of environmental acoustics."
+        },
+        {
+          "OPENOISE_BRANCHES_TITLE": "BRANCHES",
+          "OPENOISE_BRANCHES_TEXT": "The OpeNoise project is divided in three branches: an application for noise measurements through mobile devices (OpeNoise Meter), a script for noise mapping (OpeNoise Map), available within the free and open source geographical system QGIS, and a tool for acoustic data analysis developed in the R-Project framework for statistical computing (OpeNoise Analysis)."
+        }
+      ],
+      "PRIVACY": [
+        {
+          "PRIVACY_TITLE": "",
+          "PRIVACY_TEXT": "This app does not collect nor share any personal information.<br>If you want, you can save noise level as numeric data in a text file and you can share it.<br>No audio data nor any information about the localization of the device are recorded.<br>This privacy policy may change from time to time."
+        }
+      ],
+      "CONTACTS": [
+        {
+          "CONTACTS_TITLE": "",
+          "CONTACTS_TEXT": "To conctact us please send an email to:",
+          "CONTACTS_TOAST": "openoise@arpa.piemonte.it copied in the clipboard"
+        }
+      ],
+      "CREDITS": [
+        {
+          "CREDITS_ARPA": "Piedmont Regional Environmental Protection Agency"
+        }
+      ],
+      "LICENCE": [],
+      "GITHUB": []
+    }
+  }
 }

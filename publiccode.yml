@@ -7,9 +7,9 @@ name: OpeNoise Meter - Android and iOS app
 url: 'https://github.com/Arpapiemonte/openoise-meter'
 landingURL: >-
   http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise
-softwareVersion: 2.0.3
+softwareVersion: 3.0.3
 developmentStatus: stable
-releaseDate: '2018-06-26'
+releaseDate: '2023-08-08'
 softwareType: standalone/mobile
 platforms:
   - android
@@ -81,9 +81,6 @@ description:
       - screenshots/3.png
       - screenshots/4.png
       - screenshots/5.png
-      - screenshots/6.png
-      - screenshots/7.png
-      - screenshots/8.png
   en:
     genericName: Mobile Application 
     shortDescription: OpeNoise is a real-time noise level meter for Android and iOS smartphone and tablet
@@ -115,6 +112,4 @@ description:
       - screenshots/3.png
       - screenshots/4.png
       - screenshots/5.png
-      - screenshots/6.png
-      - screenshots/7.png
-      - screenshots/8.png
+

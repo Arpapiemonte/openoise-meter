@@ -1,0 +1,181 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 3
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+
+  <ion-list mode="ios">
+
+    <!-- <ion-list-header mode="ios">
+      <ion-label>VISUALIZZAZIONE</ion-label>
+    </ion-list-header> -->
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label> {{ variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_TECHNICAL }} </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('WARNING')" name="warning-outline"></ion-icon>
+        <ion-label
+          (click)="apriModal('WARNING')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_WARNING}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('TUTORIAL')"
+          src="/assets/icon/presentation-learning-icon.svg"></ion-icon>
+        <ion-label (click)="apriModal('TUTORIAL')">Tutorial</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('GLOSSARY')"
+          src="/assets/icon/manual-icon.svg"></ion-icon>
+        <ion-label
+          (click)="apriModal('GLOSSARY')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_GLOSSARY}}</ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{ variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_PROJECT }}</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('ORIGIN')" name="build-outline"></ion-icon>
+        <ion-label>
+          <h2 (click)="apriModal('ORIGIN')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_ORIGIN}}</h2>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('PRIVACY')"
+          src="/assets/icon/shield-lock-line-icon.svg"></ion-icon>
+        <ion-label>
+          <h2 (click)="apriModal('PRIVACY')">Privacy</h2>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('CONTACTS')" name="mail-outline"></ion-icon>
+        <ion-label>
+          <h2 (click)="apriModal('CONTACTS')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_CONTACTS}}</h2>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('CREDITS')"
+          src="/assets/icon/business-card-icon.svg"></ion-icon>
+        <ion-label>
+          <h2 (click)="apriModal('CREDITS')">Credits</h2>
+          <p></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>{{ variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_DEVELOP }}</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" name="git-merge-outline"></ion-icon>
+        <ion-label>
+          <h2>{{ variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_VERSION }}</h2>
+          <p>{{ versionNumber }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="apriUrl('https://www.gnu.org/licenses/gpl-3.0.html#license-text')">
+        <ion-icon style="padding-right: 10px;" name="ribbon-outline"></ion-icon>
+        <ion-label>
+          <h2>{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_LICENCE}}</h2>
+          <p>https://www.gnu.org/licenses/gpl-3.0.html#license-text</p>
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="apriUrl('https://github.com/Arpapiemonte/openoise-meter')">
+        <ion-icon style="padding-right: 10px;" name="logo-github"></ion-icon>
+        <ion-label>
+          <h2>Github</h2>
+          <p>https://github.com/Arpapiemonte/openoise-meter</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+
+  </ion-list>
+
+
+  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillModalDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="chiudiModal()">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title
+            *ngIf="modalArgument === 'WARNING'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_WARNING}}</ion-title>
+          <ion-title *ngIf="modalArgument === 'TUTORIAL'">Tutorial</ion-title>
+          <ion-title
+            *ngIf="modalArgument === 'GLOSSARY'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_GLOSSARY}}</ion-title>
+          <ion-title
+            *ngIf="modalArgument === 'ORIGIN'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_ORIGIN}}</ion-title>
+          <ion-title *ngIf="modalArgument === 'PRIVACY'">Privacy</ion-title>
+          <ion-title
+            *ngIf="modalArgument === 'CONTACTS'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_CONTACTS}}</ion-title>
+          <ion-title *ngIf="modalArgument === 'CREDITS'">Credits</ion-title>
+          <ion-title
+            *ngIf="modalArgument === 'LICENCE'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_LICENCE}}</ion-title>
+          <ion-title *ngIf="modalArgument === 'GITHUB'">Github</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div *ngIf="modalArgument !== 'CREDITS'">
+          <ion-card *ngFor="let card of cards">
+            <ion-card-header>
+              <ion-card-title>{{card.TITLE}}</ion-card-title>
+              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+            </ion-card-header>
+            <ion-card-content innerHTML="{{card.TEXT}}">
+            </ion-card-content>
+            <div *ngIf="modalArgument === 'CONTACTS'" style="text-align: center; padding-bottom: 20px;">
+              <ion-button mode='ios' (click)="copiaMail()" style="--background:  rgb(61, 194, 255, 0.9);">openoise@arpa.piemonte.it</ion-button>
+            </div>
+          </ion-card>
+        </div>
+        <div *ngIf="modalArgument === 'CREDITS'">
+          <ion-card>
+            <ion-card-header>
+              <!-- <ion-card-title>CREDITS</ion-card-title> -->
+              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row class="ion-justify-content-center">
+                <ion-col class="ion-align-self-center" style="text-align:center;" size="12" size-md>
+                  <div style="padding: 0px 10px 10px 10px; text-align: center;">
+                    {{variabiliService.translation.INFO.CREDITS[0].CREDITS_ARPA}}
+                  </div>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-col class="ion-align-self-center" style="text-align:center; ">
+                      <a target="_blank" href="https://www.arpa.piemonte.it" style="background-color: #FFFFFF">
+                        <img style="width:80%; max-width: 200px; background-color: #FFFFFF"
+                          src="./assets/loghi/logo_arpa_colori.svg" />
+                      </a>
+                    </ion-col>
+                    <ion-col class="ion-align-self-center" style="text-align:center;">
+                      <a target="_blank" href="https://www.snpambiente.it/">
+                        <img style="width:80%; max-width: 200px; background-color: #FFFFFF"
+                          src="./assets/loghi/logo_SNPA_COL.svg" />
+                      </a>
+                    </ion-col>
+                  </ion-row>
+                  <div style="padding:5px; text-align:center;">
+                    <a style="user-select:text !important; text-decoration-line: none !important;" target="_blank"
+                      href="https://www.arpa.piemonte.it">www.arpa.piemonte.it</a>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

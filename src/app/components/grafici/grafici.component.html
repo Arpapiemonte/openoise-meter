@@ -1,0 +1,122 @@
+<ion-card>
+  <div style="margin:10px 5px 0px 5px;">
+    <ion-segment value="chartLAeqTimeRunning" mode="ios" (ionChange)="segmentGrafico($event)">
+      <ion-segment-button value="chartLAeqTimeRunning">
+        <ion-label style="font-weight: normal;">{{variabiliService.translation.CHARTS.GLOBALS}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="chartThirdOctaves">
+        <ion-label style="font-weight: normal;">{{variabiliService.translation.CHARTS.OCTAVES}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="chartSonogram">
+        <ion-label style="font-weight: normal;">{{variabiliService.translation.CHARTS.SONOGRAM}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="chartFFT">
+        <ion-label style="font-weight: normal;">{{variabiliService.translation.CHARTS.FFT}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <div *ngIf="visualizzaGrafico == 'chartLAeqTimeRunning'" class="grafico-container">
+    <plotly-plot *ngIf="graficiService.chartLAeqTimeRunning" class="grafico"
+      [data]="graficiService.chartLAeqTimeRunning.data" [layout]="graficiService.chartLAeqTimeRunning.layout"
+      [config]="graficiService.chartLAeqTimeRunning.config"> </plotly-plot>
+  </div>
+
+  <div *ngIf="visualizzaGrafico == 'chartThirdOctaves'" class="grafico-container">
+    <plotly-plot *ngIf="graficiService.chartThirdOctaves" [data]="graficiService.chartThirdOctaves.data"
+      [layout]="graficiService.chartThirdOctaves.layout" [config]="graficiService.chartThirdOctaves.config">
+    </plotly-plot>
+  </div>
+
+  <div *ngIf="visualizzaGrafico == 'chartSonogram'" class="grafico-container">
+    <plotly-plot *ngIf="graficiService.chartSonogram" [data]="graficiService.chartSonogram.data"
+      [layout]="graficiService.chartSonogram.layout" [config]="graficiService.chartSonogram.config"> </plotly-plot>
+  </div>
+
+  <div *ngIf="visualizzaGrafico == 'chartFFT'" class="grafico-container">
+    <plotly-plot *ngIf="graficiService.chartFFT" class="grafico" [data]="graficiService.chartFFT.data"
+      [layout]="graficiService.chartFFT.layout" [config]="graficiService.chartFFT.config"> </plotly-plot>
+  </div>
+
+  <div style="padding-bottom: 20px; text-align: center;">
+    <ion-row *ngIf="visualizzaGrafico == 'chartLAeqTimeRunning'" style="--padding:0px;">
+      <ion-col></ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('GLOBALS_LAEQt')">
+        <div *ngIf="variabiliService.chartParameters.GLOBALS_LAEQt" [style.color]="graficiService.purple">
+          <hr [style.border-top]="'2px solid ' + graficiService.purple">LAeq(t)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.GLOBALS_LAEQt" style="color: gray">
+          <hr style="border-top: 2px solid gray">LAeq(t)
+        </div>
+      </ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('GLOBALS_LAEQ1s')">
+        <div *ngIf="variabiliService.chartParameters.GLOBALS_LAEQ1s" [style.color]="graficiService.red">
+          <hr [style.border-top]="'2px solid ' + graficiService.red">LAeq(1s)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.GLOBALS_LAEQ1s" style="color: gray">
+          <hr style="border-top: 2px solid gray">LAeq(1s)
+        </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row *ngIf="visualizzaGrafico == 'chartThirdOctaves'">
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('OCTAVES_LZmax')">
+        <div *ngIf="variabiliService.chartParameters.OCTAVES_LZmax" [style.color]="graficiService.blue">
+          <hr [style.border-top]="'2px solid ' + graficiService.blue">LZmax
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.OCTAVES_LZmax" style="color: gray">
+          <hr style="border-top: 2px solid gray">LZmax
+        </div>
+      </ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('OCTAVES_LZEQt')">
+        <div *ngIf="variabiliService.chartParameters.OCTAVES_LZEQt" [style.color]="graficiService.purple">
+          <hr [style.border-top]="'2px solid ' + graficiService.purple">LZeq(t)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.OCTAVES_LZEQt" style="color: gray">
+          <hr style="border-top: 2px solid gray">LZeq(t)
+        </div>
+      </ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('OCTAVES_LZEQ1s')">
+        <div *ngIf="variabiliService.chartParameters.OCTAVES_LZEQ1s" [style.color]="graficiService.red">
+          <hr [style.border-top]="'2px solid ' + graficiService.red">LZeq(1s)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.OCTAVES_LZEQ1s" style="color: gray">
+          <hr style="border-top: 2px solid gray">LZeq(1s)
+        </div>
+      </ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('OCTAVES_LZmin')">
+        <div *ngIf="variabiliService.chartParameters.OCTAVES_LZmin" [style.color]="graficiService.green">
+          <hr [style.border-top]="'2px solid ' + graficiService.green">LZmin
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.OCTAVES_LZmin" style="color: gray">
+          <hr style="border-top: 2px solid gray">LZmin
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="visualizzaGrafico == 'chartFFT'">
+      <ion-col></ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('FFT_LZEQ1s')">
+        <div *ngIf="variabiliService.chartParameters.FFT_LZEQ1s" [style.color]="graficiService.red">
+          <hr [style.border-top]="'2px solid ' + graficiService.red">LZeq(1s)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.FFT_LZEQ1s" style="color: gray">
+          <hr style="border-top: 2px solid gray">LZeq(1s)
+        </div>
+      </ion-col>
+      <ion-col style="font-weight: bold;" (click)="tooggleChartsParameters('FFT_LAEQ1s')">
+        <div *ngIf="variabiliService.chartParameters.FFT_LAEQ1s" [style.color]="graficiService.green">
+          <hr [style.border-top]="'2px solid ' + graficiService.green">LAeq(1s)
+        </div>
+        <div *ngIf="!variabiliService.chartParameters.FFT_LAEQ1s" style="color: gray">
+          <hr style="border-top: 2px solid gray">LAeq(1s)
+        </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </div>
+</ion-card>
+
+
+
+<div style="margin:30px"></div>

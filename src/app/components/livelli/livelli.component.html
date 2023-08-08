@@ -1,0 +1,126 @@
+
+<ion-card style="font-size: medium;">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="auto">
+                <div>{{variabiliService.translation.LEVELS.DATE_START}}</div>
+                <!-- <div>{{variabiliService.translation.LEVELS.DATE_NOW}}:</div> -->
+                <div>{{variabiliService.translation.LEVELS.ELAPSED_TIME}}</div>
+            </ion-col>
+            <ion-col>
+                <div *ngIf="audioService.date_start">{{ formatDate(audioService.date_start)}}</div>
+                <!-- <div *ngIf="audioService.date_now">{{ formatDate(audioService.date_now) }}</div> -->
+                <div *ngIf="audioService.elapsedTime">{{ audioService.elapsedTime }}</div>
+            </ion-col>
+            <ion-col size="auto" class="ion-no-padding" style="border-radius: 8px; box-shadow: 0px 0px 3px 0px var(--ion-color-medium);"
+                (click)="rotate()">
+                <ion-tab-button mode="md">
+                    <ion-icon src="/assets/icon/update-icon.svg"></ion-icon>
+                    <ion-label>{{variabiliService.translation.LEVELS.ROTATE}}</ion-label>
+                </ion-tab-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-card>
+
+<ion-card *ngIf="variabiliService.levelsOrientation === 'orizzontale'" style="font-size: medium;">
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center ion-text-center">
+                <div>LAmin</div>
+                <div>{{formatNumber(audioService.dbATimeStartMin) }}</div>
+            </ion-col>
+            <ion-col class="ion-align-self-center ion-text-center">
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'">LAeq(t)</div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'">LAeq(1s)</div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'">
+                    {{ formatNumber(audioService.dbARunning) }}
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'">
+                    {{ formatNumber(audioService.dbATime) }}
+                </div>
+            </ion-col>
+            <ion-col class="ion-align-self-center ion-text-center">
+                <div>LAmax</div>
+                <div>{{ formatNumber(audioService.dbATimeStartMax)}}</div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col class="ion-text-end" style="font-size: large;">
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'">LAeq(1s)</div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'">LAeq(t)</div>
+            </ion-col>
+            <ion-col class="ion-align-self-center ion-text-center" style="font-size: 50px; font-weight: bold;">
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'">{{ formatNumber(audioService.dbATime) }}
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'">{{ formatNumber(audioService.dbARunning) }}
+                </div>
+            </ion-col>
+            <ion-col class="ion-text-start" style="font-size: large;">
+                dBA
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-card>
+
+
+<ion-card *ngIf="variabiliService.levelsOrientation === 'verticale'" style="font-size: medium;">
+    <ion-grid style="--ion-grid-padding:0px;">
+        <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col size="auto">
+                <div class="divLabelsVertical">
+                    LAmax
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'" class="divLabelsVertical">
+                    LAeq(1s)
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'" class="divLabelsVertical">
+                    LAeq(t)
+                </div>
+                <div class="divLabelsVertical">
+                    LAmin
+                </div>
+            </ion-col>
+            <ion-col size="auto" style="text-align: right;">
+                <div class="divLevelsVertical">
+                    {{formatNumber(audioService.dbATimeStartMax) }}
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'" class="divLevelsVertical">
+                    {{formatNumber(audioService.dbATime) }}
+                </div>
+                <div *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'" class="divLevelsVertical">
+                    {{formatNumber(audioService.dbARunning) }}
+                </div>
+                <div class="divLevelsVertical">
+                    {{formatNumber(audioService.dbATimeStartMin) }}
+                </div>
+            </ion-col>
+            <ion-col *ngIf="this.variabiliService.mainLevel === 'LAeq(1s)'" style="padding:0px; text-align: center;">
+                <div style="padding-top:10px; font-size: large; ">LAeq(1s)</div>
+                <div>
+                    <span style="font-size: 50px; font-weight: bold;">{{ formatNumber(audioService.dbATime) }}</span>
+                    <span style="padding-left: 10px;">dBA</span>
+                </div>
+            </ion-col>
+            <ion-col *ngIf="this.variabiliService.mainLevel === 'LAeq(t)'" style="padding:0px; text-align: center;">
+                <div style="padding-top:10px; font-size: large;">LAeq(t)</div>
+                <div>
+                    <span style="font-size: 50px; font-weight: bold;">{{ formatNumber(audioService.dbARunning) }}</span>
+                    <span style="padding-left: 10px;">dBA</span>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-card>
+
+
+
+<!-- <div>date_start: {{ formatDate(audioService.date_start)}}</div>
+<div>date_now: {{ formatDate(audioService.date_now) }}</div>
+<div>timeElapsed: {{ audioService.elapsedTime }}</div>
+<div>LAeq al sec: {{ formatNumber(audioService.dbATime) }}</div>
+<div>LAeq running: {{ formatNumber(audioService.dbARunning) }}</div>
+<div>LAeq min: {{ formatNumber(audioService.dbATimeStartMin) }}</div>
+<div>LAeq max: {{ formatNumber(audioService.dbATimeStartMax)}}</div> -->
