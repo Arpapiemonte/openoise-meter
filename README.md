@@ -33,7 +33,7 @@ REQUIREMENTS:
 ```
 Ionic:
 
-   Ionic CLI                     : 7.1.1 (/Users/stefmase/.nvm/versions/node/v18.15.0/lib/node_modules/@ionic/cli)
+   Ionic CLI                     : 7.1.1 
    Ionic Framework               : @ionic/angular 7.0.5
    @angular-devkit/build-angular : 16.0.1
    @angular-devkit/schematics    : 16.0.1
