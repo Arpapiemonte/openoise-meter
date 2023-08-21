@@ -5,8 +5,6 @@ import { PickerController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
 import { Device } from '@capacitor/device';
-import { Geolocation } from '@capacitor/geolocation';
-import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,6 +15,7 @@ import { AudioService } from 'src/app/services/audio.service';
 import { FilesystemService } from 'src/app/services/filesystem.service';
 import { OrientationService } from 'src/app/services/orientation.service';
 import { ColorModeService } from 'src/app/services/color-mode.service';
+// import { InvioDatiService } from 'src/app/services/invio-dati.service';
 
 
 
@@ -64,7 +63,8 @@ export class SettingsPage {
   rangeFreqLowerDefault: boolean = true
   rangeFreqUpperDefault: boolean = true
 
-  dataCalibration: any
+  userType: String = ''
+  calibType: String = ''
 
   constructor(
     private zone: NgZone,
@@ -77,7 +77,8 @@ export class SettingsPage {
     public audioService: AudioService,
     public fileSystemService: FilesystemService,
     public orientationService: OrientationService,
-    private colorModeService: ColorModeService
+    private colorModeService: ColorModeService,
+    // public invioDatiService: InvioDatiService
   ) {
 
     for (let i = -50; i <= 50; i++) {
@@ -99,7 +100,8 @@ export class SettingsPage {
 
   }
 
-  apriCalibrazione() {
+  // AL M0MENTO NON VIENE MAI CHIAMATO
+  apriCalibrazione() { 
     if (this.audioService.capture) {
       this.presentAlertCalibrazione()
     } else {
@@ -171,107 +173,88 @@ export class SettingsPage {
   }
 
   // PROVE PER INVIO DATI A SERVER ARPA
-  async getDeviceDataInformation() {
-    // const coordinates = await Geolocation.getCurrentPosition();
 
-    // this.dataCalibration = {
-    //   lat: String(coordinates.coords.latitude),
-    //   lon: String(coordinates.coords.longitude),
-    //   so_type: this.logDeviceInfo.operatingSystem,
-    //   so_version: String(this.logDeviceInfo.osVersion),
-    //   phone_type: this.logDeviceInfo.model,
-    //   freq_max: String(0),
-    //   fre_min: String(0),
-    //   gain: String(this.variabiliService.dbGain),
-    //   calib_type: 'Confronto',
-    //   user_type: 'Avanzato',
-    //   codice_sicurezza: 'AAssEE44ttggVV&rrrr'
-    // }
-
-    // this.dataCalibration = {
-    //   'lat': 'stefano_fetch01',
-    //   'lon': 'aaa',
-    //   'so_type': 'aaa',
-    //   'so_version': 'aaa',
-    //   'phone_type': 'aaa',
-    //   'freq_max': 'aaa',
-    //   'fre_min': 'aaa',
-    //   'gain': 'aaa',
-    //   'calib_type': 'aaa',
-    //   'user_type': 'aaa',
-    //   'codice_sicurezza': 'AAssEE44ttggVV&rrrr'
-    // }
-
-    this.dataCalibration = {
-      lat: "stefano_fetch01",
-      lon: "aaa",
-      so_type: "aaa",
-      so_version: "aaa",
-      phone_type: "aaa",
-      freq_max: "aaa",
-      fre_min: "aaa",
-      gain: "aaa",
-      calib_type: "aaa",
-      user_type: "aaa",
-      codice_sicurezza: "AAssEE44ttggVV&rrrr"
-    }
-
-    console.log("dataCalibration", this.dataCalibration)
-
-    //return(this.dataCalibration)
-    //console.log(JSON.stringify(this.dataCalibration))
-  };
-
-  // PROVA CON PLUGIN COMUNITY
-  // async sendDataCalibration(){
-  //   const options = {
-  //     url: 'https://utility.arpa.piemonte.it/post_opennoise/send_data.php',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     //data: JSON.stringify(this.dataCalibration),
-  //     data: {"lat":"45.5512446","lon":"8.0472977","so_type":"android","so_version":"11","phone_type":"Redmi Note 8 Pro","freq_max":"0","fre_min":"0","gain":"22","calib_type":"Confronto","user_type":"Avanzato","codice_sicurezza":"AAssEE44ttggVV&rrrr"},
-  //   };
-
-  //   const response: HttpResponse = await Http.post(options);
-  //   // or...
-  //    //const response = await Http.request({ ...options, method: 'POST' })
-  // };
-
-
-  // PROVA CON PLUGIN CAPACITORHTTP NATIVO
-  // async sendDataCalibration() {
-  //   let options = {
-  //     url: 'https://utility.arpa.piemonte.it/post_opennoise/send_data.php',
-  //     //methods: 'POST',
-  //     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-  //     // data: JSON.stringify(JSON.parse(JSON.stringify(this.dataCalibration))),
-  //     data: JSON.stringify(this.dataCalibration),
-  //   };
-  //   const response: HttpResponse = await CapacitorHttp.post(options);
-  //   console.log('response: ', response);
-  // };
-
-
-  // PROVA CON FETCH DI JS
-  async sendDataCalibration() {
-    console.log("sendDataCalibration fetch", this.dataCalibration)
-    console.log("sendDataCalibration fetch JSON.stringify", JSON.stringify(this.dataCalibration))
-    const response = await fetch("https://utility.arpa.piemonte.it/post_opennoise/send_data.php", {
-      method: "POST",
-      // mode: 'no-cors',
-      headers: {
-        "Content-Type": "application/json",
-        // "Content-Type": "text/plain",
+  async presentAlertUserData() {
+    var this_copy = this
+    const alert = await this.alertController.create({
+      header: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_ATTENTION,
+      subHeader: "",
+      message: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_USERTEXT,
+      inputs: [{
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_USERTYPE1,
+        value: 'Principiante',
+        checked: true
       },
-      body: this.dataCalibration,
-    })
+      {
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_USERTYPE2,
+        value: 'Avanzato'
+      }
+      ],
+      buttons: [
+        {
+          text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CANCEL,
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler(data: String) {
+            // console.log('data: ', data)
+            this_copy.userType = data;
+            console.log('userType: ', this_copy.userType)
+            this_copy.presentAlertCalibType()
+          },
+        }
+      ]
+    });
+    await alert.present();
+  }
 
-    const text = await response.text();
-    console.log("sendDataCalibration Success:", text);
 
-    // lettura
-    const letturaResponse = await fetch("https://utility.arpa.piemonte.it/post_opennoise/visualizza.php")
-    const letturaText = await letturaResponse.text()
-    console.log("sendDataCalibration response",letturaText)
+  async presentAlertCalibType() {
+    var this_copy = this
+    const alert = await this.alertController.create({
+      header: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_ATTENTION,
+      subHeader: "",
+      message: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTEXT,
+      inputs: [{
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE1,
+        value: 'Confronto1',
+        checked: true
+      },
+      {
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE2,
+        value: 'Confronto2'
+      },
+      {
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE3,
+        value: 'Confronto3'
+      }
+      ],
+      buttons: [
+        {
+          text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CANCEL,
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler(data: String) {
+            this_copy.calibType = data;
+            console.log('calibType: ', this_copy.calibType)
+            // this_copy.invioDatiService.sendDataCalibration(this_copy.userType, this_copy.calibType)
+          }
+        }
+      ],
+    });
+    await alert.present();
+  }
+
+  sendDataCalibration() {
+    this.presentAlertUserData()
   }
 
   // FINE PROVE INVIO DATI A SERVER ARPA
@@ -284,6 +267,7 @@ export class SettingsPage {
     //this.modalRange = this.variabiliService.range
   }
 
+  // AL M0MENTO NON VIENE MAI CHIAMATO
   async presentAlertCalibrazione() {
     const alert = await this.alertController.create({
       header: 'ATTENZIONE',
@@ -294,6 +278,7 @@ export class SettingsPage {
 
     await alert.present();
   }
+  //############################################################################
 
   async presentAlertConfermaCalibrazione(newDBGain: number) {
 
@@ -318,7 +303,6 @@ export class SettingsPage {
             this.variabiliService.dbGain = newDBGain
             console.log('this.variabiliService.dbGain new: ', this.variabiliService.dbGain);
             this.preferencesService.set("dbGain", this.variabiliService.dbGain)
-            this.getDeviceDataInformation()
           },
         },
       ]
@@ -489,8 +473,6 @@ export class SettingsPage {
       this.logDeviceInfo = logDeviceInfo
       this.platform = logDeviceInfo.platform
     })
-
-    this.getDeviceDataInformation()
 
   }
   ionViewDidEnter() {

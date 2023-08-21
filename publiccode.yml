@@ -7,9 +7,9 @@ name: OpeNoise Meter - Android and iOS app
 url: 'https://github.com/Arpapiemonte/openoise-meter'
 landingURL: >-
   http://www.arpa.piemonte.it/approfondimenti/temi-ambientali/rumore/rumore/openoise_2/openoise
-softwareVersion: 3.0.3
+softwareVersion: 3.0.4
 developmentStatus: stable
-releaseDate: '2023-08-08'
+releaseDate: '2023-08-21'
 softwareType: standalone/mobile
 platforms:
   - android
