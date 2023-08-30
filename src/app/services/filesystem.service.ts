@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
+import { AlertController } from '@ionic/angular'
+
 import { VariabiliService } from './variabili.service';
 
 import * as moment from 'moment'
@@ -20,8 +22,46 @@ export class FilesystemService {
   nameFileWriting: string
 
   constructor(
+    private alertController: AlertController,
     private variabiliService: VariabiliService
   ) { }
+
+  async checkRequestPermissions() {
+    console.log("checkRequestPermissions")
+    
+    var output = "denied"
+
+    const checkRequestPermissions = await Filesystem.checkPermissions()
+    console.log("checkRequestPermissions", checkRequestPermissions)
+    
+    if (checkRequestPermissions.publicStorage == "granted") {
+      output = "granted"
+    } else {
+      console.log("checkRequestPermissions if not granted")
+
+      const requestPermissions = await Filesystem.requestPermissions()
+      console.log("requestPermissions", requestPermissions)
+
+      if (requestPermissions.publicStorage == "granted") {
+        output = "granted"
+      }
+    }
+
+    return Promise.resolve(output)
+
+  }
+
+  async presentAlert(header: string, subHeader: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: ['OK'],
+      cssClass: 'alertClass'
+    });
+
+    await alert.present();
+  }
 
   inizializeFile() {
     // console.log("inizializeFile")
@@ -31,8 +71,8 @@ export class FilesystemService {
     var intestazione = 'Date' + this.variabiliService.saveOptions.field + 'Time' + this.variabiliService.saveOptions.field + 'LAeq(t)' + this.variabiliService.saveOptions.field + 'LAeq(1s)' //+ this.variabiliService.saveOptions.field + 'LAeq(t)2'
 
     if (this.variabiliService.saveOptions.bandLZeq) {
-        intestazione = intestazione  + this.variabiliService.saveOptions.field + 'LZeq(t)'
-        intestazione = intestazione  + this.variabiliService.saveOptions.field + 'LZeq(1s)'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'LZeq(t)'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'LZeq(1s)'
       for (let el of intestazioneArray) {
         intestazione = intestazione + this.variabiliService.saveOptions.field + 'LZeq_' + el
       }
@@ -43,7 +83,7 @@ export class FilesystemService {
       }
     }
 
-    this.nameFileWriting = moment(new Date()).format("YYYY-MM-DD-HHmmss") + ".txt"
+    this.nameFileWriting = moment(new Date()).format("YYYY-MM-DD-HHmmss") + this.variabiliService.saveOptions.extension
     this.writeFile(
       this.nameFileWriting,
       intestazione

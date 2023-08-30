@@ -37,7 +37,13 @@ ion-tab-button {
 
 ion-segment-button {
     --indicator-color: rgb(61, 194, 255, 0.5);
-  }
+}
+
+ion-item-divider {
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    font-variant: small-caps;
+}
 
 .toastClass {
     text-align: center;
@@ -50,6 +56,7 @@ ion-segment-button {
 .alertFirstTime {
     --max-height: calc(100%);
     text-align: justify;
+
     .alert-message {
         max-height: calc(100%);
     }

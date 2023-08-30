@@ -46,11 +46,12 @@ export class VariabiliService {
     "bandLZeq": false,
     "bandLZmin": false,
     "decimal": ".",
-    "field": ";"
+    "field": ";",
+    "extension": ".txt"
   }
 
   mainLevel = 'LAeq(1s)'
-  countdownNumber: number = 3
+  countdownNumber: string = '3'
 
   rangeFreqHz = {
     "lower": 16,

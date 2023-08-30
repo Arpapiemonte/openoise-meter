@@ -1,8 +1,5 @@
 <ion-content [fullscreen]="true">
 
-  <!-- <ion-list-header mode="ios">
-    <ion-label>FONOMETRO</ion-label>
-  </ion-list-header> -->
   <ion-list mode="ios">
     <ion-item-group>
       <ion-item-divider>
@@ -26,7 +23,7 @@
             }} - {{variabiliService.translation.SETTINGS.YAXIS_RANGE.YAXIS_RANGE_MAX}}: {{
             this.variabiliService.range.upper }}</p>
           <div>
-            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="0" [max]="130"
+            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="-20" [max]="130"
               [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
           </div>
         </ion-label>
@@ -232,9 +229,29 @@
           </p>
         </ion-label>
       </ion-item>
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.EXTENSION_TITLE}}</h2>
+          <p>
+            <ion-segment value="{{this.variabiliService.saveOptions.extension}}"
+              [(ngModel)]="this.variabiliService.saveOptions.extension" (ionChange)="setExtension($event)" style="margin-top: 5px;">
+              <ion-segment-button value=".txt">
+                <ion-label>.txt</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value=".csv">
+                <ion-label>.csv</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value=".log">
+                <ion-label>.log</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
     </ion-item-group>
 
   </ion-list>
+  <div style="height: 20px;"></div>
 
 
   <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillModalDismiss($event)">
@@ -319,9 +336,7 @@
               <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE1}}</ion-card-title>
               <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
             </ion-card-header>
-            <ion-card-content *ngIf="platform === 'android'" innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT_ANDROID}}">
-            </ion-card-content>
-            <ion-card-content *ngIf="platform === 'ios'" innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT_IOS}}">
+            <ion-card-content innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT}}">
             </ion-card-content>
           </ion-card>
 

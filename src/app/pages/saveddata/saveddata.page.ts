@@ -8,6 +8,7 @@ import { Share } from '@capacitor/share';
 import { FilesystemService } from 'src/app/services/filesystem.service';
 
 import { VariabiliService } from 'src/app/services/variabili.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { VariabiliService } from 'src/app/services/variabili.service';
 export class SaveddataPage implements OnInit {
 
   files: any = []
+  order = 'desc'
 
   modificaMoltiVariable: boolean = false
 
@@ -38,15 +40,95 @@ export class SaveddataPage implements OnInit {
     let files: any = await this.filesystemService.readDir(this.filesystemService.directoryOpeNoise)
     console.log("files", files)
 
+
+
     this.files = []
+    var now = moment()
+    console.log("now", now)
     for (let file of files) {
-      if (file.name.includes(".txt")) {
         file["size_kb"] = (file.size / 1000).toFixed(0)
         file["checked"] = false
+        file["data_label"] = this.formatDate(file.mtime)
+        var time = this.differenzaTempi(now, file.mtime)
+        file["diff"] = time.diff
+        file["diff_label"] = time.diff_label
         this.files.push(file)
-      }
-
     }
+
+    this.files = this.sortFile(this.files,  this.order )
+  }
+
+  formatDate(date:any) {
+    var output = ''
+    if (date != '' && this.variabiliService.language === 'en') {
+      moment.locale('en-GB');
+      output = moment(date).format("MM/DD/YYYY HH:mm")
+    } else {
+      if (date != '' && this.variabiliService.language === 'it') {
+        moment.locale('it-IT');
+        output = moment(date).format("DD/MM/YYYY HH:mm")
+    }
+  }
+    return output
+  }
+
+  sortFile(files: any, order: string) {
+    files.sort(function (a, b) {
+      var x = a.diff;
+      var y = b.diff;
+      if (order == 'asc') {
+        if (x > y) { return -1; }
+        if (x < y) { return 1; }
+        return 0;
+      } else {
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
+        return 0;
+      }
+    });
+    return files
+  }
+
+  invertiOrdine() {
+    if (this.order == 'desc') {
+      this.order = 'asc'
+    } else {
+      this.order = 'desc'
+    }
+    this.files = this.sortFile(this.files,  this.order )
+  }
+
+  differenzaTempi(time1: any, time2: any) {
+
+    var output = {
+      'diff': '',
+      'diff_label': ''
+    }
+
+    var giorni = time1.diff(moment(time2), 'days')
+    var ore = time1.diff(moment(time2), 'hours')
+    var minuti = time1.diff(moment(time2), 'minutes')
+
+    output.diff = time1.diff(moment(time2))
+
+    if (giorni > 0) {
+      output.diff_label = giorni + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME1
+    } else if (ore > 0) {
+      output.diff_label = ore + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME2
+    } else if (minuti >= 0) {
+      output.diff_label = minuti + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME3
+    }
+
+    if (giorni == 1) {
+      output.diff_label = giorni + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME1s
+    } else if (ore == 1) {
+      output.diff_label = ore + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME2s
+    } else if (minuti == 1) {
+      output.diff_label = minuti + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME3s
+    }
+
+    return output
+
   }
 
   async presentActionSheet(fileName: string) {
@@ -72,6 +154,17 @@ export class SaveddataPage implements OnInit {
           }
         },
         {
+          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT9,
+          icon: '/assets/icon/pencil.svg',
+          data: {
+            action: 'rename',
+          },
+          handler: () => {
+            console.log("click rename")
+            this.presentAlertRename(this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT10, fileName, "")
+          }
+        },
+        {
           text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT7,
           icon: 'open-outline',
           data: {
@@ -84,7 +177,7 @@ export class SaveddataPage implements OnInit {
             this.filesystemService.readFile(fileName).then(res => {
               console.log("readFile res", res)
               // this.fileOpenArray = res.data.replace(';',' ').split("\n")
-              this.fileOpenArray = res.data.split("\n")
+              this.fileOpenArray = String(res.data).split("\n")
             })
           }
         },
@@ -155,6 +248,40 @@ export class SaveddataPage implements OnInit {
           }
         },
       ],
+    });
+
+    await alert.present();
+  }
+
+
+  async presentAlertRename(header: string, filename: string, message: string) {
+    const alert = await this.alertController.create({
+      // mode: 'ios',
+      header: header,
+      subHeader: filename,
+      message: message,
+      buttons: [
+        {
+          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6,
+          role: 'cancel',
+          handler: () => [
+
+          ]
+        },
+        {
+          text: 'OK',
+          handler: (res) => {
+            console.log("rename", res)
+            this.filesystemService.renameFile(filename,res[0])
+            this.recuperaFiles()
+          }
+        },
+      ],
+      inputs: [
+        {
+          value: filename,
+        },
+      ]
     });
 
     await alert.present();
@@ -262,9 +389,16 @@ export class SaveddataPage implements OnInit {
     this.isModalOpen = isOpen;
   }
 
+  async inizializzaPage() {
+    const permissions = await this.filesystemService.checkRequestPermissions()
+    if (permissions == "granted") {
+      this.recuperaFiles()
+    }
+  }
+
   ionViewWillEnter() {
     console.log("SaveddataPage ionViewWillEnter")
-    this.recuperaFiles()
+    this.inizializzaPage()
   }
 
   ionViewWillLeave() {

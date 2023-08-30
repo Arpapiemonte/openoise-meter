@@ -1,27 +1,32 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>saveddata</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<ion-content>
+<ion-content [fullscreen]="true">
+  
   <div *ngIf="files.length > 0">
-    <ion-item>
-      <ion-label>
-        {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TITLE}}
-      </ion-label>
-      <ion-icon *ngIf="!modificaMoltiVariable" name="create-outline" (click)="modificaMolti()"></ion-icon>
-      <ion-checkbox *ngIf="modificaMoltiVariable" (ionChange)="checkboxTutti($event)"></ion-checkbox>
-    </ion-item>
+    <ion-list mode="ios">
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>
+            {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TITLE}}
+          </ion-label>
+        </ion-item-divider>
+        <ion-item mode="md">
+          <ion-icon name="swap-vertical-outline" style="font-size: x-large;" (click)="invertiOrdine()"></ion-icon>
+          <ion-label></ion-label>
+          <ion-icon *ngIf="!modificaMoltiVariable" name="create-outline" (click)="modificaMolti()"></ion-icon>
+          <ion-checkbox *ngIf="modificaMoltiVariable" (ionChange)="checkboxTutti($event)"></ion-checkbox>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
 
     <ion-item-group>
       <ion-list>
         <ion-item *ngFor="let file of files">
           <ion-label (click)="presentActionSheet(file.name)">
-            <h3>{{file.name}}</h3>
-            <p>{{file.size_kb}} kB</p>
+            <h2>{{file.name}}</h2>
+            <p><span style="font-size: small;">{{file.size_kb}} kB</span> - {{file.data_label}}</p>
+            <p><i>{{file.diff_label}}</i></p>
           </ion-label>
-          <ion-checkbox *ngIf="modificaMoltiVariable" slot="end" [checked]="file.checked" (ionChange)="checkboxChange(file.name,$event)"></ion-checkbox>
+          <ion-checkbox *ngIf="modificaMoltiVariable" slot="end" [checked]="file.checked"
+            (ionChange)="checkboxChange(file.name,$event)"></ion-checkbox>
         </ion-item>
       </ion-list>
     </ion-item-group>
@@ -70,7 +75,7 @@
 <ion-tab-bar *ngIf="modificaMoltiVariable">
   <ion-tab-button (click)="eliminaMolti()">
     <ion-icon name="trash-outline"></ion-icon>
-    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4}}</ion-label>
+    <ion-label> {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4}}</ion-label>
   </ion-tab-button>
   <ion-tab-button (click)="condividiMolti()">
     <ion-icon name="share-social-outline"></ion-icon>
@@ -78,6 +83,6 @@
   </ion-tab-button>
   <ion-tab-button (click)="annulla()">
     <ion-icon name="close-outline"></ion-icon>
-    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6}}</ion-label>
+    <ion-label> {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6}}</ion-label>
   </ion-tab-button>
 </ion-tab-bar>

@@ -47,8 +47,7 @@
         "CALIBRATION_TITLE": "Calibration",
         "CALIBRATION_VALUE": "Value",
         "CALIBRATION_TITLE1": "Instruction",
-        "CALIBRATION_TEXT_ANDROID": "In order to calibrate the device compare LAeq noise level with the value measured by a professional sound level meter.<br>Operating mode:<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +5.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation",
-        "CALIBRATION_TEXT_IOS": "In order to calibrate the device compare LAeq noise level with the value measured by a professional sound level meter.<br>Operating mode:<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +5.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation<br><br>For this device we recommended to use a calibration value of 24.0 dB.",
+        "CALIBRATION_TEXT": "To calibrate the device, you need to compare the sound level measured by OpeNoise with a known value measured by a professional sound level meter. Alternatively, an already calibrated device can be used as a reference. For iOS we recommend a calibration of +24.0 dBA, while for Android the calibration is variable depending on the model.<br><br>OPERATING MODE:<br>1) Go to Settings/Calibration when measurement is stopped<br>2) Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>3) Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +5.7 dBA)<br>4) Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation",
         "CALIBRATION_OPENOISE_VALUE_TEXT": "OpeNoise level",
         "CALIBRATION_VALUE_TEXT": "Calibration value",
         "CALIBRATION_BUTTON": "CALIBRATE",
@@ -140,7 +139,8 @@
           "SEP_FIELDS_POINT_COMMA": "Semicolon",
           "SEP_FIELDS_COMMA": "Comma",
           "SEP_FIELDS_PIPE": "Pipe"
-        }
+        },
+        "EXTENSION_TITLE": "File extension"
       }
     },
     "SAVE_FILES": {
@@ -159,6 +159,14 @@
       "SAVE_FILES_TEXT7": "Open",
       "SAVE_FILES_TEXT8_TITLE": "WARNING",
       "SAVE_FILES_TEXT8": "A program such as LibreOffice Calc or Office Excel must be used to view the file correctly. This simple viewer is only used to perform rough checks on the correct execution of the measurement.",
+      "SAVE_FILES_TEXT9": "Rename",
+      "SAVE_FILES_TEXT10": "Rename the file",
+      "SAVE_FILES_TIME1": " days ago",
+      "SAVE_FILES_TIME2": " hours ago",
+      "SAVE_FILES_TIME3": " minutes ago",
+      "SAVE_FILES_TIME1s": " day ago",
+      "SAVE_FILES_TIME2s": " hour ago",
+      "SAVE_FILES_TIME3s": " minute ago",
       "SAVE_BUTTON": {
         "SAVE_BUTTON_TEXT1": "Data saved in the file:",
         "SAVE_BUTTON_TEXT2": "WARNING",
@@ -207,7 +215,7 @@
         },
         {
           "CALIBRATION_TITLE": "CALIBRATING THE DEVICE",
-          "CALIBRATION_TEXT": "Each device responds differently to acoustic signals, so calibration is necessary.<br>To calibrate the device, the sound level measured by OpeNoise must be compared with a known value measured by a professional sound level meter (or from an already calibrated device).<br><br>Operating mode:<br>- Go to Settings/Calibration when measurement is stopped<br>- Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>- Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +5.7 dBA)<br>- Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation"
+          "CALIBRATION_TEXT": "Each device responds differently to acoustic signals, so calibration is necessary.<br>To calibrate the device, you need to compare the sound level measured by OpeNoise with a known value measured by a professional sound level meter. Alternatively, an already calibrated device can be used as a reference. For iOS we recommend a calibration of +24.0 dBA, while for Android the calibration is variable depending on the model.<br><br>OPERATING MODE:<br>1) Go to Settings/Calibration when measurement is stopped<br>2) Simultaneously check the levels measured by OpeNoise and a professional sound level meter at the same point (e.g. OpeNoise level 52.3 dBA and professional sound level meter 58.0 dBA)<br>3) Set the calibration value, using integers and decimals (e.g. 58.0 - 52.3 = +5.7 dBA)<br>4) Now the level measured by OpeNoise must match the level measured by the professional sound level meter, if not, repeat the operation"
         },
         {
           "RANGE_TITLE": "DYNAMIC RANGE",

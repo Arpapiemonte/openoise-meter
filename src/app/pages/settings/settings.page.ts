@@ -401,10 +401,13 @@ export class SettingsPage {
     this.preferencesService.set("saveOptions", this.variabiliService.saveOptions);
   }
 
+  setExtension(event: any) {
+    console.log("this.variabiliService.saveOptions.extension: ", this.variabiliService.saveOptions.extension);
+    this.preferencesService.set("saveOptions", this.variabiliService.saveOptions);
+  }
 
   segmentChangedCountdownNumber(event: any) {
-    console.log("this.mainLevel: ", this.variabiliService.countdownNumber);
-    console.log("event: ", event);
+    console.log("segmentChangedCountdownNumber event: ", event.detail.value);
     this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber);
   }
 

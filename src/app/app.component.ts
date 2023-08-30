@@ -95,6 +95,9 @@ export class AppComponent {
       this.preferencesService.set("saveOptions", this.variabiliService.saveOptions)
     } else {
       console.log("saveOptions esiste", saveOptions)
+      if (!("extension" in saveOptions)) {
+        saveOptions["extension"] = ".txt"
+      }
       this.variabiliService.saveOptions = saveOptions
     }
 
@@ -122,7 +125,7 @@ export class AppComponent {
       this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber)
     } else {
       console.log("countdownNumber esiste", countdownNumber)
-      this.variabiliService.countdownNumber = countdownNumber
+      this.variabiliService.countdownNumber = String(countdownNumber)
     }
 
     var rangeFreqHz = await this.preferencesService.get('rangeFreqHz')

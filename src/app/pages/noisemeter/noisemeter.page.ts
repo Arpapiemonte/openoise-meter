@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { NgZone } from '@angular/core';
+import { Optional } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { IonRouterOutlet } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular'
 import { ToastController } from '@ionic/angular';
+
+import { App } from '@capacitor/app';
 
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { AudioService } from '../../services/audio.service';
@@ -24,16 +29,33 @@ export class NoisemeterPage {
 
   countdownBoolean: boolean = false
   countdownNumberLocal: any
+  countdownInterval: any
 
   constructor(
     private zone: NgZone,
+    private router: Router,
     public platform: Platform,
     private alertController: AlertController,
     private toastController: ToastController,
     public variabiliService: VariabiliService,
     public audioService: AudioService,
     public filesystemService: FilesystemService,
+    @Optional() private routerOutlet?: IonRouterOutlet,
   ) {
+    
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      console.log("backButton")
+      if (!this.routerOutlet.canGoBack()) {
+        console.log("this.router.url", this.router.url)
+        if (this.router.url == '/pages/tabs/noisemeter') {
+          console.log("backButton exitApp")
+          App.exitApp();
+        } else {
+          this.router.navigate(['/pages/tabs/noisemeter'])
+        }
+      }
+    });
+
   }
 
   startCapture() {
@@ -75,6 +97,9 @@ export class NoisemeterPage {
           this.filesystemService.nameFileWriting
         )
       }
+    } else if (this.countdownNumberLocal > 0) { 
+      clearInterval(this.countdownInterval)
+      this.countdownBoolean = false
     }
   }
 
@@ -90,26 +115,29 @@ export class NoisemeterPage {
     }
   }
 
-  toggleChangeSave() {
+  async toggleChangeSave() {
     console.log("toggleChangeSave")
 
-    if (this.filesystemService.saveData) {
-      this.filesystemService.saveData = false
-      if (this.audioService.capture) {
-        this.presentAlert(
-          this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
-          '',
-          this.filesystemService.nameFileWriting
-        )
+    const permissions = await this.filesystemService.checkRequestPermissions()
+    if (permissions == "granted") {
+      if (this.filesystemService.saveData) {
+        this.filesystemService.saveData = false
+        if (this.audioService.capture) {
+          this.presentAlert(
+            this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
+            '',
+            this.filesystemService.nameFileWriting
+          )
+        } else {
+          this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT5)
+        }
       } else {
-        this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT5)
-      }
-    } else {
-      this.filesystemService.saveData = true
-      if (this.audioService.capture) {
-        this.initializeFile()
-      } else {
-        this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT4)
+        this.filesystemService.saveData = true
+        if (this.audioService.capture) {
+          this.initializeFile()
+        } else {
+          this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT4)
+        }
       }
     }
 
@@ -155,16 +183,18 @@ export class NoisemeterPage {
   }
 
   startCaptureWithCountdown() {
-    console.log("startCaptureWithCountdown")
-    this.countdownNumberLocal = this.variabiliService.countdownNumber
+    console.log("startCaptureWithCountdown", this.variabiliService.countdownNumber)
+    this.countdownNumberLocal = Number(this.variabiliService.countdownNumber)
+    console.log("countdownNumberLocal", this.countdownNumberLocal)
+
     if (this.countdownNumberLocal > 0) {
       this.countdownBoolean = true
       var this_copy = this
-      var countdownInterval = setInterval(function () {
+      this.countdownInterval = setInterval(function () {
         console.log("countdownNumberLocal", this_copy.countdownNumberLocal)
         this_copy.countdownNumberLocal = this_copy.countdownNumberLocal - 1
         if (this_copy.countdownNumberLocal == 0) {
-          clearInterval(countdownInterval)
+          clearInterval(this_copy.countdownInterval)
           this_copy.countdownBoolean = false
           this_copy.audioService.startAudio()
           if (this_copy.filesystemService.saveData) {
@@ -211,6 +241,7 @@ export class NoisemeterPage {
   ionViewDidEnter() {
     console.log("NoisemeterPage ionViewDidEnter")
     this.autoStart()
+
   }
 
   ionViewWillLeave() {

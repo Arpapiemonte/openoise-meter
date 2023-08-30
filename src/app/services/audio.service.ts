@@ -381,8 +381,8 @@ export class AudioService {
     this.setIntervalCapture = setInterval(function () {
 
       // console.log("this_copy.date_start",this_copy.date_start)
-      this_copy.date_now = new Date(this_copy.date_start)
-      this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
+      this_copy.date_now = new Date()
+      // this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
       // console.log("this_copy.date_now",this_copy.date_now)
       this_copy.countInterval++
 
@@ -518,7 +518,7 @@ export class AudioService {
 
         if (this_copy.countInterval > 1) {
           if (this_copy.filesystemService.saveData) {
-            let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
+            let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss.SSS")
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             // data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning2.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)

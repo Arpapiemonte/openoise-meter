@@ -47,8 +47,7 @@
         "CALIBRATION_TITLE": "Calibrazione",
         "CALIBRATION_VALUE": "Valore",
         "CALIBRATION_TITLE1": "Istruzioni",
-        "CALIBRATION_TEXT_ANDROID": "Per calibrare il dispositivo occorre confrontare il livello sonoro LAeq con un valore noto misurato da un fonometro professionale.<br>Modalità operativa:<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione",
-        "CALIBRATION_TEXT_IOS": "Per calibrare il dispositivo occorre confrontare il livello sonoro LAeq con un valore noto misurato da un fonometro professionale.<br>Modalità operativa:<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione<br><br>Per questo dispositivo si consiglia il valore di: 24.0 dB.",
+        "CALIBRATION_TEXT": "Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale.<br>In alternativa, è possibile utilizzare come riferimento un dispositivo già calibrato. Per iOS si consiglia una calibrazione di +24.0 dBA, mentre per Android la calibrazione è variabile a seconda del modello.<br><br>MODALITÀ OPERATIVA:<br>1) Andare in Opzioni/Calibrazione a misura ferma<br>2) Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>3) Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>4) Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione",
         "CALIBRATION_OPENOISE_VALUE_TEXT": "Livello di OpeNoise",
         "CALIBRATION_VALUE_TEXT": "Valore di calibrazione",
         "CALIBRATION_BUTTON": "CALIBRA",
@@ -140,7 +139,8 @@
           "SEP_FIELDS_POINT_COMMA": "Punto e virgola",
           "SEP_FIELDS_COMMA": "Virgola",
           "SEP_FIELDS_PIPE": "Pipe"
-        }
+        },
+        "EXTENSION_TITLE": "Estensione del file"
       }
     },
     "SAVE_FILES": {
@@ -159,6 +159,14 @@
       "SAVE_FILES_TEXT7": "Apri",
       "SAVE_FILES_TEXT8_TITLE": "ATTENZIONE",
       "SAVE_FILES_TEXT8": "Per visualizzare correttamente il file occorre utilizzare un programma come LibreOffice Calc o Office Excel. Questo semplice visualizzatore serve unicamente ad effettuare controlli di massima sulla corretta esecuzione della misura.",
+      "SAVE_FILES_TEXT9": "Rinomina",
+      "SAVE_FILES_TEXT10": "Rinomina il file",
+      "SAVE_FILES_TIME1": " giorni fa",
+      "SAVE_FILES_TIME2": " ore fa",
+      "SAVE_FILES_TIME3": " minuti fa",
+      "SAVE_FILES_TIME1s": " giorno fa",
+      "SAVE_FILES_TIME2s": " ora fa",
+      "SAVE_FILES_TIME3s": " minuto fa",
       "SAVE_BUTTON": {
         "SAVE_BUTTON_TEXT1": "Dati salvati nel file:",
         "SAVE_BUTTON_TEXT2": "ATTENZIONE",
@@ -207,7 +215,7 @@
         },
         {
           "CALIBRATION_TITLE": "CALIBRARE IL DISPOSITIVO",
-          "CALIBRATION_TEXT": "Ogni dispositivo risponde in maniera diversa ai segnali acustici, per cui è necessario effettuare una calibrazione.<br>Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale (oppure da un dispositivo già calibrato).<br><br>Modalità operativa:<br>- Andare in Opzioni/Calibrazione a misura ferma<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione"
+          "CALIBRATION_TEXT": "Ogni dispositivo risponde in maniera diversa ai segnali acustici, per cui è necessario effettuare una calibrazione.<br>Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale.<br>In alternativa, è possibile utilizzare come riferimento un dispositivo già calibrato. Per iOS si consiglia una calibrazione di +24.0 dBA, mentre per Android la calibrazione è variabile a seconda del modello.<br><br>MODALITÀ OPERATIVA:<br>1) Andare in Opzioni/Calibrazione a misura ferma<br>2) Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>3) Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>4) Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione"
         },
         {
           "RANGE_TITLE": "VERIFICARE LA DINAMICA",
