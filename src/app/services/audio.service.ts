@@ -379,7 +379,7 @@ export class AudioService {
 
     // calculate data every sec
     this.setIntervalCapture = setInterval(function () {
-
+      console.log("this_copy.countInterval", this_copy.countInterval)
       // console.log("this_copy.date_start",this_copy.date_start)
       this_copy.date_now = new Date()
       // this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
@@ -509,7 +509,7 @@ export class AudioService {
             "sonogramData": this_copy.sonogramData,
             "fftData": this_copy.fftData
           })
-          console.log("this_copy.sonogramData", this_copy.sonogramData)
+          // console.log("this_copy.sonogramData", this_copy.sonogramData)
         }
 
         this_copy.elapsedTime = this_copy.elapsedTimeCalculation(this_copy.date_start, this_copy.date_now)
@@ -518,7 +518,7 @@ export class AudioService {
 
         if (this_copy.countInterval > 1) {
           if (this_copy.filesystemService.saveData) {
-            let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss.SSS")
+            let data = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format) + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss.SSS")
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             // data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning2.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
@@ -549,7 +549,7 @@ export class AudioService {
 
         this_copy.variabiliService.setDataRefreshBS(this_copy.date_now)
         if (this_copy.filesystemService.saveData) {
-          let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
+          let data = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format) + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
           data = data + this_copy.variabiliService.saveOptions.field
           data = data + this_copy.variabiliService.saveOptions.field
           // data = data + this_copy.variabiliService.saveOptions.field
@@ -646,6 +646,14 @@ export class AudioService {
         this.graficiService.inizializzaGrafici()
       }
       audioinput.stop()
+      if (this.filesystemService.saveData) {
+        let data = moment().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
+        data = data + this.variabiliService.saveOptions.field + "RESET"
+        this.filesystemService.appendFile(
+          this.filesystemService.nameFileWriting,
+          data
+        )
+      }
       this.startCapture()
     } else {
       this.resetParameters()
@@ -654,8 +662,8 @@ export class AudioService {
   }
 
   elapsedTimeCalculation(date_start: any, date_end: any) {
-    console.log("elapsedTimeCalculation date_start", date_start)
-    console.log("elapsedTimeCalculation date_end", date_end)
+    // console.log("elapsedTimeCalculation date_start", date_start)
+    // console.log("elapsedTimeCalculation date_end", date_end)
     var output = ''
 
     if (date_start != '' && date_end != '') {
@@ -678,7 +686,7 @@ export class AudioService {
       leftSec = leftSec - min * 60;
 
       var outputHMS = hrs.toLocaleString(undefined, { minimumIntegerDigits: 2 }) + ":" + min.toLocaleString(undefined, { minimumIntegerDigits: 2 }) + ":" + leftSec.toLocaleString(undefined, { minimumIntegerDigits: 2 });
-      
+
       if (days > 0) {
         output = days + " " + this.variabiliService.translation.LEVELS.DAYS + " " + outputHMS
       } else {

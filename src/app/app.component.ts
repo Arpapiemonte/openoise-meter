@@ -96,7 +96,10 @@ export class AppComponent {
     } else {
       console.log("saveOptions esiste", saveOptions)
       if (!("extension" in saveOptions)) {
-        saveOptions["extension"] = ".txt"
+        saveOptions["extension"] = this.variabiliService.saveOptions.extension
+      }
+      if (!("date_format" in saveOptions)) {
+        saveOptions["date_format"] = this.variabiliService.saveOptions.date_format
       }
       this.variabiliService.saveOptions = saveOptions
     }

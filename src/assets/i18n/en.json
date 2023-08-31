@@ -140,7 +140,8 @@
           "SEP_FIELDS_COMMA": "Comma",
           "SEP_FIELDS_PIPE": "Pipe"
         },
-        "EXTENSION_TITLE": "File extension"
+        "EXTENSION_TITLE": "File extension",
+        "DATE_FORMAT_TITLE": "Date format"
       }
     },
     "SAVE_FILES": {

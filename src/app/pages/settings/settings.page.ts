@@ -406,6 +406,11 @@ export class SettingsPage {
     this.preferencesService.set("saveOptions", this.variabiliService.saveOptions);
   }
 
+  setDateFormat(event: any) {
+    console.log("this.variabiliService.saveOptions.date_format: ", this.variabiliService.saveOptions.date_format);
+    this.preferencesService.set("saveOptions", this.variabiliService.saveOptions);
+  }
+
   segmentChangedCountdownNumber(event: any) {
     console.log("segmentChangedCountdownNumber event: ", event.detail.value);
     this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber);

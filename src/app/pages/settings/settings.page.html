@@ -248,6 +248,25 @@
           </p>
         </ion-label>
       </ion-item>
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_TITLE}}</h2>
+          <p>
+            <ion-segment value="{{this.variabiliService.saveOptions.date_format}}"
+              [(ngModel)]="this.variabiliService.saveOptions.date_format" (ionChange)="setDateFormat($event)" style="margin-top: 5px;">
+              <ion-segment-button value="YYYY-MM-DD">
+                <ion-label>Y-M-D</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="DD-MM-YYYY">
+                <ion-label>D-M-Y</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="MM-DD-YYYY">
+                <ion-label>M-D-Y</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
     </ion-item-group>
 
   </ion-list>

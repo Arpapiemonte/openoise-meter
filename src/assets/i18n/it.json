@@ -140,7 +140,8 @@
           "SEP_FIELDS_COMMA": "Virgola",
           "SEP_FIELDS_PIPE": "Pipe"
         },
-        "EXTENSION_TITLE": "Estensione del file"
+        "EXTENSION_TITLE": "Estensione del file",
+        "DATE_FORMAT_TITLE": "Formato della data"
       }
     },
     "SAVE_FILES": {
