@@ -101,6 +101,9 @@ export class AppComponent {
       if (!("date_format" in saveOptions)) {
         saveOptions["date_format"] = this.variabiliService.saveOptions.date_format
       }
+      if (!("debug" in saveOptions)) {
+        saveOptions["debug"] = this.variabiliService.saveOptions.debug
+      }
       this.variabiliService.saveOptions = saveOptions
     }
 

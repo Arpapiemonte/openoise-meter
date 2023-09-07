@@ -129,6 +129,7 @@
         "FALSE": "Not saved",
         "SAVE_DATA_BAND_LAEQ": "Save LZeq 1/3 octaves levels",
         "SAVE_DATA_BAND_LZMIN": "Save LZmin 1/3 octaves levels",
+        "SAVE_DATA_DEBUG": "Save debug parameters",
         "SEP_DEC": {
           "SEP_DEC_TITLE": "Decimal separator",
           "SEP_DEC_POINT": "Point",
@@ -141,7 +142,10 @@
           "SEP_FIELDS_PIPE": "Pipe"
         },
         "EXTENSION_TITLE": "File extension",
-        "DATE_FORMAT_TITLE": "Date format"
+        "DATE_FORMAT_TITLE": "Date format",
+        "DATE_FORMAT_YMD": "Y-M-D",
+        "DATE_FORMAT_DMY": "D-M-Y",
+        "DATE_FORMAT_MDY": "M-D-Y"
       }
     },
     "SAVE_FILES": {

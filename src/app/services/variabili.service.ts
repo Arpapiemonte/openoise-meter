@@ -48,7 +48,8 @@ export class VariabiliService {
     "decimal": ".",
     "field": ";",
     "extension": ".txt",
-    "date_format": "YYYY-MM-DD"
+    "date_format": "YYYY-MM-DD",
+    "debug": false
   }
 
   mainLevel = 'LAeq(1s)'

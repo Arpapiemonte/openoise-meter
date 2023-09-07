@@ -369,6 +369,13 @@ export class SettingsPage {
     this.preferencesService.set("saveOptions", this.variabiliService.saveOptions)
   }
 
+  toggleChangeSaveDebug(event: any) {
+    console.log("toggleChangeSaveDebug", event.detail.checked)
+
+    this.variabiliService.saveOptions.debug = event.detail.checked
+    this.preferencesService.set("saveOptions", this.variabiliService.saveOptions)
+  }
+
 
   setDecSeparator(event: any) {
 

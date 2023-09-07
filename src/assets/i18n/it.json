@@ -129,6 +129,7 @@
         "FALSE": "Non salvati",
         "SAVE_DATA_BAND_LAEQ": "Salva LZeq dei 1/3 di ottava",
         "SAVE_DATA_BAND_LZMIN": "Salva LZmin dei 1/3 di ottava",
+        "SAVE_DATA_DEBUG": "Salva parametri di debug",
         "SEP_DEC": {
           "SEP_DEC_TITLE": "Separatore dei decimali",
           "SEP_DEC_POINT": "Punto",
@@ -141,7 +142,11 @@
           "SEP_FIELDS_PIPE": "Pipe"
         },
         "EXTENSION_TITLE": "Estensione del file",
-        "DATE_FORMAT_TITLE": "Formato della data"
+        "DATE_FORMAT_TITLE": "Formato della data",
+        "DATE_FORMAT_YMD": "A-M-G",
+        "DATE_FORMAT_DMY": "G-M-A",
+        "DATE_FORMAT_MDY": "M-G-A"
+
       }
     },
     "SAVE_FILES": {

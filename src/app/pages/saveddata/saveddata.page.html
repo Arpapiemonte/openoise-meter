@@ -9,7 +9,7 @@
           </ion-label>
         </ion-item-divider>
         <ion-item mode="md">
-          <ion-icon name="swap-vertical-outline" style="font-size: x-large;" (click)="invertiOrdine()"></ion-icon>
+          <ion-icon *ngIf="!modificaMoltiVariable" name="swap-vertical-outline" style="font-size: x-large;" (click)="invertiOrdine()"></ion-icon>
           <ion-label></ion-label>
           <ion-icon *ngIf="!modificaMoltiVariable" name="create-outline" (click)="modificaMolti()"></ion-icon>
           <ion-checkbox *ngIf="modificaMoltiVariable" (ionChange)="checkboxTutti($event)"></ion-checkbox>

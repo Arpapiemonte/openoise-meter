@@ -23,8 +23,8 @@
             }} - {{variabiliService.translation.SETTINGS.YAXIS_RANGE.YAXIS_RANGE_MAX}}: {{
             this.variabiliService.range.upper }}</p>
           <div>
-            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="-20" [max]="130"
-              [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
+            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true"
+              [min]="-20" [max]="130" [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
           </div>
         </ion-label>
       </ion-item>
@@ -105,8 +105,10 @@
       <ion-item>
         <ion-label class="ion-text-wrap">
           <h2>{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_TITLE}}</h2>
-          <p *ngIf="variabiliService.ruotaSchermo">{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_SECONDARY}}</p>
-          <p *ngIf="!variabiliService.ruotaSchermo">{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_PRIMARY}}</p>
+          <p *ngIf="variabiliService.ruotaSchermo">
+            {{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_SECONDARY}}</p>
+          <p *ngIf="!variabiliService.ruotaSchermo">
+            {{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_PRIMARY}}</p>
         </ion-label>
         <ion-toggle color="secondary" mode="md" [checked]="variabiliService.ruotaSchermo"
           (ionChange)="toggleChangeRuotaSchermo($event)"></ion-toggle>
@@ -174,67 +176,14 @@
             {{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_TEXT}}</p>
         </ion-label>
       </ion-item-divider>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LAEQ}}</h2>
-          <p *ngIf="variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
-          <p *ngIf="!variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}</p>
-        </ion-label>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
-          (ionChange)="toggleChangeSaveLZeq($event)"></ion-toggle>
-      </ion-item>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LZMIN}}</h2>
-          <p *ngIf="variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
-          <p *ngIf="!variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}</p>
-        </ion-label>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
-          (ionChange)="toggleChangeSaveLZmin($event)"></ion-toggle>
-      </ion-item>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_TITLE}}</h2>
-          <p>
-            <ion-segment value="{{this.variabiliService.saveOptions.decimal}}"
-              [(ngModel)]="this.variabiliService.saveOptions.decimal" (ionChange)="setDecSeparator($event)" style="margin-top: 5px;">
-              <ion-segment-button value=".">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_POINT}}: .</ion-label>
-              </ion-segment-button>
-              <ion-segment-button disabled="{{this.virgolaDisabledD}}" value=",">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_COMMA}}: ,</ion-label>
-              </ion-segment-button>
-            </ion-segment>
-          </p>
-        </ion-label>
-      </ion-item>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_TITLE}}</h2>
-          <p>
-            <ion-segment value="{{this.variabiliService.saveOptions.field}}"
-              [(ngModel)]="this.variabiliService.saveOptions.field" (ionChange)="setFieldSeparator($event)" style="margin-top: 5px;">
-              <ion-segment-button value=";">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:
-                  ;</ion-label>
-              </ion-segment-button>
-              <ion-segment-button disabled="{{this.virgolaDisabledF}}" value=",">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:
-                  ,</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="|">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}: |</ion-label>
-              </ion-segment-button>
-            </ion-segment>
-          </p>
-        </ion-label>
-      </ion-item>
+
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.EXTENSION_TITLE}}</h2>
           <p>
             <ion-segment value="{{this.variabiliService.saveOptions.extension}}"
-              [(ngModel)]="this.variabiliService.saveOptions.extension" (ionChange)="setExtension($event)" style="margin-top: 5px;">
+              [(ngModel)]="this.variabiliService.saveOptions.extension" (ionChange)="setExtension($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value=".txt">
                 <ion-label>.txt</ion-label>
               </ion-segment-button>
@@ -248,25 +197,107 @@
           </p>
         </ion-label>
       </ion-item>
+
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_TITLE}}</h2>
           <p>
             <ion-segment value="{{this.variabiliService.saveOptions.date_format}}"
-              [(ngModel)]="this.variabiliService.saveOptions.date_format" (ionChange)="setDateFormat($event)" style="margin-top: 5px;">
+              [(ngModel)]="this.variabiliService.saveOptions.date_format" (ionChange)="setDateFormat($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value="YYYY-MM-DD">
-                <ion-label>Y-M-D</ion-label>
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_YMD}}</ion-label>
               </ion-segment-button>
               <ion-segment-button value="DD-MM-YYYY">
-                <ion-label>D-M-Y</ion-label>
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_DMY}}</ion-label>
               </ion-segment-button>
               <ion-segment-button value="MM-DD-YYYY">
-                <ion-label>M-D-Y</ion-label>
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_MDY}}</ion-label>
               </ion-segment-button>
             </ion-segment>
           </p>
         </ion-label>
       </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_TITLE}}</h2>
+          <p>
+            <ion-segment value="{{this.variabiliService.saveOptions.field}}"
+              [(ngModel)]="this.variabiliService.saveOptions.field" (ionChange)="setFieldSeparator($event)"
+              style="margin-top: 5px;">
+              <ion-segment-button value=";">
+                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:-->
+                  ;</ion-label>
+              </ion-segment-button>
+              <ion-segment-button disabled="{{this.virgolaDisabledF}}" value=",">
+                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:-->
+                  ,</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="|">
+                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}:-->
+                  |</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_TITLE}}</h2>
+          <p>
+            <ion-segment value="{{this.variabiliService.saveOptions.decimal}}"
+              [(ngModel)]="this.variabiliService.saveOptions.decimal" (ionChange)="setDecSeparator($event)"
+              style="margin-top: 5px;">
+              <ion-segment-button value=".">
+                <ion-label style="font-size: large;">
+                  <!-- {{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_POINT}}:  -->
+                  .</ion-label>
+              </ion-segment-button>
+              <ion-segment-button disabled="{{this.virgolaDisabledD}}" value=",">
+                <ion-label style="font-size: large;">
+                  <!-- {{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_COMMA}}:  -->
+                  ,</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LAEQ}}</h2>
+          <p *ngIf="variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
+          <p *ngIf="!variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+          </p>
+        </ion-label>
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
+          (ionChange)="toggleChangeSaveLZeq($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LZMIN}}</h2>
+          <p *ngIf="variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
+          <p *ngIf="!variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+          </p>
+        </ion-label>
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
+          (ionChange)="toggleChangeSaveLZmin($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_DEBUG}}</h2>
+          <p *ngIf="variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
+          <p *ngIf="!variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+          </p>
+        </ion-label>
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.debug"
+          (ionChange)="toggleChangeSaveDebug($event)"></ion-toggle>
+      </ion-item>
+
     </ion-item-group>
 
   </ion-list>

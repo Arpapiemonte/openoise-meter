@@ -68,8 +68,14 @@ export class FilesystemService {
     var intestazioneArray: Array<any> = [16, 20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500,
       630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 16000, 20000];
 
-    var intestazione = 'Date' + this.variabiliService.saveOptions.field + 'Time' + this.variabiliService.saveOptions.field + 'LAeq(t)' + this.variabiliService.saveOptions.field + 'LAeq(1s)' //+ this.variabiliService.saveOptions.field + 'LAeq(t)2'
-
+    var intestazione = 'Date' + this.variabiliService.saveOptions.field + 'Time' + this.variabiliService.saveOptions.field + 'LAeq(t)' + this.variabiliService.saveOptions.field + 'LAeq(1s)' + this.variabiliService.saveOptions.field + 'Marker' //+ this.variabiliService.saveOptions.field + 'LAeq(t)2'
+    
+    if (this.variabiliService.saveOptions.debug) { 
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'Time (ms)'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'Count (s)'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'N_FFT'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'LAeq(s)_linear'
+    }
     if (this.variabiliService.saveOptions.bandLZeq) {
       intestazione = intestazione + this.variabiliService.saveOptions.field + 'LZeq(t)'
       intestazione = intestazione + this.variabiliService.saveOptions.field + 'LZeq(1s)'

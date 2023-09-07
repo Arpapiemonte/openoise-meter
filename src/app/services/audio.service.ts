@@ -24,6 +24,7 @@ export class AudioService {
   countInterval: number = 0
   date_start: any
   date_now: any
+  date_now_debug: any
   elapsedTime: any
   timeElapsed: string = ''
 
@@ -382,7 +383,8 @@ export class AudioService {
       console.log("this_copy.countInterval", this_copy.countInterval)
       // console.log("this_copy.date_start",this_copy.date_start)
       this_copy.date_now = new Date()
-      // this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
+      this_copy.date_now_debug = new Date()
+      this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
       // console.log("this_copy.date_now",this_copy.date_now)
       this_copy.countInterval++
 
@@ -518,10 +520,17 @@ export class AudioService {
 
         if (this_copy.countInterval > 1) {
           if (this_copy.filesystemService.saveData) {
-            let data = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format) + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss.SSS")
+            let data = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format) + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
-            data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             // data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning2.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
+            data = data + this_copy.variabiliService.saveOptions.field + ''
+            if (this_copy.variabiliService.saveOptions.debug) {
+              data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
+            }
             if (this_copy.variabiliService.saveOptions.bandLZeq) {
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbRunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbTime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
@@ -552,7 +561,13 @@ export class AudioService {
           let data = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format) + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
           data = data + this_copy.variabiliService.saveOptions.field
           data = data + this_copy.variabiliService.saveOptions.field
-          // data = data + this_copy.variabiliService.saveOptions.field
+          data = data + this_copy.variabiliService.saveOptions.field + 'PAUSE'
+          if (this_copy.variabiliService.saveOptions.debug) {
+            data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
+          }
           if (this_copy.variabiliService.saveOptions.bandLZeq) {
             data = data + this_copy.variabiliService.saveOptions.field
             data = data + this_copy.variabiliService.saveOptions.field
@@ -647,8 +662,16 @@ export class AudioService {
       }
       audioinput.stop()
       if (this.filesystemService.saveData) {
-        let data = moment().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
+        let data = moment().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss")
+        data = data + this.variabiliService.saveOptions.field
+        data = data + this.variabiliService.saveOptions.field
         data = data + this.variabiliService.saveOptions.field + "RESET"
+        if (this.variabiliService.saveOptions.debug) {
+          data = data + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
+          data = data + this.variabiliService.saveOptions.field + this.countInterval
+          data = data + this.variabiliService.saveOptions.field + this.numberFftTime
+          data = data + this.variabiliService.saveOptions.field + this.linearATime.toFixed(0)
+        }
         this.filesystemService.appendFile(
           this.filesystemService.nameFileWriting,
           data
