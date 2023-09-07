@@ -73,7 +73,8 @@ export class FilesystemService {
     if (this.variabiliService.saveOptions.debug) { 
       intestazione = intestazione + this.variabiliService.saveOptions.field + 'Time (ms)'
       intestazione = intestazione + this.variabiliService.saveOptions.field + 'Count (s)'
-      intestazione = intestazione + this.variabiliService.saveOptions.field + 'N_FFT'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'N_FFT_s'
+      intestazione = intestazione + this.variabiliService.saveOptions.field + 'N_FFT_TOT'
       intestazione = intestazione + this.variabiliService.saveOptions.field + 'LAeq(s)_linear'
     }
     if (this.variabiliService.saveOptions.bandLZeq) {

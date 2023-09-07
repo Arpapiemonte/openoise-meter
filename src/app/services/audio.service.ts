@@ -16,6 +16,7 @@ import 'moment/locale/it';
 })
 export class AudioService {
 
+
   // TIME VARIABLES
   capture: boolean = false
   captureCalibrazione: boolean = false
@@ -27,6 +28,7 @@ export class AudioService {
   date_now_debug: any
   elapsedTime: any
   timeElapsed: string = ''
+  setEventAddListeners:boolean = false
 
   // NOISE VARIABLES
   p_ref: number = 0.00002;
@@ -302,6 +304,7 @@ export class AudioService {
 
     this.onAudio = function onAudioInput(evt: any) {
       if (!this_copy.pause) {
+        // console.log("this_copy.numberFftTime", this_copy.numberFftTime)
         // console.log("evt", evt.data.length)
 
         // parte nuova rispetto opeNoise 2, vedere txt
@@ -309,6 +312,7 @@ export class AudioService {
 
         this_copy.numberFftTime += 1;
         this_copy.numberFftTotal += 1;
+
 
         // hanning without overlap
         for (let i = 0; i < raw.length; i++) {
@@ -330,6 +334,8 @@ export class AudioService {
         //   console.log("mag length", mag.length);
         //   // console.log("mag", mag);
         // }
+
+        // console.log("evt, mag, numebrFFT", evt.data.length, mag.length, this_copy.numberFftTime)
 
         var linearGain: number = Math.pow(10, this_copy.variabiliService.dbGain / 10);
 
@@ -368,13 +374,17 @@ export class AudioService {
 
     audioinput.start(this.audioCfgService.config())
 
-    // Listen to audioinput events
-    window.addEventListener("audioinput", this.onAudio, false);
-    //  Listen to audioinputerror events
-    var onAudioInputError = function (error) {
-      alert("onAudioInputError event recieved: " + JSON.stringify(error));
-    };
-    window.addEventListener("audioinputerror", onAudioInputError, false);
+    if (this.setEventAddListeners == false) {
+      console.log("setEventAddListeners", this.setEventAddListeners)
+      this.setEventAddListeners = true
+      // Listen to audioinput events
+      window.addEventListener("audioinput", this.onAudio, false);
+      //  Listen to audioinputerror events
+      var onAudioInputError = function (error) {
+        alert("onAudioInputError event recieved: " + JSON.stringify(error));
+      };
+      window.addEventListener("audioinputerror", onAudioInputError, false);
+    }
 
     this.inizializzaData()
 
@@ -384,7 +394,7 @@ export class AudioService {
       // console.log("this_copy.date_start",this_copy.date_start)
       this_copy.date_now = new Date()
       this_copy.date_now_debug = new Date()
-      this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
+      this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval);
       // console.log("this_copy.date_now",this_copy.date_now)
       this_copy.countInterval++
 
@@ -529,6 +539,7 @@ export class AudioService {
               data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
             }
             if (this_copy.variabiliService.saveOptions.bandLZeq) {
@@ -566,6 +577,7 @@ export class AudioService {
             data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
           }
           if (this_copy.variabiliService.saveOptions.bandLZeq) {
@@ -670,6 +682,7 @@ export class AudioService {
           data = data + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
           data = data + this.variabiliService.saveOptions.field + this.countInterval
           data = data + this.variabiliService.saveOptions.field + this.numberFftTime
+          data = data + this.variabiliService.saveOptions.field + this.numberFftTotal
           data = data + this.variabiliService.saveOptions.field + this.linearATime.toFixed(0)
         }
         this.filesystemService.appendFile(
