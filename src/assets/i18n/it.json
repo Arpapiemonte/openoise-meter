@@ -51,7 +51,6 @@
         "CALIBRATION_OPENOISE_VALUE_TEXT": "Livello di OpeNoise",
         "CALIBRATION_VALUE_TEXT": "Valore di calibrazione",
         "CALIBRATION_BUTTON": "CALIBRA",
-        "CALIBRATION_VALUE_SENDTEXT": "Invio dati di calibrazione ad ARPA",
         "CALIBRATION_SENDBUTTON": "INVIA",
         "CALIBRATION_CANCEL": "Annulla",
         "CALIBRATION_OK": "Ok",
@@ -62,18 +61,25 @@
         "CALIBRATION_CONFIRM_QUESTION": "Sei sicuro di voler cambiare il valore della calibrazione?"
       },
       "SEND_CALIBDATA":{
+        "SEND_CALIBDATA_TITLE": "Invio dati di calibrazione",
+        "SEND_CALIBDATA_TEXT": "Arpa Piemonte raccoglie su base volontaria i valori di calibrazione per creare un database di riferimento. Invia anche tu la tua calibrazione! Il dato è raccolto in maniera anonima.",
         "SEND_CALIBDATA_BUTTONTEXT": "INVIA",
-        "SEND_CALIBDATA_BUTTONMSG": "Invio dati di calibrazione ad ARPA",
         "SEND_CALIBDATA_USERTEXT": "Indicare che tipo di utente sei:",
-        "SEND_CALIBDATA_USERTYPE1": "Principiante",
-        "SEND_CALIBDATA_USERTYPE2": "Avanzato",
+        "SEND_CALIBDATA_USERTYPE1": "Principiante (non so nulla di rumore)",
+        "SEND_CALIBDATA_USERTYPE2": "Intermedio (ho qualche conoscenza di rumore)",
+        "SEND_CALIBDATA_USERTYPE3": "Avanzato (sono un esperto / professionista nel campo del rumore)",
         "SEND_CALIBDATA_CALIBTEXT": "Indicare il tipo di calibazione effettuata:",
-        "SEND_CALIBDATA_CALIBTYPE1": "Confronto1",
-        "SEND_CALIBDATA_CALIBTYPE2": "Confronto2",
-        "SEND_CALIBDATA_CALIBTYPE3": "Confronto3",
+        "SEND_CALIBDATA_CALIBTYPE1": "Nessuna (senza confronto)",
+        "SEND_CALIBDATA_CALIBTYPE2": "Intermedia (confronto con altro dispositivo calibrato)",
+        "SEND_CALIBDATA_CALIBTYPE3": "Ottimale (confronto con fonometro professionale / calibratore con mic esterno)",
+        "SEND_CALIBDATA_CALIBTYPE4": "Ho usato il valore suggerito di 24.0 dB per iOS",
+        "SEND_CALIBDATA_MICTEXT": "Indicare il tipo di microfono:",
+        "SEND_CALIBDATA_MICTYPE1": "Interno (microfono del dispositivo)",
+        "SEND_CALIBDATA_MICTYPE2": "Esterno",
+        "SEND_CALIBDATA_EXTERNALMICTEXT": "Indicare il modello di microfono esterno:",
         "SEND_CALIBDATA_FINALTEXT": "Invio andato a buon fine!",
         "SEND_CALIBDATA_NO_NETWORK": "Invio dati non riuscito, rete assente.",
-        "SEND_CALIBDATA_ATTENTION": "ATTENZIONE!",
+        "SEND_CALIBDATA_ATTENTION": "INVIO CALIBRAZIONE",
         "SEND_CALIBDATA_CANCEL": "Annulla"
       },
       "YAXIS_RANGE": {
@@ -229,7 +235,11 @@
         },
         {
           "SAVING_TITLE": "SALVARE I DATI",
-          "SAVING_TEXT": "L'opzione viene attivata selezionando in Fonometro il pulsante Salva. Vengono così salvati i dati su un file di testo con i livelli sonori misurati (non viene registrato l'audio). I file possono essere aperti nella sezione Misure. In Opzioni è possibile configurare la formattazione del file di testo generato e quali parametri salvare."
+          "SAVING_TEXT": "L'opzione viene attivata selezionando in Fonometro il pulsante Salva. Vengono così salvati i dati su un file di testo con i livelli sonori misurati (non viene registrato l'audio). I file possono essere aperti nella sezione Misure. In Opzioni è possibile configurare la formattazione del file di testo generato, quali parametri salvare e l'estensione del file (.dat, .txt, .log)."
+        },
+        {
+          "SAVING_TITLE": "INSERIRE UN MARKER",
+          "SAVING_TEXT": "Attivando la funzione di salvataggio dati (pulsante Salva) si abilita il pulsante Marker che permette di inserire un tag agli eventi di interesse, sia nel grafico che nel file di log."
         },
         {
           "PLOTS_TITLE": "GRAFICI",

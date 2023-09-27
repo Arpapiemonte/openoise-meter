@@ -65,6 +65,7 @@ export class SettingsPage {
 
   userType: String = ''
   calibType: String = ''
+  micType: String = ''
 
   constructor(
     private zone: NgZone,
@@ -101,7 +102,7 @@ export class SettingsPage {
   }
 
   // AL M0MENTO NON VIENE MAI CHIAMATO
-  apriCalibrazione() { 
+  apriCalibrazione() {
     if (this.audioService.capture) {
       this.presentAlertCalibrazione()
     } else {
@@ -189,6 +190,11 @@ export class SettingsPage {
       {
         type: 'radio',
         label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_USERTYPE2,
+        value: 'Intermedio'
+      },
+      {
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_USERTYPE3,
         value: 'Avanzato'
       }
       ],
@@ -218,6 +224,7 @@ export class SettingsPage {
       header: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_ATTENTION,
       subHeader: "",
       message: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTEXT,
+      cssClass: 'alertLong',
       inputs: [{
         type: 'radio',
         label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE1,
@@ -233,6 +240,11 @@ export class SettingsPage {
         type: 'radio',
         label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE3,
         value: 'Confronto3'
+      },
+      {
+        type: 'radio',
+        label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CALIBTYPE4,
+        value: 'Confronto4'
       }
       ],
       buttons: [
@@ -245,10 +257,83 @@ export class SettingsPage {
           handler(data: String) {
             this_copy.calibType = data;
             console.log('calibType: ', this_copy.calibType)
-            // this_copy.invioDatiService.sendDataCalibration(this_copy.userType, this_copy.calibType)
+            this_copy.presentAlertMicType()
           }
         }
       ],
+    });
+    await alert.present();
+  }
+
+
+  async presentAlertMicType() {
+    var this_copy = this
+    const alert = await this.alertController.create({
+      header: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_ATTENTION,
+      subHeader: "",
+      message: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_MICTEXT,
+      inputs: [
+        {
+          type: 'radio',
+          label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_MICTYPE1,
+          value: 'Interno',
+          checked: true
+        },
+        {
+          type: 'radio',
+          label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_MICTYPE2,
+          value: 'Esterno'
+        },
+      ],
+      buttons: [
+        {
+          text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CANCEL,
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler(data: String) {
+            // console.log('data: ', data)
+            this_copy.micType = data;
+            console.log('micType: ', this_copy.micType)
+            if (this_copy.micType == "Esterno") {
+              this_copy.presentAlertExternalMicType()
+            } else {
+              // this_copy.invioDatiService.sendDataCalibration(this_copy.userType, this_copy.calibType, this_copy.micType,'')
+            }
+          },
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async presentAlertExternalMicType() {
+    var this_copy = this
+    const alert = await this.alertController.create({
+      header: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_ATTENTION,
+      subHeader: "",
+      message: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_EXTERNALMICTEXT,
+      inputs: [
+        {
+          type: 'textarea',
+          label: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_EXTERNALMICTYPE,
+          placeholder: '',
+        },
+      ],
+      buttons: [
+        {
+          text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_CANCEL,
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler(res) {
+            console.log("presentAlertExternalMicType res", res)
+            // this_copy.invioDatiService.sendDataCalibration(this_copy.userType, this_copy.calibType, this_copy.micType,res[0])
+          },
+        }
+      ]
     });
     await alert.present();
   }

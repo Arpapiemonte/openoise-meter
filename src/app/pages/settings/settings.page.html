@@ -227,15 +227,18 @@
               [(ngModel)]="this.variabiliService.saveOptions.field" (ionChange)="setFieldSeparator($event)"
               style="margin-top: 5px;">
               <ion-segment-button value=";">
-                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:-->
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:-->
                   ;</ion-label>
               </ion-segment-button>
               <ion-segment-button disabled="{{this.virgolaDisabledF}}" value=",">
-                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:-->
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:-->
                   ,</ion-label>
               </ion-segment-button>
               <ion-segment-button value="|">
-                <ion-label style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}:-->
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}:-->
                   |</ion-label>
               </ion-segment-button>
             </ion-segment>
@@ -287,7 +290,7 @@
           (ionChange)="toggleChangeSaveLZmin($event)"></ion-toggle>
       </ion-item>
 
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+      <!-- <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_DEBUG}}</h2>
           <p *ngIf="variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
@@ -296,7 +299,7 @@
         </ion-label>
         <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.debug"
           (ionChange)="toggleChangeSaveDebug($event)"></ion-toggle>
-      </ion-item>
+      </ion-item> -->
 
     </ion-item-group>
 
@@ -315,7 +318,6 @@
           </ion-buttons>
           <ion-title
             *ngIf="modalArgument === 'calibrazione'">{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE}}</ion-title>
-          <ion-title *ngIf="modalArgument === 'assi'">Regolazione assi</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
@@ -365,21 +367,20 @@
               </div>
             </ion-card-content>
           </ion-card>
-
-
-          <!-- <ion-card>
+<!-- 
+          <ion-card style="text-align: left;">
             <ion-card-header>
-              <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_VALUE_SENDTEXT}}</ion-card-title>
+              <ion-card-title>{{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TITLE}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <div>
+              {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TEXT}}
+              <div style="text-align: right;">
                 <ion-button (click)="sendDataCalibration()" style="--background:  rgb(61, 194, 255, 0.9);">
-                  {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_SENDBUTTON}}
+                  {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_BUTTONTEXT}}
                 </ion-button>
               </div>
             </ion-card-content>
           </ion-card> -->
-
 
           <ion-card style="text-align: left;">
             <ion-card-header>
@@ -390,10 +391,6 @@
             </ion-card-content>
           </ion-card>
 
-        </div>
-        <div *ngIf="modalArgument === 'assi'">
-          <ion-range [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="0" [max]="130"
-            [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
         </div>
       </ion-content>
     </ng-template>

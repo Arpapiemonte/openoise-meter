@@ -40,25 +40,23 @@ export class SaveddataPage implements OnInit {
     let files: any = await this.filesystemService.readDir(this.filesystemService.directoryOpeNoise)
     console.log("files", files)
 
-
-
     this.files = []
     var now = moment()
     console.log("now", now)
     for (let file of files) {
-        file["size_kb"] = (file.size / 1000).toFixed(0)
-        file["checked"] = false
-        file["data_label"] = this.formatDate(file.mtime)
-        var time = this.differenzaTempi(now, file.mtime)
-        file["diff"] = time.diff
-        file["diff_label"] = time.diff_label
-        this.files.push(file)
+      file["size_kb"] = (file.size / 1000).toFixed(0)
+      file["checked"] = false
+      file["data_label"] = this.formatDate(Number(file.mtime))
+      var time = this.differenzaTempi(now, Number(file.mtime))
+      file["diff"] = time.diff
+      file["diff_label"] = time.diff_label
+      this.files.push(file)
     }
 
-    this.files = this.sortFile(this.files,  this.order )
+    this.files = this.sortFile(this.files, this.order)
   }
 
-  formatDate(date:any) {
+  formatDate(date: any) {
     var output = ''
     if (date != '' && this.variabiliService.language === 'en') {
       moment.locale('en-GB');
@@ -67,8 +65,8 @@ export class SaveddataPage implements OnInit {
       if (date != '' && this.variabiliService.language === 'it') {
         moment.locale('it-IT');
         output = moment(date).format("DD/MM/YYYY HH:mm")
+      }
     }
-  }
     return output
   }
 
@@ -95,7 +93,7 @@ export class SaveddataPage implements OnInit {
     } else {
       this.order = 'desc'
     }
-    this.files = this.sortFile(this.files,  this.order )
+    this.files = this.sortFile(this.files, this.order)
   }
 
   differenzaTempi(time1: any, time2: any) {
@@ -137,34 +135,6 @@ export class SaveddataPage implements OnInit {
       subHeader: fileName,
       buttons: [
         {
-          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4,
-          role: 'destructive',
-          icon: 'trash-outline',
-          data: {
-            action: 'delete',
-          },
-          handler: () => {
-            console.log("click delete")
-            this.presentAlertDelete(
-              this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4_2 + ':',
-              '',
-              fileName,
-              [fileName]
-            )
-          }
-        },
-        {
-          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT9,
-          icon: '/assets/icon/pencil.svg',
-          data: {
-            action: 'rename',
-          },
-          handler: () => {
-            console.log("click rename")
-            this.presentAlertRename(this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT10, fileName, "")
-          }
-        },
-        {
           text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT7,
           icon: 'open-outline',
           data: {
@@ -182,6 +152,17 @@ export class SaveddataPage implements OnInit {
           }
         },
         {
+          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT9,
+          icon: '/assets/icon/pencil.svg',
+          data: {
+            action: 'rename',
+          },
+          handler: () => {
+            console.log("click rename")
+            this.presentAlertRename(this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT10, fileName, "")
+          }
+        },
+        {
           text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT5,
           icon: 'share-social-outline',
           data: {
@@ -190,6 +171,23 @@ export class SaveddataPage implements OnInit {
           handler: () => {
             console.log("click share")
             this.shareFile([fileName])
+          }
+        },
+        {
+          text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4,
+          role: 'destructive',
+          icon: 'trash-outline',
+          data: {
+            action: 'delete',
+          },
+          handler: () => {
+            console.log("click delete")
+            this.presentAlertDelete(
+              this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4_2 + ':',
+              '',
+              fileName,
+              [fileName]
+            )
           }
         },
         {
@@ -233,9 +231,10 @@ export class SaveddataPage implements OnInit {
         {
           text: this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6,
           role: 'cancel',
-          handler: () => [
-
-          ]
+          handler: () => {
+            console.log("presentAlertDelete cancel")
+            this.annulla()
+          }
         },
         {
           text: 'OK',
@@ -245,6 +244,8 @@ export class SaveddataPage implements OnInit {
             }
 
             this.recuperaFiles()
+            this.modificaMoltiVariable = false
+            this.multiFiles = []
           }
         },
       ],
@@ -272,7 +273,7 @@ export class SaveddataPage implements OnInit {
           text: 'OK',
           handler: (res) => {
             console.log("rename", res)
-            this.filesystemService.renameFile(filename,res[0])
+            this.filesystemService.renameFile(filename, res[0])
             this.recuperaFiles()
           }
         },
@@ -341,9 +342,6 @@ export class SaveddataPage implements OnInit {
         this.multiFiles
       )
 
-      this.modificaMoltiVariable = false
-      this.multiFiles = []
-
     } else {
       this.presentAlert(this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4_2cA, '', this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4_2cB)
     }
@@ -361,8 +359,14 @@ export class SaveddataPage implements OnInit {
   }
 
   annulla() {
+    console.log("annulla")
     if (this.modificaMoltiVariable) {
+      console.log("annulla if modificaMoltiVariable true")
       this.modificaMoltiVariable = false
+      this.multiFiles = []
+      for (let file of this.files) {
+        file.checked = false
+      }
     } else {
       this.modificaMoltiVariable = true
     }

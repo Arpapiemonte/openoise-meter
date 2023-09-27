@@ -19,6 +19,7 @@ export class FilesystemService {
   directoryOpeNoise: string = 'opeNoise/'
 
   saveData: boolean = false
+  saveDataStart: boolean = false
   nameFileWriting: string
 
   constructor(
@@ -63,7 +64,7 @@ export class FilesystemService {
     await alert.present();
   }
 
-  inizializeFile() {
+  async inizializeFile() {
     // console.log("inizializeFile")
     var intestazioneArray: Array<any> = [16, 20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500,
       630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 16000, 20000];
@@ -91,7 +92,7 @@ export class FilesystemService {
     }
 
     this.nameFileWriting = moment(new Date()).format("YYYY-MM-DD-HHmmss") + this.variabiliService.saveOptions.extension
-    this.writeFile(
+    await this.writeFile(
       this.nameFileWriting,
       intestazione
     )

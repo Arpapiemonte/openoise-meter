@@ -36,7 +36,7 @@
     {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT3}}
   </div>
 
-  <ion-modal [isOpen]="isModalOpen">
+  <ion-modal [isOpen]="isModalOpen" (ionModalDidDismiss)="setModalOpen(false)">
     <ng-template>
       <ion-header>
         <ion-toolbar>

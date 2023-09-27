@@ -4,7 +4,7 @@ import { AlertController } from '@ionic/angular';
 
 import { Network } from '@capacitor/network';
 import { Device } from '@capacitor/device';
-import { Geolocation } from '@capacitor/geolocation';
+// import { Geolocation } from '@capacitor/geolocation';
 
 import { VariabiliService } from './variabili.service';
 
@@ -59,7 +59,7 @@ export class InvioDatiService {
   }
 
 
-  async sendDataCalibration(inputUserType: any, inputCalibType: any) {
+  async sendDataCalibration(inputUserType: any, inputCalibType: any, inputMicType: any, inputExternalMicType: any) {
 
     var network = await this.checkNetwork()
     console.log("sendDataCalibration Network", network)
@@ -72,28 +72,31 @@ export class InvioDatiService {
     var lat: any
     var lon: any
 
-    try {
-      // console.log("sendDataCalibration Geolocation start")
-      const coordinates = await Geolocation.getCurrentPosition({timeout: 3});
-      console.log("sendDataCalibration Geolocation coordinates: ", coordinates)
-      lat = coordinates.coords.latitude
-      lon = coordinates.coords.longitude
-    } catch (err) {
-      console.log("sendDataCalibration Geolocation err", err)
-      if (err.message === 'Location permission was denied') {
-        lat = "Permission denied"
-        lon = "Permission denied"
-      } else {
-        lat = "ERROR"
-        lon = "ERROR"
-      }
-    }
+    // try {
+    //   // console.log("sendDataCalibration Geolocation start")
+    //   const coordinates = await Geolocation.getCurrentPosition({timeout: 3});
+    //   console.log("sendDataCalibration Geolocation coordinates: ", coordinates)
+    //   lat = coordinates.coords.latitude
+    //   lon = coordinates.coords.longitude
+    // } catch (err) {
+    //   console.log("sendDataCalibration Geolocation err", err)
+    //   if (err.message === 'Location permission was denied') {
+    //     lat = "Permission denied"
+    //     lon = "Permission denied"
+    //   } else {
+    //     lat = "ERROR"
+    //     lon = "ERROR"
+    //   }
+    // }
 
     const device = await Device.getInfo();
+    const deviceId = await Device.getId();
+    // console.log("sendDataCalibration deviceId", deviceId)
 
     var details = {
       lat: String(lat),
       lon: String(lon),
+      id: String(deviceId.identifier),
       so_type: device.operatingSystem,
       so_version: String(device.osVersion),
       phone_type: device.model,
@@ -102,8 +105,11 @@ export class InvioDatiService {
       gain: String(this.variabiliService.dbGain),
       calib_type: inputCalibType,
       user_type: inputUserType,
+      mic_type: inputMicType,
+      external_mic_type: inputExternalMicType,
       codice_sicurezza: 'PASSWORD'
     }
+    console.log("sendDataCalibration dataToSend", details)
 
     var formBody: any = [];
     for (var property in details) {
@@ -113,7 +119,7 @@ export class InvioDatiService {
     }
     formBody = formBody.join("&");
 
-    const response = await fetch("URL", {
+    const response = await fetch("https://utility.arpa.piemonte.it/post_opennoise/send_data.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

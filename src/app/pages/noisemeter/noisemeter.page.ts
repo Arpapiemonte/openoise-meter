@@ -27,6 +27,8 @@ export class NoisemeterPage {
 
   playStatic: Boolean = true
 
+  markerStatus: Boolean = false
+
   countdownBoolean: boolean = false
   countdownNumberLocal: any
   countdownInterval: any
@@ -42,7 +44,7 @@ export class NoisemeterPage {
     public filesystemService: FilesystemService,
     @Optional() private routerOutlet?: IonRouterOutlet,
   ) {
-    
+
     this.platform.backButton.subscribeWithPriority(-1, () => {
       console.log("backButton")
       if (!this.routerOutlet.canGoBack()) {
@@ -90,6 +92,7 @@ export class NoisemeterPage {
     if (this.audioService.capture) {
       this.audioService.stopCapture()
       this.playStatic = true
+      this.markerStatus = false
       if (this.filesystemService.saveData) {
         this.presentAlert(
           this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
@@ -97,7 +100,7 @@ export class NoisemeterPage {
           this.filesystemService.nameFileWriting
         )
       }
-    } else if (this.countdownNumberLocal > 0) { 
+    } else if (this.countdownNumberLocal > 0) {
       clearInterval(this.countdownInterval)
       this.countdownBoolean = false
     }
@@ -121,7 +124,12 @@ export class NoisemeterPage {
     const permissions = await this.filesystemService.checkRequestPermissions()
     if (permissions == "granted") {
       if (this.filesystemService.saveData) {
+        if (this.audioService.capture) { 
+          this.audioService.writeStatus('STOP')
+        }
         this.filesystemService.saveData = false
+        this.audioService.marker = false
+        this.markerStatus = false
         if (this.audioService.capture) {
           this.presentAlert(
             this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
@@ -143,8 +151,9 @@ export class NoisemeterPage {
 
   }
 
-  initializeFile() {
-    this.filesystemService.inizializeFile()
+  async initializeFile() {
+    await this.filesystemService.inizializeFile()
+    this.filesystemService.saveDataStart = true
 
     this.presentToast(
       this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT6 + this.filesystemService.nameFileWriting
@@ -220,6 +229,19 @@ export class NoisemeterPage {
     })
   }
 
+  startStopMarker() {
+    if (this.filesystemService.saveData) {
+      console.log('click start Marker!')
+      if (this.audioService.marker) {
+        this.audioService.marker = false
+        this.markerStatus = false
+      } else {
+        this.audioService.marker = true
+        this.markerStatus = true
+      }
+    }
+  }
+
   ionViewWillEnter() {
     console.log("NoisemeterPage ionViewWillEnter")
     this.audioSubscribe = this.variabiliService.getDataRefreshBS().subscribe(val => {
@@ -232,6 +254,16 @@ export class NoisemeterPage {
           this.playStatic = true
         }
       }
+
+      if (this.audioService.marker) {
+        console.log("markerStatus: ", this.markerStatus)
+        if (this.markerStatus) {
+          this.markerStatus = false
+        } else {
+          this.markerStatus = true
+        }
+      }
+
       this.zone.run(() => {
         console.log('force update the screen');
       });

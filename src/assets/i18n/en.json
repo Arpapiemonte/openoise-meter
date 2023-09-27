@@ -51,8 +51,6 @@
         "CALIBRATION_OPENOISE_VALUE_TEXT": "OpeNoise level",
         "CALIBRATION_VALUE_TEXT": "Calibration value",
         "CALIBRATION_BUTTON": "CALIBRATE",
-        "CALIBRATION_VALUE_SENDTEXT": "Send calibration data to ARPA",
-        "CALIBRATION_SENDBUTTON": "SEND",
         "CALIBRATION_CANCEL": "Cancel",
         "CALIBRATION_OK": "Ok",
         "CALIBRATION_YES": "Yes",
@@ -62,15 +60,22 @@
         "CALIBRATION_CONFIRM_QUESTION": "Are you sure to change the calibration value?"
       },
       "SEND_CALIBDATA":{
+        "SEND_CALIBDATA_TITLE": "Send calibration data",
+        "SEND_CALIBDATA_TEXT": "Arpa Piemonte collects calibration values on a voluntary basis to create a reference database. Submit your calibration too! The data is collected anonymously.",
         "SEND_CALIBDATA_BUTTONTEXT": "SEND",
-        "SEND_CALIBDATA_BUTTONMSG": "Send calibration data to ARPA",
         "SEND_CALIBDATA_USERTEXT": "Please indicate what kind of user you are:",
-        "SEND_CALIBDATA_USERTYPE1": "Beginner",
-        "SEND_CALIBDATA_USERTYPE2": "Advanced",
+        "SEND_CALIBDATA_USERTYPE1": "Beginner (don't know anything about noise)",
+        "SEND_CALIBDATA_USERTYPE2": "Intermediate (I have some knowledge of noise)",
+        "SEND_CALIBDATA_USERTYPE3": "Advanced (I am an expert/professional in the field of noise)",
         "SEND_CALIBDATA_CALIBTEXT": "Indicate the type of calibration carried out:",
-        "SEND_CALIBDATA_CALIBTYPE1": "Comparison1",
-        "SEND_CALIBDATA_CALIBTYPE2": "Comparison2",
-        "SEND_CALIBDATA_CALIBTYPE3": "Comparison3",
+        "SEND_CALIBDATA_CALIBTYPE1": "None (without comparison)",
+        "SEND_CALIBDATA_CALIBTYPE2": "Intermediate (comparison with other calibrated device)",
+        "SEND_CALIBDATA_CALIBTYPE3": "Optimal (comparison with professional sound level meter/calibrator with external mic)",
+        "SEND_CALIBDATA_CALIBTYPE4": "I used the suggested value of 24.0 dB for iOS",
+        "SEND_CALIBDATA_MICTEXT": "Indicate the type of microphone:",
+        "SEND_CALIBDATA_MICTYPE1": "Internal (device microphone)",
+        "SEND_CALIBDATA_MICTYPE2": "External",
+        "SEND_CALIBDATA_EXTERNALMICTEXT": "Indicate the model of external microphone:",
         "SEND_CALIBDATA_FINALTEXT": "Successful submission!",
         "SEND_CALIBDATA_NO_NETWORK": "Sending data failed, network absent.",
         "SEND_CALIBDATA_ATTENTION": "WARNING!",
@@ -228,7 +233,11 @@
         },
         {
           "SAVING_TITLE": "DATA SAVING",
-          "SAVING_TEXT": "The option is activated by selecting the Save button in the Noise Meter. This saves the data to a text file with the measured sound levels (no audio is recorded). Files can be opened in the Measures section. Under Settings, you can configure the formatting of the generated text file and which parameters to save."
+          "SAVING_TEXT": "The option is activated by selecting the Save button in the Noise Meter. This saves the data to a text file with the measured sound levels (no audio is recorded). Files can be opened in the Measures section. Under Settings, you can configure the formatting of the generated text file, which parameters to save and the file extension (.dat, .txt, .log)."
+        },
+        {
+          "SAVING_TITLE": "INSERT A MARKER",
+          "SAVING_TEXT": "Activating the save data function (Save button) enables the Marker button that allows you to tag events of interest, either in the graph or in the log file."
         },
         {
           "PLOTS_TITLE": "PLOTS",

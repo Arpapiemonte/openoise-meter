@@ -61,3 +61,10 @@ ion-item-divider {
         max-height: calc(100%);
     }
 }
+
+
+.alertLong {
+    .alert-radio-label.sc-ion-alert-md {
+        font-size: small;
+    }
+}
