@@ -1,0 +1,10 @@
+<div *ngFor="let mappaBase of mappaService.mappeBaseLeaflet" style="padding: 10px; border-bottom: 1px solid #D3D3D3;">
+  <ion-row (click)="cambiaBase(mappaBase)" class="ion-align-items-center">
+    <ion-col size="4">
+      <img src="{{mappaBase.thumb}}" style="border: 1px solid gray; "> 
+    </ion-col>
+    <ion-col>
+      {{mappaBase.label}}
+    </ion-col>
+  </ion-row>
+</div>

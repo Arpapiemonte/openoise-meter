@@ -1,24 +1,134 @@
 <ion-content [fullscreen]="true">
 
-  <!-- <ion-list-header mode="ios">
-    <ion-label>FONOMETRO</ion-label>
-  </ion-list-header> -->
   <ion-list mode="ios">
     <ion-item-group>
+
       <ion-item-divider>
         <ion-label>
-          {{variabiliService.translation.SETTINGS.NOISE_METER.NOISE_METER_TITLE}}
+          {{variabiliService.translation.SETTINGS.USERDATA.USERDATA_TITLE}}
+        </ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_AGE}}</h2>
+          <p>
+            <ion-segment swipe-gesture="false" value="{{variabiliService.userData.age}}"
+              style="margin-top: 5px;margin-bottom:0px; padding-bottom:0px;"
+              (ionChange)="segmentChangedUserAge($event)">
+              <ion-segment-button value="<20">
+                <ion-label>
+                  < 20</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="20-30">
+                <ion-label>20-30</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="30-40">
+                <ion-label>30-40</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="40-50">
+                <ion-label>40-50</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+            <ion-segment swipe-gesture="false" value="{{variabiliService.userData.age}}"
+              style="margin-top: 0px;padding-top:0px;" (ionChange)="segmentChangedUserAge($event)">
+              <ion-segment-button value="50-60">
+                <ion-label>50-60</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="60-70">
+                <ion-label>60-70</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="70-80">
+                <ion-label>70-80</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value=">80">
+                <ion-label>> 80</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.USERDATA.USEDATA_GENDER}}</h2>
+          <p>
+            <ion-segment swipe-gesture="false" value="{{variabiliService.userData.gender}}"
+              (ionChange)="segmentChangedUserGender($event)" style="margin-top: 5px;">
+              <ion-segment-button value="female">
+                <ion-label>{{variabiliService.translation.SETTINGS.USERDATA.USEDATA_FEMALE_GENDER}}</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="male">
+                <ion-label>{{variabiliService.translation.SETTINGS.USERDATA.USEDATA_MALE_GENDER}}</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="other">
+                <ion-label>{{variabiliService.translation.SETTINGS.USERDATA.USEDATA_OTHER_GENDER}}</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE}}</h2>
+          <div>
+            <ion-list>
+              <ion-radio-group mode="md" [allowEmptySelection]="false" value="{{variabiliService.userData.type}}"
+                (ionChange)="userTypeRadioGroup($event)">
+                <ion-item>
+                  <ion-radio value="beginner"
+                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_BEGINNER}}
+                    <ion-label class="ion-text-wrap"
+                      style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_BEGINNER_SUB}}</ion-label>
+                  </ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="intermediate"
+                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_INTERMEDIATE}}
+                    <ion-label class="ion-text-wrap"
+                      style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_INTERMEDIATE_SUB}}</ion-label>
+                  </ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-radio value="advanced"
+                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_ADVANCED}}
+                    <ion-label class="ion-text-wrap"
+                      style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_ADVANCED_SUB}}</ion-label>
+                  </ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </div>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>
+          {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE}}
           <p *ngIf="audioService.capture" class="ion-text-wrap">
             {{variabiliService.translation.SETTINGS.NOISE_METER.NOISE_METER_TEXT}}</p>
         </ion-label>
       </ion-item-divider>
       <ion-item [disabled]="audioService.capture" (click)="apriCalibrazione()">
         <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE}}</h2>
+          <h2>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_ITEM_TEXT}}</h2>
           <p>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_VALUE}}: {{
             (variabiliService.dbGain).toFixed(1) }}</p>
         </ion-label>
       </ion-item>
+      <ion-item [disabled]="audioService.capture" (click)="sendDataCalibration()">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TITLE}}</h2>
+          <p>{{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TEXT}}</p>
+        </ion-label>
+        <ion-icon *ngIf="!variabiliService.calibrationCloud" name="cloud-upload-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="variabiliService.calibrationCloud" name="cloud-done-outline" size="large"
+          color="secondary"></ion-icon>
+      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>
+          {{variabiliService.translation.SETTINGS.NOISE_METER.NOISE_METER_TITLE}}
+        </ion-label>
+      </ion-item-divider>
       <ion-item>
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.YAXIS_RANGE.YAXIS_RANGE_TITLE}}</h2>
@@ -26,8 +136,8 @@
             }} - {{variabiliService.translation.SETTINGS.YAXIS_RANGE.YAXIS_RANGE_MAX}}: {{
             this.variabiliService.range.upper }}</p>
           <div>
-            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="0" [max]="130"
-              [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
+            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true"
+              [min]="-20" [max]="130" [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
           </div>
         </ion-label>
       </ion-item>
@@ -35,7 +145,7 @@
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.LEVEL_EVIDENCE.LEVEL_EVIDENCE_TITLE}}</h2>
           <p>
-            <ion-segment value="LAeq(t)" [(ngModel)]="this.variabiliService.mainLevel"
+            <ion-segment swipe-gesture="false" value="LAeq(t)" [(ngModel)]="this.variabiliService.mainLevel"
               (ionChange)="segmentChangedMainLevel($event)" style="margin-top: 5px;">
               <ion-segment-button value="LAeq(1s)">
                 <ion-label>LAeq(1s)</ion-label>
@@ -51,8 +161,9 @@
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.COUNTDOWN_MEASURE.COUNTDOWN_MEASURE_TITLE}}</h2>
           <p>
-            <ion-segment value="{{variabiliService.countdownNumber}}" [(ngModel)]="variabiliService.countdownNumber"
-              (ionChange)="segmentChangedCountdownNumber($event)" style="margin-top: 5px;">
+            <ion-segment swipe-gesture="false" value="{{variabiliService.countdownNumber}}"
+              [(ngModel)]="variabiliService.countdownNumber" (ionChange)="segmentChangedCountdownNumber($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value="0">
                 <ion-label>0 s</ion-label>
               </ion-segment-button>
@@ -106,20 +217,23 @@
         <ion-label>{{variabiliService.translation.SETTINGS.VIEW.VIEW_LABEL.VIEW_TITLE}}</ion-label>
       </ion-item-divider>
       <ion-item>
-        <ion-label class="ion-text-wrap">
-          <h2>{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_TITLE}}</h2>
-          <p *ngIf="variabiliService.ruotaSchermo">{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_SECONDARY}}</p>
-          <p *ngIf="!variabiliService.ruotaSchermo">{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_PRIMARY}}</p>
-        </ion-label>
         <ion-toggle color="secondary" mode="md" [checked]="variabiliService.ruotaSchermo"
-          (ionChange)="toggleChangeRuotaSchermo($event)"></ion-toggle>
+          (ionChange)="toggleChangeRuotaSchermo($event)">
+          <ion-label class="ion-text-wrap">
+            <h2>{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_TITLE}}</h2>
+            <p *ngIf="variabiliService.ruotaSchermo">
+              {{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_SECONDARY}}</p>
+            <p *ngIf="!variabiliService.ruotaSchermo">
+              {{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_PORTRAIT_PRIMARY}}</p>
+          </ion-label>
+        </ion-toggle>
       </ion-item>
       <!-- COMMENTATO PARTE SCELTA VISUSALIZZZAZIONE LIVELLI ORIZZONTALE / VERTICALE -->
       <!-- <ion-item>
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.VIEW.LEVELS.LEVELS_TITLE}}</h2>
           <p>
-            <ion-segment value="{{this.variabiliService.levelsOrientation}}" [(ngModel)]="this.variabiliService.levelsOrientation"
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.levelsOrientation}}" [(ngModel)]="this.variabiliService.levelsOrientation"
               (ionChange)="segmentChangedLevelsOrientation($event)" style="margin-top: 5px;">
               <ion-segment-button value="verticale">
                 <ion-label>{{variabiliService.translation.SETTINGS.VIEW.LEVELS.LEVELS_VERTICAL}}</ion-label>
@@ -135,8 +249,9 @@
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.VIEW.COLOR.COLOR_TITLE}}</h2>
           <p>
-            <ion-segment value="{{this.variabiliService.colorMode}}" [(ngModel)]="this.variabiliService.colorMode"
-              (ionChange)="segmentChangedColorMode($event)" style="margin-top: 5px;">
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.colorMode}}"
+              [(ngModel)]="this.variabiliService.colorMode" (ionChange)="segmentChangedColorMode($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value="auto">
                 <ion-label>{{variabiliService.translation.SETTINGS.VIEW.COLOR.COLOR_AUTO}}</ion-label>
               </ion-segment-button>
@@ -155,8 +270,9 @@
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.VIEW.LANGUAGE.LANGUAGE_TITLE}}</h2>
           <p>
-            <ion-segment value="{{this.variabiliService.language}}" [(ngModel)]="this.variabiliService.language"
-              (ionChange)="segmentChangedLanguage($event)" style="margin-top: 5px;">
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.language}}"
+              [(ngModel)]="this.variabiliService.language" (ionChange)="segmentChangedLanguage($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value="en">
                 <ion-label>{{variabiliService.translation.SETTINGS.VIEW.LANGUAGE.LANGUAGE_EN}}</ion-label>
               </ion-segment-button>
@@ -177,64 +293,137 @@
             {{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_TEXT}}</p>
         </ion-label>
       </ion-item-divider>
+
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
         <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LAEQ}}</h2>
-          <p *ngIf="variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
-          <p *ngIf="!variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}</p>
-        </ion-label>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
-          (ionChange)="toggleChangeSaveLZeq($event)"></ion-toggle>
-      </ion-item>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LZMIN}}</h2>
-          <p *ngIf="variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
-          <p *ngIf="!variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}</p>
-        </ion-label>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
-          (ionChange)="toggleChangeSaveLZmin($event)"></ion-toggle>
-      </ion-item>
-      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-label>
-          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_TITLE}}</h2>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.EXTENSION_TITLE}}</h2>
           <p>
-            <ion-segment value="{{this.variabiliService.saveOptions.decimal}}"
-              [(ngModel)]="this.variabiliService.saveOptions.decimal" (ionChange)="setDecSeparator($event)" style="margin-top: 5px;">
-              <ion-segment-button value=".">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_POINT}}: .</ion-label>
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.saveOptions.extension}}"
+              [(ngModel)]="this.variabiliService.saveOptions.extension" (ionChange)="setExtension($event)"
+              style="margin-top: 5px;">
+              <ion-segment-button value=".txt">
+                <ion-label>.txt</ion-label>
               </ion-segment-button>
-              <ion-segment-button disabled="{{this.virgolaDisabledD}}" value=",">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_COMMA}}: ,</ion-label>
+              <ion-segment-button value=".csv">
+                <ion-label>.csv</ion-label>
+              </ion-segment-button>
+              <!-- <ion-segment-button value=".log">
+                <ion-label>.log</ion-label>
+              </ion-segment-button> -->
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_TITLE}}</h2>
+          <p>
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.saveOptions.date_format}}"
+              [(ngModel)]="this.variabiliService.saveOptions.date_format" (ionChange)="setDateFormat($event)"
+              style="margin-top: 5px;">
+              <ion-segment-button value="YYYY-MM-DD">
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_YMD}}</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="DD-MM-YYYY">
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_DMY}}</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="MM-DD-YYYY">
+                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_MDY}}</ion-label>
               </ion-segment-button>
             </ion-segment>
           </p>
         </ion-label>
       </ion-item>
+
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
         <ion-label>
           <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_TITLE}}</h2>
           <p>
-            <ion-segment value="{{this.variabiliService.saveOptions.field}}"
-              [(ngModel)]="this.variabiliService.saveOptions.field" (ionChange)="setFieldSeparator($event)" style="margin-top: 5px;">
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.saveOptions.field}}"
+              [(ngModel)]="this.variabiliService.saveOptions.field" (ionChange)="setFieldSeparator($event)"
+              style="margin-top: 5px;">
               <ion-segment-button value=";">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_POINT_COMMA}}:-->
                   ;</ion-label>
               </ion-segment-button>
               <ion-segment-button disabled="{{this.virgolaDisabledF}}" value=",">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_COMMA}}:-->
                   ,</ion-label>
               </ion-segment-button>
               <ion-segment-button value="|">
-                <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}: |</ion-label>
+                <ion-label
+                  style="font-size: large;"><!--{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_FIELDS.SEP_FIELDS_PIPE}}:-->
+                  |</ion-label>
               </ion-segment-button>
             </ion-segment>
           </p>
         </ion-label>
       </ion-item>
+
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_TITLE}}</h2>
+          <p>
+            <ion-segment swipe-gesture="false" value="{{this.variabiliService.saveOptions.decimal}}"
+              [(ngModel)]="this.variabiliService.saveOptions.decimal" (ionChange)="setDecSeparator($event)"
+              style="margin-top: 5px;">
+              <ion-segment-button value=".">
+                <ion-label style="font-size: large;">
+                  <!-- {{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_POINT}}:  -->
+                  .</ion-label>
+              </ion-segment-button>
+              <ion-segment-button disabled="{{this.virgolaDisabledD}}" value=",">
+                <ion-label style="font-size: large;">
+                  <!-- {{variabiliService.translation.SETTINGS.SAVE_DATA.SEP_DEC.SEP_DEC_COMMA}}:  -->
+                  ,</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
+          (ionChange)="toggleChangeSaveLZeq($event)">
+          <ion-label>
+            <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LAEQ}}</h2>
+            <p *ngIf="variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}
+            </p>
+            <p *ngIf="!variabiliService.saveOptions.bandLZeq">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+            </p>
+          </ion-label>
+        </ion-toggle>
+      </ion-item>
+      <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
+          (ionChange)="toggleChangeSaveLZmin($event)">
+          <ion-label>
+            <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LZMIN}}</h2>
+            <p *ngIf="variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}
+            </p>
+            <p *ngIf="!variabiliService.saveOptions.bandLZmin">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+            </p>
+          </ion-label>
+        </ion-toggle>
+      </ion-item>
+
+      <!-- <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
+        <ion-label>
+          <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_DEBUG}}</h2>
+          <p *ngIf="variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.TRUE}}</p>
+          <p *ngIf="!variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
+          </p>
+        </ion-label>
+        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.debug"
+          (ionChange)="toggleChangeSaveDebug($event)"></ion-toggle>
+      </ion-item> -->
+
     </ion-item-group>
 
   </ion-list>
+  <div style="height: 20px;"></div>
 
 
   <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillModalDismiss($event)">
@@ -248,7 +437,6 @@
           </ion-buttons>
           <ion-title
             *ngIf="modalArgument === 'calibrazione'">{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE}}</ion-title>
-          <ion-title *ngIf="modalArgument === 'assi'">Regolazione assi</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
@@ -295,40 +483,62 @@
                 <ion-button (click)="apriPickerCalibrazione()" style="--background:  rgb(61, 194, 255, 0.9);">
                   {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_BUTTON}}
                 </ion-button>
+                <ion-modal class="modalPicker" [isOpen]="isModalPickerOpen"
+                  (willDismiss)="onWillModalPickerDismiss($event)">
+                  <ng-template>
+                    <ion-toolbar>
+                      <ion-buttons slot="start">
+                        <ion-button color="primary" (click)="modalPickerCancel()">{{variabiliService.translation.SETTINGS.CALIBRATION
+                          .CALIBRATION_CANCEL}}</ion-button>
+                      </ion-buttons>
+                      <ion-buttons slot="end">
+                        <ion-button color="primary" (click)="modalPickerOk()">{{variabiliService.translation.SETTINGS.CALIBRATION
+                          .CALIBRATION_OK}}</ion-button>
+                      </ion-buttons>
+                    </ion-toolbar>
+                    <ion-picker mode="ios">
+                        <ion-picker-column mode="ios" value="{{currentValueModalPickerInteger}}" (ionChange)="onIonChangeModalPickerInteger($event)">
+                          <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
+                            .CALIBRATION_INTEGER}}</div>
+                        <ion-picker-column-option *ngFor="let int of calibrazioneInteger" value="{{int}}"
+                          disabled="false">{{int}}</ion-picker-column-option>
+                      </ion-picker-column>
+                      <ion-picker-column mode="ios" value="{{currentValueModalPickerDecimal}}" (ionChange)="onIonChangeModalPickerDecimal($event)">
+                        <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
+                          .CALIBRATION_DECIMAL}}</div>
+                        <ion-picker-column-option *ngFor="let dec of calibrazioneDecimal" value="{{dec}}"
+                          disabled="false">{{dec}}</ion-picker-column-option>
+                      </ion-picker-column>
+                    </ion-picker>
+                  </ng-template>
+                </ion-modal>
               </div>
             </ion-card-content>
           </ion-card>
-
-
-          <!-- <ion-card>
-            <ion-card-header>
-              <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_VALUE_SENDTEXT}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <div>
-                <ion-button (click)="sendDataCalibration()" style="--background:  rgb(61, 194, 255, 0.9);">
-                  {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_SENDBUTTON}}
-                </ion-button>
-              </div>
-            </ion-card-content>
-          </ion-card> -->
-
 
           <ion-card style="text-align: left;">
             <ion-card-header>
               <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE1}}</ion-card-title>
               <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
             </ion-card-header>
-            <ion-card-content *ngIf="platform === 'android'" innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT_ANDROID}}">
-            </ion-card-content>
-            <ion-card-content *ngIf="platform === 'ios'" innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT_IOS}}">
+            <ion-card-content innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT}}">
             </ion-card-content>
           </ion-card>
 
-        </div>
-        <div *ngIf="modalArgument === 'assi'">
-          <ion-range [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="0" [max]="130"
-            [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
+          <!-- <ion-card style="text-align: left;">
+            <ion-card-header>
+              <ion-card-title>{{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TITLE}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TEXT}}
+              <div style="text-align: right;">
+                <ion-button (click)="sendDataCalibration()" style="--background:  rgb(61, 194, 255, 0.9);">
+                  {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_BUTTONTEXT}}
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card> -->
+
         </div>
       </ion-content>
     </ng-template>

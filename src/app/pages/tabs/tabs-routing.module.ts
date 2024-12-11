@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../saveddata/saveddata.module').then( m => m.SaveddataPageModule)
       },
       {
+        path: 'map',
+        loadChildren: () => import('../map/map.module').then( m => m.MapPageModule)
+      },
+      {
         path: '',
         redirectTo: '/pages/tabs/noisemeter',
         pathMatch: 'full'

@@ -1,27 +1,113 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>saveddata</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-content [fullscreen]="true">
 
-<ion-content>
   <div *ngIf="files.length > 0">
-    <ion-item>
-      <ion-label>
-        {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TITLE}}
-      </ion-label>
-      <ion-icon *ngIf="!modificaMoltiVariable" name="create-outline" (click)="modificaMolti()"></ion-icon>
-      <ion-checkbox *ngIf="modificaMoltiVariable" (ionChange)="checkboxTutti($event)"></ion-checkbox>
-    </ion-item>
+    <ion-list mode="ios">
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>
+            {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TITLE}} ({{files.length}})
+          </ion-label>
+        </ion-item-divider>
+        <ion-item *ngIf="!modificaMoltiVariable" mode="md">
+          <ion-icon name="eye-outline"
+            (click)="viewListLayoutFunction()"></ion-icon>
+          <ion-label *ngIf="viewListLayout == 1" style="padding-left: 8px; font-size:small"
+            (click)="viewListLayoutFunction()">{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT12_1}}</ion-label>
+          <ion-label *ngIf="viewListLayout == 2" style="padding-left: 8px; font-size:small"
+            (click)="viewListLayoutFunction()">{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT12_2}}</ion-label>
+          <ion-label *ngIf="viewListLayout == 3" style="padding-left: 8px; font-size:small"
+            (click)="viewListLayoutFunction()">{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT12_3}}</ion-label>
+          <ion-icon name="swap-vertical-outline" style="padding-right:20px; font-size: x-large;"
+            (click)="invertiOrdine()"></ion-icon>
+          <ion-icon src="/assets/icon/list-check.svg" (click)="modificaMolti()"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="modificaMoltiVariable" mode="md">
+          <ion-checkbox style="float: right;" (ionChange)="checkboxTutti($event)">
+            <ion-label>
+              {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT13}}
+            </ion-label>
+          </ion-checkbox>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
 
     <ion-item-group>
       <ion-list>
-        <ion-item *ngFor="let file of files">
-          <ion-label (click)="presentActionSheet(file.name)">
-            <h3>{{file.name}}</h3>
-            <p>{{file.size_kb}} kB</p>
+        <ion-item *ngFor="let file of files" disabled="{{file.name === filesystemService.nameFileWriting}}">
+          <ion-label>
+            <ion-row class="measuresTitle ion-align-items-center">
+              <ion-col (click)="presentActionSheet(file)" style="text-align: left;">
+                <h2>{{file.name}} <span *ngIf="file.name === filesystemService.nameFileWriting"> - {{variabiliService.translation.SAVE_FILES.SAVE_FILES_SAVING}}</span></h2>
+                <p>{{file.data_label}} - <i>{{file.diff_label}}</i> </p>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-tab-button (click)="sendDataMeasurement(file)">
+                  <ion-icon
+                    *ngIf="variabiliService.metadataFromLabelToValue(file.metadata.CLOUD).value === 'cloud-false'"
+                    name="cloud-upload-outline" size="large"></ion-icon>
+                  <ion-icon
+                    *ngIf="variabiliService.metadataFromLabelToValue(file.metadata.CLOUD).value === 'cloud-true'"
+                    name="cloud-done-outline" size="large" color="secondary"></ion-icon>
+                  <ion-label>{{file.size_kb}} kB</ion-label>
+                </ion-tab-button>
+              </ion-col>
+              <ion-col *ngIf="modificaMoltiVariable" size="auto" style="padding:0px 5px;">
+                <ion-checkbox [checked]="file.checked"
+                (ionChange)="checkboxChange(file.name,$event)"></ion-checkbox>
+              </ion-col>
+            </ion-row>
+            <div style="padding: 5px 10px 0px 10px;">
+              <div (click)="presentActionSheet(file)">
+                <ion-row *ngIf="viewListLayout >= 2">
+                  <ion-col style="text-align: left;">
+                    <b>LAeq(t): </b> {{file.metadata.LAEQ}}
+                  </ion-col>
+                  <ion-col style="text-align: right;">
+                    <b>{{variabiliService.translation.SAVE_FILES.METADATA.MEASURE_DURATION}}: </b>
+                    {{file.metadata.MEASURE_DURATION}}
+                  </ion-col>
+                </ion-row>
+                <div *ngIf="viewListLayout >= 2" style="font-size: small;">
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.DESCRIPTION}}:</b> {{blankMetadata(file.metadata.DESCRIPTION)}}
+                </div>
+                <div *ngIf="viewListLayout == 3" style="font-size: small;">
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.TYPE}}:</b> {{blankMetadata(file.metadata.TYPE)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.ENVIRONMENT}}:</b> {{blankMetadata(file.metadata.ENVIRONMENT)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.SOURCE}}:</b> {{blankMetadata(file.metadata.SOURCE)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.WEATHER}}:</b> {{blankMetadata(file.metadata.WEATHER)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.WHYTAKENOISE}}:</b> {{blankMetadata(file.metadata.WHYTAKENOISE)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.FEELING}}:</b> {{blankMetadata(file.metadata.FEELING)}}<br>
+                  <b>{{variabiliService.translation.SAVE_FILES.METADATA.APPROPRIATE}}:</b> {{blankMetadata(file.metadata.APPROPRIATE)}}<br>
+                </div>
+
+                <!-- <ion-row>
+                  <ion-col size="auto" class="ion-text-wrap" style="text-align: left;">
+                    <b>{{variabiliService.translation.SAVE_FILES.METADATA.DESCRIPTION}}: </b>
+                  </ion-col>
+                  <ion-col class="ion-text-wrap" style="padding-left: 5px; text-align: left;">
+                    {{file.metadata.DESCRIPTION}}
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="viewListLayout == 3" style="padding-top: 10px;">
+                  <ion-col>
+                    <b>{{variabiliService.translation.SAVE_FILES.METADATA.TYPE}}</b><br>{{file.metadata.TYPE}}
+                  </ion-col>
+                  <ion-col>
+                    <b>{{variabiliService.translation.SAVE_FILES.METADATA.SOURCE}}</b><br>{{file.metadata.SOURCE}}
+                  </ion-col>
+                  <ion-col>
+                    <b>{{variabiliService.translation.SAVE_FILES.METADATA.WEATHER}}</b><br>{{file.metadata.WEATHER}}
+                  </ion-col> -->
+                  <!-- <ion-col>
+                    <b>Sensazione</b><br>{{file.metadata.FEELING}}
+                  </ion-col>
+                  <ion-col>
+                    <b>Appropriatezza</b><br>{{file.metadata.APPROPRIATE}}
+                  </ion-col> -->
+                <!-- </ion-row> -->
+              </div>
+            </div>
           </ion-label>
-          <ion-checkbox *ngIf="modificaMoltiVariable" slot="end" [checked]="file.checked" (ionChange)="checkboxChange(file.name,$event)"></ion-checkbox>
         </ion-item>
       </ion-list>
     </ion-item-group>
@@ -31,46 +117,12 @@
     {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT3}}
   </div>
 
-  <ion-modal [isOpen]="isModalOpen">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="setModalOpen(false)">
-              <ion-icon name="arrow-back-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-          <ion-title>File: {{fileOpen}}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT8_TITLE}}</ion-card-title>
-            <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
-          </ion-card-header>
-          <ion-card-content innerHTML="{{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT8}}">
-          </ion-card-content>
-        </ion-card>
-
-        <div style="padding:10px;">
-          <div *ngFor="let line of fileOpenArray">
-            {{line}}
-          </div>
-        </div>
-
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-
-
 </ion-content>
 
 <ion-tab-bar *ngIf="modificaMoltiVariable">
   <ion-tab-button (click)="eliminaMolti()">
     <ion-icon name="trash-outline"></ion-icon>
-    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4}}</ion-label>
+    <ion-label> {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT4}}</ion-label>
   </ion-tab-button>
   <ion-tab-button (click)="condividiMolti()">
     <ion-icon name="share-social-outline"></ion-icon>
@@ -78,6 +130,6 @@
   </ion-tab-button>
   <ion-tab-button (click)="annulla()">
     <ion-icon name="close-outline"></ion-icon>
-    <ion-label > {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6}}</ion-label>
+    <ion-label> {{variabiliService.translation.SAVE_FILES.SAVE_FILES_TEXT6}}</ion-label>
   </ion-tab-button>
 </ion-tab-bar>

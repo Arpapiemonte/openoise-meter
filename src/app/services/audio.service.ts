@@ -16,16 +16,20 @@ import 'moment/locale/it';
 })
 export class AudioService {
 
+
   // TIME VARIABLES
   capture: boolean = false
   captureCalibrazione: boolean = false
   pause: boolean = false
+  marker: boolean = false
   setIntervalCapture: any;
   countInterval: number = 0
   date_start: any
   date_now: any
+  date_now_debug: any
   elapsedTime: any
   timeElapsed: string = ''
+  setEventAddListeners: boolean = false
 
   // NOISE VARIABLES
   p_ref: number = 0.00002;
@@ -236,6 +240,10 @@ export class AudioService {
   sonogramData: any
   fftData: any
 
+  // SAVE DATA VARIABLES
+  lastData: any
+  saveDataStartSaved: boolean = false
+
   constructor(
     public variabiliService: VariabiliService,
     public audioCfgService: AudioCfgService,
@@ -301,13 +309,16 @@ export class AudioService {
 
     this.onAudio = function onAudioInput(evt: any) {
       if (!this_copy.pause) {
+        // console.log("this_copy.numberFftTime", this_copy.numberFftTime)
         // console.log("evt", evt.data.length)
 
         // parte nuova rispetto opeNoise 2, vedere txt
         const raw = this_copy.normalizeAudio(evt.data);
+        // const raw = evt.data
 
         this_copy.numberFftTime += 1;
         this_copy.numberFftTotal += 1;
+
 
         // hanning without overlap
         for (let i = 0; i < raw.length; i++) {
@@ -329,6 +340,8 @@ export class AudioService {
         //   console.log("mag length", mag.length);
         //   // console.log("mag", mag);
         // }
+
+        // console.log("evt, mag, numebrFFT", evt.data.length, mag.length, this_copy.numberFftTime)
 
         var linearGain: number = Math.pow(10, this_copy.variabiliService.dbGain / 10);
 
@@ -367,24 +380,39 @@ export class AudioService {
 
     audioinput.start(this.audioCfgService.config())
 
-    // Listen to audioinput events
-    window.addEventListener("audioinput", this.onAudio, false);
-    //  Listen to audioinputerror events
-    var onAudioInputError = function (error) {
-      alert("onAudioInputError event recieved: " + JSON.stringify(error));
-    };
-    window.addEventListener("audioinputerror", onAudioInputError, false);
+    if (this.setEventAddListeners == false) {
+      console.log("setEventAddListeners", this.setEventAddListeners)
+      this.setEventAddListeners = true
+      // Listen to audioinput events
+      window.addEventListener("audioinput", this.onAudio, false);
+      //  Listen to audioinputerror events
+      var onAudioInputError = function (error: any) {
+        // alert("onAudioInputError event recieved: " + JSON.stringify(error));
+        console.log("onAudioInputError event recieved: ", error)
+      };
+      window.addEventListener("audioinputerror", onAudioInputError, false);
+    }
 
     this.inizializzaData()
 
+
+    this_copy.saveDataStartSaved = false
+    var date_start_saving_date = ""
+    var date_start_saving_time = ""
+    var date_start_saving: any
+
     // calculate data every sec
     this.setIntervalCapture = setInterval(function () {
-
+      console.log("this_copy.countInterval", this_copy.countInterval)
       // console.log("this_copy.date_start",this_copy.date_start)
-      this_copy.date_now = new Date(this_copy.date_start)
-      this_copy.date_now.setSeconds(this_copy.date_start.getSeconds() + this_copy.countInterval); 
+      this_copy.date_now_debug = new Date()
+      this_copy.date_now = new Date(this_copy.date_start.getTime() + this_copy.countInterval * 1000);
       // console.log("this_copy.date_now",this_copy.date_now)
       this_copy.countInterval++
+
+      var date_now_date = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format)
+      var date_now_date_server = moment(this_copy.date_now).format("YYYY-MM-DD")
+      var date_now_time = moment(this_copy.date_now).format("HH:mm:ss")
 
       if (!this_copy.pause) {
         console.log("this_copy.numberFftTime", this_copy.numberFftTime)
@@ -412,8 +440,14 @@ export class AudioService {
 
         this_copy.LAeqTimeRunningData.level.y.shift()
         this_copy.LAeqTimeRunningData.running.y.shift()
+        this_copy.LAeqTimeRunningData.marker.y.shift()
         this_copy.LAeqTimeRunningData.level.y.push(this_copy.dbATime)
         this_copy.LAeqTimeRunningData.running.y.push(this_copy.dbARunning)
+        if (this_copy.marker) {
+          this_copy.LAeqTimeRunningData.marker.y.push(this_copy.variabiliService.range.upper)
+        } else {
+          this_copy.LAeqTimeRunningData.marker.y.push(null)
+        }
 
         // Min and max global levels since start
         if (!isNaN(this_copy.dbATime)) {
@@ -509,7 +543,7 @@ export class AudioService {
             "sonogramData": this_copy.sonogramData,
             "fftData": this_copy.fftData
           })
-          console.log("this_copy.sonogramData", this_copy.sonogramData)
+          // console.log("this_copy.sonogramData", this_copy.sonogramData)
         }
 
         this_copy.elapsedTime = this_copy.elapsedTimeCalculation(this_copy.date_start, this_copy.date_now)
@@ -518,10 +552,42 @@ export class AudioService {
 
         if (this_copy.countInterval > 1) {
           if (this_copy.filesystemService.saveData) {
-            let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
+            let data = date_now_date + this_copy.variabiliService.saveOptions.field + date_now_time
+            if (!this_copy.saveDataStartSaved) {
+              date_start_saving_date = date_now_date_server
+              date_start_saving_time = date_now_time
+              date_start_saving = this_copy.date_now
+              this_copy.saveDataStartSaved = true
+            }
+            this_copy.lastData = {
+              "START_DATE": date_start_saving_date,
+              "START_TIME": date_start_saving_time,
+              "LAST_DATE": date_now_date_server,
+              "LAST_TIME": date_now_time,
+              "DURATION": this_copy.elapsedTimeCalculation(date_start_saving, this_copy.date_now),
+              "LAST_LAEQT": this_copy.dbARunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
+            }
+
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
-            data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
             // data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbARunning2.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbATime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
+            if (this_copy.filesystemService.saveDataStart) {
+              data = data + this_copy.variabiliService.saveOptions.field + 'START'
+              this_copy.filesystemService.saveDataStart = false
+            } else {
+              if (this_copy.marker) {
+                data = data + this_copy.variabiliService.saveOptions.field + 'MARKER'
+              } else {
+                data = data + this_copy.variabiliService.saveOptions.field + ''
+              }
+            }
+            if (this_copy.variabiliService.saveOptions.debug) {
+              data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
+            }
             if (this_copy.variabiliService.saveOptions.bandLZeq) {
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbRunning.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.dbTime.toFixed(1).replace(".", this_copy.variabiliService.saveOptions.decimal)
@@ -549,10 +615,17 @@ export class AudioService {
 
         this_copy.variabiliService.setDataRefreshBS(this_copy.date_now)
         if (this_copy.filesystemService.saveData) {
-          let data = moment(this_copy.date_now).format("DD/MM/YYYY") + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now).format("HH:mm:ss")
+          let data = date_now_date + this_copy.variabiliService.saveOptions.field + date_now_time
           data = data + this_copy.variabiliService.saveOptions.field
           data = data + this_copy.variabiliService.saveOptions.field
-          // data = data + this_copy.variabiliService.saveOptions.field
+          data = data + this_copy.variabiliService.saveOptions.field + 'PAUSE'
+          if (this_copy.variabiliService.saveOptions.debug) {
+            data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.linearATime.toFixed(0)
+          }
           if (this_copy.variabiliService.saveOptions.bandLZeq) {
             data = data + this_copy.variabiliService.saveOptions.field
             data = data + this_copy.variabiliService.saveOptions.field
@@ -577,11 +650,43 @@ export class AudioService {
 
   }
 
+  writeStatus(status: string) {
+    console.log("writeStatus", status)
+
+    if (this.filesystemService.saveData) {
+      let data = moment().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss")
+      data = data + this.variabiliService.saveOptions.field
+      data = data + this.variabiliService.saveOptions.field
+      data = data + this.variabiliService.saveOptions.field + status
+      if (this.variabiliService.saveOptions.debug) {
+        data = data + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
+        data = data + this.variabiliService.saveOptions.field + this.countInterval
+        data = data + this.variabiliService.saveOptions.field + this.numberFftTime
+        data = data + this.variabiliService.saveOptions.field + this.numberFftTotal
+        data = data + this.variabiliService.saveOptions.field + this.linearATime.toFixed(0)
+      }
+      this.filesystemService.appendFile(
+        this.filesystemService.nameFileWriting,
+        data
+      )
+
+      if (status == 'STOP') {
+        this.filesystemService.writeMetadataFirstTime(this.lastData)
+        this.saveDataStartSaved = false
+      }
+    }
+  }
+
   stopCapture() {
+
+    this.writeStatus('STOP')
+
     this.capture = false
     audioinput.stop()
     clearInterval(this.setIntervalCapture)
     this.pause = false
+    this.marker = false
+
   }
 
   normalizeAudio(pcmData: any) {
@@ -646,6 +751,9 @@ export class AudioService {
         this.graficiService.inizializzaGrafici()
       }
       audioinput.stop()
+      if (this.filesystemService.saveData) {
+        this.writeStatus('RESET')
+      }
       this.startCapture()
     } else {
       this.resetParameters()
@@ -654,8 +762,8 @@ export class AudioService {
   }
 
   elapsedTimeCalculation(date_start: any, date_end: any) {
-    console.log("elapsedTimeCalculation date_start", date_start)
-    console.log("elapsedTimeCalculation date_end", date_end)
+     //console.log("elapsedTimeCalculation date_start", date_start)
+     //console.log("elapsedTimeCalculation date_end", date_end)
     var output = ''
 
     if (date_start != '' && date_end != '') {
@@ -678,7 +786,7 @@ export class AudioService {
       leftSec = leftSec - min * 60;
 
       var outputHMS = hrs.toLocaleString(undefined, { minimumIntegerDigits: 2 }) + ":" + min.toLocaleString(undefined, { minimumIntegerDigits: 2 }) + ":" + leftSec.toLocaleString(undefined, { minimumIntegerDigits: 2 });
-      
+
       if (days > 0) {
         output = days + " " + this.variabiliService.translation.LEVELS.DAYS + " " + outputHMS
       } else {
@@ -700,6 +808,7 @@ export class AudioService {
     this.LAeqTimeRunningData = {
       level: { x: [], y: [] },
       running: { x: [], y: [] },
+      marker: { x: [], y: [] },
     }
 
     this.dbBandData = {
@@ -725,8 +834,10 @@ export class AudioService {
 
       this.LAeqTimeRunningData.level.x.push(x_value)
       this.LAeqTimeRunningData.running.x.push(x_value)
+      this.LAeqTimeRunningData.marker.x.push(x_value)
       this.LAeqTimeRunningData.level.y.push(0)
       this.LAeqTimeRunningData.running.y.push(0)
+      this.LAeqTimeRunningData.marker.y.push(null)
 
       // x value for sonogramData
       this.sonogramData.value.x.push(x_value)

@@ -1,5 +1,27 @@
-ion-item-divider {
-    --padding-top: 5px;
-    --padding-bottom: 5px;
-    font-variant: small-caps;
+.colAge {
+    padding: 8px 0px;
+    text-align: center;
+    font-size: small;
+    font-weight: bold;
+    opacity: 0.5;
 }
+
+.colAgeSelected {
+    padding: 8px 0px;
+    text-align: center;
+    background-color: var(--ion-color-secondary);
+    border-radius: 10px;
+    font-size: small;
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+ion-segment-button {
+    padding-top: 5px;
+}
+
+.modalPicker {
+    --height: auto;
+  
+    align-items: end;
+  }

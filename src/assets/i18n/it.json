@@ -2,12 +2,13 @@
   "TRANSLATION": {
     "PREMETER": {
       "HEADER_FIRST_TIME": "Benvenuto in OpeNoise!",
-      "MESSAGE_FIRST_TIME": "<p>OpeNoise consente di misurare il livello di rumore in tempo reale.</p><p>Prima di considerare attendibili i valori rilevati è necessario procedere alla calibrazione del dispositivo.</p><p>Per un corretto utilizzo di OpeNoise si invita a consultare le sezioni <i>Tutorial e Glossario</i>.</p><p>Buone misure!</p><br><b>ATTENZIONE:</b> In caso di aggiornamento dalla versione 2.0.3, è necessario ri-calibrare il dispositivo. Ci scusiamo per il disagio.",
-      "OK": "Ok"
+      "MESSAGE_FIRST_TIME": "<p>OpeNoise consente di misurare il livello di rumore in tempo reale.</p><p>Prima di considerare attendibili i valori rilevati è necessario procedere alla calibrazione del dispositivo.</p><p>Per un corretto utilizzo di OpeNoise si invita a consultare le sezioni <i>Tutorial e Glossario</i>.</p><p>Buone misure!</p>",
+      "OK": "OK"
     },
     "TABS": {
       "NOISE_METER": "Fonometro",
       "SAVED_DATA": "Misure",
+      "MAP": "Mappa",
       "SETTINGS": "Opzioni",
       "INFO": "Info"
     },
@@ -18,6 +19,23 @@
       "RESET": "Azzera",
       "SAVE": "Salva",
       "ROTATE": "Ruota"
+    },
+    "MAP": {
+      "LEGEND": "Legenda",
+      "BASEMAPS": "Mappe di base",
+      "TOPO": "Topografica",
+      "ORTO": "Ortofoto",
+      "ALERT_HEAD": "ATTENZIONE",
+      "ALERT_TEXT1": "Non ci sono misure georiferite!",
+      "ALERT_TEXT2": "C'è stato un problema, riprovare più tardi",
+      "MEASURE_FILTERED": "Misure filtrate: ",
+      "FILTERS": "Filtri: ",
+      "FILTERS2": "Filtri",
+      "FILTER_ME": "Mie misure",
+      "FILTER_COMMUNITY": "Comunità",
+      "MEASURE_FILTER": "Filtra le misure",
+      "MEASURE_DETAILS": "Dettagli",
+      "COMMUNITY_MEASURE": "Misura della comunità"
     },
     "LEVELS": {
       "DATE_START": "Inizio",
@@ -39,43 +57,76 @@
       "AXIS_FREQUENCY_FFT": "Frequenze (Hz)"
     },
     "SETTINGS": {
+      "USERDATA": {
+        "USERDATA_TITLE": "Dati utente",
+        "USERDATA_AGE": "Età",
+        "USEDATA_GENDER": "Genere",
+        "USEDATA_FEMALE_GENDER": "Femmina",
+        "USEDATA_MALE_GENDER": "Maschio",
+        "USEDATA_OTHER_GENDER": "Altro",
+        "USERDATA_USERTYPE": "Tipo utente",
+        "USERDATA_USERTYPE_BEGINNER": "Principiante",
+        "USERDATA_USERTYPE_BEGINNER_SUB": "Non so nulla di rumore",
+        "USERDATA_USERTYPE_INTERMEDIATE": "Intermedio",
+        "USERDATA_USERTYPE_INTERMEDIATE_SUB": "Ho qualche conoscenza di rumore",
+        "USERDATA_USERTYPE_ADVANCED": "Avanzato",
+        "USERDATA_USERTYPE_ADVANCED_SUB": "Sono un esperto/professionista nel campo del rumore"
+      },
       "NOISE_METER": {
         "NOISE_METER_TITLE": "Fonometro",
-        "NOISE_METER_TEXT": "Alcune impostazioni sono disabilitate in quanto è in corso una misura"
+        "NOISE_METER_TEXT": "La calibrazione è disabilitata quando è in corso una misura"
       },
       "CALIBRATION": {
         "CALIBRATION_TITLE": "Calibrazione",
+        "CALIBRATION_ITEM_TEXT": "Calibra il dispositivo",
         "CALIBRATION_VALUE": "Valore",
         "CALIBRATION_TITLE1": "Istruzioni",
-        "CALIBRATION_TEXT_ANDROID": "Per calibrare il dispositivo occorre confrontare il livello sonoro LAeq con un valore noto misurato da un fonometro professionale.<br>Modalità operativa:<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione",
-        "CALIBRATION_TEXT_IOS": "Per calibrare il dispositivo occorre confrontare il livello sonoro LAeq con un valore noto misurato da un fonometro professionale.<br>Modalità operativa:<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione<br><br>Per questo dispositivo si consiglia il valore di: 24.0 dB.",
+        "CALIBRATION_TEXT": "Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale.<br>In alternativa, è possibile utilizzare come riferimento un dispositivo già calibrato. Per iOS si consiglia una calibrazione di +24.0 dBA, mentre per Android la calibrazione è variabile a seconda del modello.<br><br>MODALITÀ OPERATIVA:<br>1) Rilevare i livelli generati da una sorgente costante misurati in contemporanea da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>2) Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>3) Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione",
         "CALIBRATION_OPENOISE_VALUE_TEXT": "Livello di OpeNoise",
         "CALIBRATION_VALUE_TEXT": "Valore di calibrazione",
         "CALIBRATION_BUTTON": "CALIBRA",
-        "CALIBRATION_VALUE_SENDTEXT": "Invio dati di calibrazione ad ARPA",
         "CALIBRATION_SENDBUTTON": "INVIA",
-        "CALIBRATION_CANCEL": "Annulla",
-        "CALIBRATION_OK": "Ok",
-        "CALIBRATION_YES": "Sì",
+        "CALIBRATION_CANCEL": "ANNULLA",
+        "CALIBRATION_OK": "OK",
+        "CALIBRATION_YES": "SÌ",
         "CALIBRATION_INTEGER": "Intero:",
         "CALIBRATION_DECIMAL": "Decimale:",
-        "CALIBRATION_WARNING": "Attenzione",
-        "CALIBRATION_CONFIRM_QUESTION": "Sei sicuro di voler cambiare il valore della calibrazione?"
+        "CALIBRATION_WARNING": "ATTENZIONE",
+        "CALIBRATION_CONFIRM_QUESTION1": "Sei sicuro di voler cambiare il valore della calibrazione da ",
+        "CALIBRATION_CONFIRM_QUESTION2": " a "
       },
-      "SEND_CALIBDATA":{
+      "SEND_CALIBDATA": {
+        "SEND_CALIBDATA_TITLE": "Invio valore di calibrazione",
+        "SEND_CALIBDATA_TEXT": "Aiutaci a implementare un database di calibrazioni per trovare valori standard",
         "SEND_CALIBDATA_BUTTONTEXT": "INVIA",
-        "SEND_CALIBDATA_BUTTONMSG": "Invio dati di calibrazione ad ARPA",
-        "SEND_CALIBDATA_USERTEXT": "Indicare che tipo di utente sei:",
-        "SEND_CALIBDATA_USERTYPE1": "Principiante",
-        "SEND_CALIBDATA_USERTYPE2": "Avanzato",
+        "SEND_CALIBDATA_USERTEXT": "Per inviare il valore di calibrazione, occorre aver compilato i dati utente.",
+        "SEND_CALIBDATA_NO_CALIBRATION": "Per inviare la misura, occorre aver inviato il valore di calibrazione.",
+        "SEND_CALIBDATA_NO_METADATA": "Per inviare la misura, occorre aver compilato i metadati.",
+        "SEND_CALIBDATA_NO_PRIVACY": "Per inviare la misura, occorre prendere visione dell'informativa nella pagina Privacy.",
+        "SEND_CALIBDATA_USERTYPE1": "Principiante (non so nulla di rumore)",
+        "SEND_CALIBDATA_USERTYPE2": "Intermedio (ho qualche conoscenza di rumore)",
+        "SEND_CALIBDATA_USERTYPE3": "Avanzato (sono un esperto / professionista nel campo del rumore)",
         "SEND_CALIBDATA_CALIBTEXT": "Indicare il tipo di calibazione effettuata:",
-        "SEND_CALIBDATA_CALIBTYPE1": "Confronto1",
-        "SEND_CALIBDATA_CALIBTYPE2": "Confronto2",
-        "SEND_CALIBDATA_CALIBTYPE3": "Confronto3",
-        "SEND_CALIBDATA_FINALTEXT": "Invio andato a buon fine!",
+        "SEND_CALIBDATA_CALIBTYPE1": "Nessuna (senza confronto)",
+        "SEND_CALIBDATA_CALIBTYPE2": "Intermedia (confronto con altro dispositivo calibrato)",
+        "SEND_CALIBDATA_CALIBTYPE3": "Ottimale (confronto con fonometro professionale / calibratore con mic esterno)",
+        "SEND_CALIBDATA_CALIBTYPE4_ANDROID": "Confronto con un dispositivo iOS calibrato con il valore suggerito di 24.0 dB",
+        "SEND_CALIBDATA_CALIBTYPE4_IOS": "Ho usato il valore suggerito di 24.0 dB per iOS",
+        "SEND_CALIBDATA_MICTEXT": "Indicare il tipo di microfono:",
+        "SEND_CALIBDATA_MICTYPE1": "Interno (microfono del dispositivo)",
+        "SEND_CALIBDATA_MICTYPE2": "Esterno",
+        "SEND_CALIBDATA_EXTERNALMICTEXT": "Indicare il modello di microfono esterno:",
+        "SEND_CALIBDATA_FINALTEXT": "Invio andato a buon fine!<br>Grazie per aver contribuito alla comunità Openoise.",
         "SEND_CALIBDATA_NO_NETWORK": "Invio dati non riuscito, rete assente.",
-        "SEND_CALIBDATA_ATTENTION": "ATTENZIONE!",
-        "SEND_CALIBDATA_CANCEL": "Annulla"
+        "SEND_CALIBDATA_ATTENTION": "ATTENZIONE",
+        "SEND_CALIBDATA_CONGRATULATIONS": "GRAZIE!",
+        "SEND_CALIBDATA_CANCEL": "ANNULLA",
+        "SEND_CALIBDATA_ZERO": "Sei sicuro che la tua calibrazione sia uguale a 0 dB?",
+        "SEND_CALIBDATA_NO_COORDINATES": "Invio dati non riuscito, non è possibile inviare una misura senza coordinate GPS.",
+        "SEND_CALIBDATA_NO_METADATA_OLD_VERSIONS": "Misura realizzata con una precedente versione di OpeNoise, non è possibile modificare i metadati né inviare la misura sul cloud",
+        "PRIVACY_MESSAGGE": "Per inviare la calibrazione e le misure alla comunità OpeNoise occorre prendere visione dell'informativa nella pagina Privacy.",
+        "PRIVACY_VIEW": "Leggi informativa",
+        "PRIVACY_ACCEPTED": "Informativa letta"
       },
       "YAXIS_RANGE": {
         "YAXIS_RANGE_TITLE": "Assi del livello sonoro nei grafici",
@@ -130,6 +181,7 @@
         "FALSE": "Non salvati",
         "SAVE_DATA_BAND_LAEQ": "Salva LZeq dei 1/3 di ottava",
         "SAVE_DATA_BAND_LZMIN": "Salva LZmin dei 1/3 di ottava",
+        "SAVE_DATA_DEBUG": "Salva parametri di debug",
         "SEP_DEC": {
           "SEP_DEC_TITLE": "Separatore dei decimali",
           "SEP_DEC_POINT": "Punto",
@@ -140,7 +192,12 @@
           "SEP_FIELDS_POINT_COMMA": "Punto e virgola",
           "SEP_FIELDS_COMMA": "Virgola",
           "SEP_FIELDS_PIPE": "Pipe"
-        }
+        },
+        "EXTENSION_TITLE": "Estensione del file",
+        "DATE_FORMAT_TITLE": "Formato della data",
+        "DATE_FORMAT_YMD": "A-M-G",
+        "DATE_FORMAT_DMY": "G-M-A",
+        "DATE_FORMAT_MDY": "M-G-A"
       }
     },
     "SAVE_FILES": {
@@ -155,10 +212,37 @@
       "SAVE_FILES_TEXT4_2cA": "ATTENZIONE",
       "SAVE_FILES_TEXT4_2cB": "Selezionare almeno un file",
       "SAVE_FILES_TEXT5": "Condividi",
-      "SAVE_FILES_TEXT6": "Annulla",
+      "SAVE_FILES_TEXT6": "ANNULLA",
       "SAVE_FILES_TEXT7": "Apri",
       "SAVE_FILES_TEXT8_TITLE": "ATTENZIONE",
       "SAVE_FILES_TEXT8": "Per visualizzare correttamente il file occorre utilizzare un programma come LibreOffice Calc o Office Excel. Questo semplice visualizzatore serve unicamente ad effettuare controlli di massima sulla corretta esecuzione della misura.",
+      "SAVE_FILES_TEXT9": "Rinomina",
+      "SAVE_FILES_TEXT10": "Rinomina il file",
+      "SAVE_FILES_TEXT11": "Modifica metadati",
+      "SAVE_FILES_TEXT11_2A": "Descrizione: ",
+      "SAVE_FILES_TEXT11_2B": "Tipo misura: ",
+      "SAVE_FILES_TEXT11_2C": "Sorgente principale: ",
+      "SAVE_FILES_TEXT11_2D": "Meteo: ",
+      "SAVE_FILES_TEXT11_2E": "Sensazione: ",
+      "SAVE_FILES_TEXT11_3": "Coordinate: ",
+      "SAVE_FILES_TEXT11_4": "Calibrazione: ",
+      "SAVE_FILES_TEXT11_5": "Inizio misura: ",
+      "SAVE_FILES_TEXT11_6": "Fine misura: ",
+      "SAVE_FILES_TEXT11_7": "Durata: ",
+      "SAVE_FILES_TEXT12_1": "Vista compatta",
+      "SAVE_FILES_TEXT12_2": "Vista normale",
+      "SAVE_FILES_TEXT12_3": "Vista completa",
+      "SAVE_FILES_TEXT13": "Seleziona tutti",
+      "SAVE_FILES_SAVING": "Salvataggio in corso...",
+      "SAVE_FILES_TIME1": " giorni fa",
+      "SAVE_FILES_TIME2": " ore fa",
+      "SAVE_FILES_TIME3": " minuti fa",
+      "SAVE_FILES_TIME1s": " giorno fa",
+      "SAVE_FILES_TIME2s": " ora fa",
+      "SAVE_FILES_TIME3s": " minuto fa",
+      "SHARE_TITLE": "OpeNoise: condivisione misura",
+      "SHARE_TEXT": "In allegato le seguenti misure: ",
+      "SHARE_BUDDIES": "Condividi con gli amici",
       "SAVE_BUTTON": {
         "SAVE_BUTTON_TEXT1": "Dati salvati nel file:",
         "SAVE_BUTTON_TEXT2": "ATTENZIONE",
@@ -167,6 +251,84 @@
         "SAVE_BUTTON_TEXT5": "Salvataggio file disabilitato.",
         "SAVE_BUTTON_TEXT6": "Salvataggio dati in corso nel file: ",
         "SAVE_BUTTON_TEXT7": "Avviare la misura prima di salvare i dati"
+      },
+      "METADATA": {
+        "DESCRIPTION": "Descrizione",
+        "TYPE": "Condizione",
+        "ENVIRONMENT": "Ambiente",
+        "SOURCE": "Sorgente",
+        "WEATHER": "Meteo",
+        "FEELING": "Sensazione",
+        "APPROPRIATE": "Appropriato",
+        "WHYTAKENOISE": "Motivo",
+        "COORDINATES": "Coordinate",
+        "CALIBRATION": "Calibrazione",
+        "MEASURE_START": "Inizio misura",
+        "MEASURE_STOP": "Fine misura",
+        "MEASURE_DURATION": "Durata",
+        "LAEQ": "LAeq(t)",
+        "CLOUD": "Cloud"
+      },
+      "EDIT_DESCRIPTION": {
+        "EDIT_BUTTON": "Edita metadati",
+        "HEADER_DESCRIPTION": "DESCRIZIONE MISURA",
+        "INSERT_TEXT": "Inserisci testo",
+        "HEADER_MEASURETYPE": "CONDIZIONE DI MISURA",
+        "HEADER_ENVIRONMENT": "AMBIENTE",
+        "HEADER_SOURCETYPE": "SORGENTE PRINCIPALE",
+        "HEADER_FEELING": "DESCRIVI L’AMBIENTE SONORO",
+        "HEADER2_FEELING": "Descrivi:",
+        "HEADER_APPROPRIATE": "L'AMBIENTE SONORO È ADEGUATO AL LUOGO?",
+        "HEADER2_APPROPRIATE": "Appropriato:",
+        "HEADER_WEATHER": "CONDIZIONI METEO",
+        "HEADER_WHYTAKENOISE": "PERCHÉ HAI EFFETTUATO UNA MISURAZIONE CON OPENOISE?",
+        "OUTDOOR": "All'aperto",
+        "INDOOR_OPEN_WINDOWS": "Al chiuso con finestre aperte",
+        "INDOOR_CLOSE_WINDOWS": "Al chiuso con finestre chiuse",
+        "ENVIRONMENT_URBAN": "Urbano",
+        "ENVIRONMENT_RURAL": "Rurale",
+        "ENVIRONMENT_WILDERNESS": "Selvaggio",
+        "SOURCETYPE_ROAD": "Traffico stradale",
+        "SOURCETYPE_RAILWAY": "Traffico ferroviario",
+        "SOURCETYPE_AIRPLANE": "Traffico aereo",
+        "SOURCETYPE_BOAT": "Traffico marittimo",
+        "SOURCETYPE_ELECTRO_MECHANICAL": "Elettro-meccanico",
+        "SOURCETYPE_ELECTRO_MECHANICAL_SUB": "Cantiere, ventilazione, agricoltura, domestico, installazione elettrica, industria",
+        "SOURCETYPE_VOICE": "Voce",
+        "SOURCETYPE_VOICE_SUB": "Parlato, canto, risate, urla",
+        "SOURCETYPE_MUSIC": "Musica",
+        "SOURCETYPE_MUSIC_SUB": "Concert, disco",
+        "SOURCETYPE_NATURE": "Natura",
+        "SOURCETYPE_NATURE_SUB": "Animali selvatici, vento, acqua, tuoni, movimento terra/ghiaccio",
+        "SOURCETYPE_OTHER": "Altra sorgente",
+        "WEATHER_DRY": "Secco",
+        "WEATHER_WET": "Bagnato",
+        "WEATHER_CLOUDY": "Nuvoloso",
+        "WEATHER_RAINY": "Piovoso",
+        "WEATHER_WINDY": "Ventoso",
+        "WEATHER_SNOW": "Innevato",
+        "WEATHER_OTHER": "Altre condizioni",
+        "WHYTAKENOISE_TEST": "Prova",
+        "WHYTAKENOISE_ANNOYED": "Disturbato da un rumore",
+        "WHYTAKENOISE_PROFESSIONAL": "Uso professionale",
+        "WHYTAKENOISE_STUDY": "Studio",
+        "WHYTAKENOISE_EDUCATIONAL": "Insegnamento, educazione",
+        "WHYTAKENOISE_ENTERTAIMENT": "Passatempo",
+        "WHYTAKENOISE_OTHER": "Altro motivo",
+        "METADATA_BAR_NODATA": "Da valutare",
+        "METADATA_FEELING_VERYGOOD": "Molto buono",
+        "METADATA_FEELING_GOOD": "Buono",
+        "METADATA_FEELING_NOBAD": "Né buono, né brutto",
+        "METADATA_FEELING_BAD": "Brutto",
+        "METADATA_FEELING_VERYBAD": "Molto brutto",
+        "METADATA_APPROPRIATE_NOTATALL": "Per niente",
+        "METADATA_APPROPRIATE_SLIGHTLY": "Leggermente",
+        "METADATA_APPROPRIATE_MODERATELY": "Moderatamente",
+        "METADATA_APPROPRIATE_VERY": "Molto",
+        "METADATA_APPROPRIATE_PERFECTLY": "Perfettamente",
+        "METADATA_EDIT": "Indica in descrizione misura",
+        "CLOUD_YES": "Si",
+        "CLOUD_NO": "No"
       }
     },
     "INFO": {
@@ -177,7 +339,8 @@
         "INFO_LABEL_WARNING": "Avvertenze",
         "INFO_LABEL_DISCLAIMER": "Avvertenze",
         "INFO_LABEL_GLOSSARY": "Glossario",
-        "INFO_LABEL_ORIGIN": "Origine",
+        "INFO_LABEL_ORIGIN": "Origine e finalità",
+        "INFO_LABEL_COMMUNITY": "Condivisione dati con la comunità",
         "INFO_LABEL_CONTACTS": "Contatti",
         "INFO_LABEL_VERSION": "Versione",
         "INFO_LABEL_LICENCE": "Licenza"
@@ -189,11 +352,11 @@
         },
         {
           "TERM_TITLE": "CONDIZIONI DI UTILIZZO",
-          "TERM_TEXT": "Questa app non è progettata per usi professionali in quanto non garantisce una misurazione del rumore sufficientemente accurata.<br>Prima di considerare attendibili i valori rilevati è necessario un confronto con un fonometro professionale nel range di livelli di interesse, in quanto ogni apparecchio ha una specifica risposta al rumore.<br>Per utilizzare i dati acquisiti è comunque necessario avere adeguate conoscenze e competenze tecniche; una misura estemporanea e di breve durata nella maggior parte dei casi può non essere significativa.<br>In caso di dubbi, si prega di consultare, nella sezione <i>Tutorial</i>, le parti relative alla calibrazione del dispositivo e alla verifica della dinamica."
+          "TERM_TEXT": "Questa app non è progettata per usi professionali in quanto non garantisce una misurazione del rumore sufficientemente accurata.<br>Prima di considerare attendibili i valori rilevati è necessario un confronto con un fonometro professionale nel range di livelli di interesse, in quanto ogni apparecchio ha una specifica risposta al rumore.<br>Per utilizzare i dati acquisiti è comunque necessario avere adeguate conoscenze e competenze tecniche; una misura estemporanea e di breve durata nella maggior parte dei casi può non essere significativa.<br>In caso di dubbi, si prega di consultare, nella sezione <i>Tutorial</i>, le parti relative alla calibrazione del dispositivo e alla verifica della dinamica.<br>Le calibrazioni e le misure inviate alla comunità OpeNoise verranno utilizzate a soli fini statistici e non possono essere utilizzate in alcun modo al fine di verificare la conformità con i limiti di legge."
         },
         {
           "SPECIFICS_TITLE": "SPECIFICHE TECNICHE",
-          "SPECIFICS_TEXT": " - Misurazione in tempo reale del livello equivalente di pressione sonora lineare Z e ponderato A<br> - Indicazione livello minimo e massimo<br> - Analisi in 1/3 di ottava e FFT<br> - Salvataggio dati in un file di testo<br> - Calibrazione"
+          "SPECIFICS_TEXT": " - Misurazione in tempo reale del livello equivalente di pressione sonora lineare Z e ponderato A<br> - Indicazione livello minimo e massimo<br> - Analisi in 1/3 di ottava e FFT<br> - Salvataggio dati in un file di testo<br> - Calibrazione<br>- Visualizzazione delle misure su mappa<br>- Compilazione di metadati<br>- Condivisione della calibrazione e delle misure con la comunità OpeNoise"
         }
       ],
       "TUTORIAL": [
@@ -207,7 +370,7 @@
         },
         {
           "CALIBRATION_TITLE": "CALIBRARE IL DISPOSITIVO",
-          "CALIBRATION_TEXT": "Ogni dispositivo risponde in maniera diversa ai segnali acustici, per cui è necessario effettuare una calibrazione.<br>Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale (oppure da un dispositivo già calibrato).<br><br>Modalità operativa:<br>- Andare in Opzioni/Calibrazione a misura ferma<br>- Rilevare in contemporanea i livelli misurati da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>- Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>- Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione"
+          "CALIBRATION_TEXT": "Ogni dispositivo risponde in maniera diversa ai segnali acustici, per cui è necessario effettuare una calibrazione.<br>Per calibrare il dispositivo occorre confrontare il livello sonoro misurato da OpeNoise con un valore noto misurato da un fonometro professionale.<br>In alternativa, è possibile utilizzare come riferimento un dispositivo già calibrato. Per iOS si consiglia una calibrazione di +24.0 dBA, mentre per Android la calibrazione è variabile a seconda del modello.<br><br>MODALITÀ OPERATIVA:<br>1) Andare in Opzioni/Calibrazione a misura ferma<br>2) Rilevare i livelli generati da una sorgente costante misurati in contemporanea da OpeNoise e da un fonometro professionale nello stesso punto (es. livello OpeNoise 52.3 dBA e livello fonometro professionale 58.0 dBA)<br>3) Impostare il valore di calibrazione, agendo su interi e decimali (es. 58.0 - 52.3 = +5.7 dBA)<br>4) Adesso il livello misurato da OpeNoise deve coincidere con quello misurato dal fonometro professionale, in caso negativo ripetere l’operazione"
         },
         {
           "RANGE_TITLE": "VERIFICARE LA DINAMICA",
@@ -215,11 +378,23 @@
         },
         {
           "SAVING_TITLE": "SALVARE I DATI",
-          "SAVING_TEXT": "L'opzione viene attivata selezionando in Fonometro il pulsante Salva. Vengono così salvati i dati su un file di testo con i livelli sonori misurati (non viene registrato l'audio). I file possono essere aperti nella sezione Misure. In Opzioni è possibile configurare la formattazione del file di testo generato e quali parametri salvare."
+          "SAVING_TEXT": "L'opzione viene attivata selezionando in Fonometro il pulsante Salva. Vengono così salvati i dati su un file di testo con i livelli sonori misurati (non viene registrato l'audio). I file possono essere aperti nella sezione Misure. In Opzioni è possibile configurare la formattazione del file di testo generato, quali parametri salvare e l'estensione del file (.txt, .csv)."
+        },
+        {
+          "SAVING_TITLE": "INSERIRE UN MARKER",
+          "SAVING_TEXT": "Attivando la funzione di salvataggio dati (pulsante Salva) si abilita il pulsante Marker che permette di inserire un tag agli eventi di interesse, sia nel grafico che nel file di log."
         },
         {
           "PLOTS_TITLE": "GRAFICI",
           "PLOTS_TEXT": "In Fonometro sono visualizzati 4 grafici nel seguente ordine:<br>- Globali: Andamento temporale dei livelli LAmin, LAeq(1s), LAmax e LAeq(t)<br>- 1/3 Ottava: Spettro delle frequenze in 1/3 di ottava dei livelli LZmax, LZeq(t), LZeq(1s) e LZmin<br>- Sonogramma: Spettro delle frequenze in 1/3 di ottava dei livelli di LZeq(1s)<br>- FFT: Spettro delle frequenze in banda costante calcolato con FFT LZeq(1s) e LAeq(1s)<br>Con un tocco sulla legenda dei grafici si possono abilitare o disabilitare i vari parametri visualizzati."
+        },
+        {
+          "SEND_CALIBRATION_TITLE": "INVIO DELLA CALIBRAZIONE",
+          "SEND_CALIBRAZION_TEXT": "Per inviare la calibrazione alla comunità OpeNoise occorre andare alla pagina Opzioni alla riga 'Invio valore di calibrazione' e premere l'icona a forma di nuvola.<br>L'invio è consentito dopo aver preso visione dell'informativa sulla privacy, calibrato il dispositivo e compilato i dati utente."
+        },
+        {
+          "SEND_MEASUREMENTS_TITLE": "INVIO DI UNA MISURA",
+          "SEND_MEASUREMENTS_TEXT": "Per inviare una misura alla comunità OpeNoise occorre andare alla pagina Misure e premere l'icona a forma di nuvola del file di misura che si vuole inviare.<br>L'invio è consentito dopo aver preso visione dell'informativa sulla privacy, calibrato il dispositivo, compilato i dati utente e i metadati della misura.<br>Le misure senza le coordinate geografiche non possono essere inviate; pertanto, è necessario attivare la posizione del dispositivo prima di eseguire una misura."
         }
       ],
       "GLOSSARY": [
@@ -283,7 +458,7 @@
       "ORIGIN": [
         {
           "OPENOISE_METER_TITLE": "OPENOISE METER",
-          "OPENOISE_METER_TEXT": "OpeNoise Meter è la parte del progetto OpeNoise dedicata alla misurazione del rumore attraverso i dispositivi mobili: consiste in un'app scaricabile dagli store ufficiali di Android e iOS in grado di emulare il funzionamento di un fonometro. Il progetto è in fase di sviluppo dal 2016."
+          "OPENOISE_METER_TEXT": "OpeNoise Meter è la parte del progetto OpeNoise dedicata alla misurazione del rumore attraverso i dispositivi mobili: consiste in un'app scaricabile dagli store ufficiali di Android e iOS in grado di emulare il funzionamento di un fonometro.<br>È inoltre possibile condividere i valori di calibrazione e di misura con la comunità OpeNoise, al fine di migliorare la comprensione e gestione del problema dell'inquinamento acustico a livello locale e globale, anche in possibili progetti educativi e di Citizen science.<br>Il progetto è in fase di sviluppo dal 2016."
         },
         {
           "OPENOISE_PROJECT_TITLE": "PROGETTO OPENOISE",
@@ -291,13 +466,30 @@
         },
         {
           "OPENOISE_BRANCHES_TITLE": "RAMI DEL PROGETTO",
-          "OPENOISE_BRANCHES_TEXT": "Il progetto OpeNoise è suddiviso in tre parti: un'applicazione per la misurazione del rumore attraverso dispositivi mobili (OpeNoise Meter), uno plugin per la mappatura del rumore (OpeNoise Map), disponibile all'interno del software geografico libero e open-source QGIS, e uno strumento per l'analisi dei dati acustici sviluppato attraverso il framework R-Project per il calcolo statistico (OpeNoise Analysis)."
+          "OPENOISE_BRANCHES_TEXT": "Il progetto OpeNoise è suddiviso in tre parti:<br>1) OpeNoise Meter: un'applicazione per la misurazione del rumore attraverso dispositivi mobili<br>2) OpeNoise Map: un plugin per la mappatura del rumore, disponibile all'interno del software geografico libero e open-source QGIS<br>3) OpeNoise Analysis: uno strumento per l'analisi dei dati acustici sviluppato attraverso il framework R-Project per il calcolo statistico"
+        }
+      ],
+      "COMMUNITY": [
+        {
+          "COMMUNITY_TITLE": "CONDIVISIONE DEI DATI",
+          "COMMUNITY_TEXT": "OpeNoise permette agli utenti di inviare, su base volontaria e in modo completamente anonimo, i valori di calibrazione e delle misure. I dati inviati sono trattati come riportato nella informativa sulla Privacy.<br>Le calibrazioni e le misure inviate alla comunità OpeNoise verranno utilizzate a soli fini statistici e non possono essere utilizzate in alcun modo al fine di verificare la conformità con i limiti di legge."
+        },
+        {
+          "COMMUNITY_TITLE": "CALIBRAZIONE",
+          "COMMUNITY_TEXT": "La raccolta del valore di calibrazione di un grande numero di dispositivi in un unico database può fornire indicazioni utili per la definizione di valori di riferimento specifici per ogni modello da raccomandare agli utenti durante l'installazione di OpeNoise.<br>Il database e i valori di riferimento sono al momento in fase di creazione e verranno pubblicati quando verrà raggiunto un numero sufficiente di calibrazioni inviate."
+        },
+        {
+          "COMMUNITY_TITLE": "MISURE",
+          "COMMUNITY_TEXT": "La raccolta delle misure degli utenti può aiutare ad ampliare le informazioni disponibili circa i paesaggi sonori. Inoltre, può favorire la collaborazione tra ricercatori, autorità locali e cittadini interessati al monitoraggio dell'inquinamento acustico. Tutte le misure inviate sono visibili sulla mappa. Per ogni misura è necessario compilare un insieme di informazioni (metadati) per contestualizzare il dato e la percezione del paesaggio sonoro, prendendo spunto dalle indicazioni della norma ISO/TS 12913-2:2018 <i>Acoustics - Soundscape - Part 2: Data collection and reporting requirements</i>."
         }
       ],
       "PRIVACY": [
         {
           "PRIVACY_TITLE": "",
-          "PRIVACY_TEXT": "L'app non memorizza né condivide alcun dato personale.<br>L'utente può, utilizzando la app, salvare i livelli sonori in forma numerica in un file di testo e, eventualmente, condividere questi dati.<br>Non viene effettuata nessuna registrazione audio né vengono acquisite informazioni sulla localizzazione del dispositivo utilizzato."
+          "PRIVACY_TEXT": "L'app non memorizza né condivide alcun dato personale.<br>L'utente può, utilizzando la app, salvare i livelli sonori in forma numerica in un file di testo e, eventualmente, condividere questi dati.<br>Non viene effettuata nessuna registrazione audio né vengono acquisite informazioni sulla localizzazione del dispositivo utilizzato.",
+          "PRIVACY_ACCEPTATION": "Informativa sulla privacy",
+          "PRIVACY_ACCEPTED": "Informativa letta",
+          "PRIVACY_NOT_ACCEPTED": "Informativa da leggere"
         }
       ],
       "CONTACTS": [
@@ -314,6 +506,18 @@
       ],
       "LICENCE": [],
       "GITHUB": []
+    },
+    "OTHER": {
+      "GPS_MESSAGE": {
+        "GENERIC": "Non è stato possibile recuperare la posizione, verificare di non essere in modalità aereo o avere il GPS disabilitato.",
+        "LOCATION_DISABLED": "Non è stato possibile recuperare la posizione, il GPS sembra essere disattivato.",
+        "PERMITION_DENIED": "Non è stato possibile recuperare la posizione, controllare le autorizzazioni di geolocalizzazione.",
+        "PLANE_MODE": "Modalità aereo",
+        "NO_DATA": "Nessun dato"
+      },
+      "NETWORK_MESSAGE": {
+        "NO_NETWORK": "Non c'è rete, controllare la connessione a Internet."
+      }
     }
   }
 }

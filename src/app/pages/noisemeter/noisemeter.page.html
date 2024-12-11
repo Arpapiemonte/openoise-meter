@@ -19,13 +19,6 @@
   <app-grafici></app-grafici>
 
 </ion-content>
-<!-- 
-<ion-tab-bar>
-  <ion-item>
-    <ion-label>Salvataggio dati in log file</ion-label>
-    <ion-toggle></ion-toggle>
-  </ion-item>
-</ion-tab-bar> -->
 
 <ion-tab-bar>
   <!-- <ion-tab-button (click)="startPauseCapture()">
@@ -76,5 +69,11 @@
     <ion-label *ngIf="filesystemService.saveData"
       style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.SAVE}}</ion-label>
   </ion-tab-button>
-
+  <ion-tab-button [disabled]="!filesystemService.saveData" mode="md" (click)="startStopMarker()">
+    <ion-icon *ngIf="!audioService.marker" name="flag-outline"></ion-icon>
+    <ion-icon *ngIf="audioService.marker && !markerStatus" name="flag" style="color: rgba(255, 165, 0, 0)"></ion-icon>
+    <ion-icon *ngIf="audioService.marker && markerStatus" name="flag" style="color: rgba(255, 165, 0, 1)"></ion-icon>
+    <ion-label *ngIf="!audioService.marker">Marker</ion-label>
+    <ion-label *ngIf="audioService.marker" style="color: rgba(255, 165, 0, 1)">Marker</ion-label>
+  </ion-tab-button>
 </ion-tab-bar>

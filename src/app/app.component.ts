@@ -14,6 +14,8 @@ import { VariabiliService } from './services/variabili.service';
 import { GraficiService } from './services/grafici.service';
 import { OrientationService } from './services/orientation.service';
 import { ColorModeService } from './services/color-mode.service';
+import { MappaService } from './services/mappa.service';
+import { FilesystemService } from './services/filesystem.service';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +32,9 @@ export class AppComponent {
     private variabiliService: VariabiliService,
     private graficiService: GraficiService,
     public orientationService: OrientationService,
-    private colorModeService: ColorModeService
+    private colorModeService: ColorModeService,
+    private mappaService: MappaService,
+    private filesystemService: FilesystemService,
   ) {
 
     // parte con plugin cordova
@@ -54,8 +58,17 @@ export class AppComponent {
     await this.keepAwake()
 
     await this.recuperaPreferences()
-    this.colorModeService.inizializeColorMode()
-    
+
+    this.colorModeService.setColorInterface()
+
+    // await this.decidiMapppaBase()
+    this.mappaService.mappeBaseLeaflet = this.mappaService.mappeBaseLeafletProxyArpa
+    this.mappaService.mappaBaseAttuale = this.mappaService.mappeBaseLeaflet[1]
+
+    await this.folderChange()
+
+    // this.variabiliService.getLocPosition()
+
   }
 
   async recuperaPreferences() {
@@ -95,7 +108,21 @@ export class AppComponent {
       this.preferencesService.set("saveOptions", this.variabiliService.saveOptions)
     } else {
       console.log("saveOptions esiste", saveOptions)
+      if (!("extension" in saveOptions)) {
+        saveOptions["extension"] = this.variabiliService.saveOptions.extension
+      } else {
+        if (saveOptions.extension == '.log') {
+          saveOptions.extension = '.txt'
+        }
+      }
+      if (!("date_format" in saveOptions)) {
+        saveOptions["date_format"] = this.variabiliService.saveOptions.date_format
+      }
+      if (!("debug" in saveOptions)) {
+        saveOptions["debug"] = this.variabiliService.saveOptions.debug
+      }
       this.variabiliService.saveOptions = saveOptions
+      this.preferencesService.set("saveOptions", saveOptions)
     }
 
     var mainLevel = await this.preferencesService.get('mainLevel')
@@ -122,7 +149,7 @@ export class AppComponent {
       this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber)
     } else {
       console.log("countdownNumber esiste", countdownNumber)
-      this.variabiliService.countdownNumber = countdownNumber
+      this.variabiliService.countdownNumber = String(countdownNumber)
     }
 
     var rangeFreqHz = await this.preferencesService.get('rangeFreqHz')
@@ -132,6 +159,42 @@ export class AppComponent {
     } else {
       console.log("rangeFreqHz esiste", rangeFreqHz)
       this.variabiliService.rangeFreqHz = rangeFreqHz
+    }
+
+    var userData = await this.preferencesService.get('userData')
+    if (userData == null) {
+      console.log("userData non esiste, la inizializzo")
+      this.preferencesService.set("userData", this.variabiliService.userData)
+    } else {
+      console.log("userData esiste", userData)
+      this.variabiliService.userData = userData
+    }
+
+    var calibrationCloud = await this.preferencesService.get('calibrationCloud')
+    if (calibrationCloud == null) {
+      console.log("calibrationCloud non esiste, la inizializzo")
+      this.preferencesService.set("calibrationCloud", this.variabiliService.calibrationCloud)
+    } else {
+      console.log("calibrationCloud esiste", calibrationCloud)
+      this.variabiliService.calibrationCloud = calibrationCloud
+    }
+
+    var calibData = await this.preferencesService.get('calibData')
+    if (calibData == null) {
+      console.log("calibData non esiste, la inizializzo")
+      this.preferencesService.set("calibData", this.variabiliService.calibData)
+    } else {
+      console.log("calibData esiste", calibData)
+      this.variabiliService.calibData = calibData
+    }
+
+    var privacyAccepted = await this.preferencesService.get('privacyAccepted')
+    if (privacyAccepted == null) {
+      console.log("privacyAccepted non esiste, la inizializzo")
+      this.preferencesService.set("privacyAccepted", this.variabiliService.privacyAccepted)
+    } else {
+      console.log("privacyAccepted esiste", privacyAccepted)
+      this.variabiliService.privacyAccepted = privacyAccepted
     }
 
   }
@@ -175,41 +238,57 @@ export class AppComponent {
       console.log("translateService", res)
       this.variabiliService.translation = res
       this.graficiService.aggiornaLabelGrafici()
-      this.checkFirstTime()
     });
 
   }
 
-  async checkFirstTime() {
-    console.log("checkFirstTime")
-    var firstTime = await this.preferencesService.get('firstTime')
-    if (firstTime == null) {
-      console.log("firstTime")
-      this.alertFirstTime()
+  async decidiMapppaBase() {
+
+    this.mappaService.mappeBaseLeaflet = this.mappaService.mappeBaseLeafletProxyArpa
+
+    this.mappaService.mappaBaseAttuale = this.mappaService.mappeBaseLeaflet[0]
+    this.mappaService.setMappaBaseS(this.mappaService.mappeBaseLeaflet[0])
+    console.log("VariabiliService definite mappeBase", this.mappaService.mappeBaseLeaflet)
+
+    await this.preferencesService.get('mappaBaseLeafletIniziale')
+      .then(res => {
+        if (res == null || res == "") {
+          this.mappaService.mappaBaseAttuale = this.mappaService.mappeBaseLeaflet[0]
+          this.preferencesService.set('mappaBaseLeafletIniziale', JSON.stringify(this.mappaService.mappeBaseLeaflet[0]));
+        } else {
+          console.log("AppComponent mappaBaseLeafletIniziale", res)
+          let obj = this.mappaService.mappeBaseLeaflet.find(o => o.name === res.name);
+          console.log("obj", obj)
+          if (obj) {
+            this.mappaService.mappaBaseAttuale = obj
+            console.log("AppComponent mappaBaseAttuale", obj)
+          } else {
+            this.mappaService.mappaBaseAttuale = this.mappaService.mappeBaseLeaflet[0]
+            this.mappaService.setMappaBaseS(this.mappaService.mappeBaseLeaflet[0])
+            this.preferencesService.set('mappaBaseLeafletIniziale', JSON.stringify(this.mappaService.mappeBaseLeaflet[0]));
+          }
+        }
+      })
+      .catch(error => {
+        console.log("errore decidiMapppaBase", error)
+        this.mappaService.mappaBaseAttuale = this.mappaService.mappeBaseLeaflet[0]
+      })
+
+
+  }
+
+  async folderChange() {
+    console.log("folderChange")
+
+    var folderChange = await this.preferencesService.get('folderChange')
+    if (folderChange == null) {
+      console.log("folderChange to do")
+      await this.filesystemService.folderChange()
+      this.preferencesService.set('folderChange', true)
     } else {
-      console.log("firstTime", firstTime)
+      console.log("folderChange already executed")
     }
-  }
 
-  async alertFirstTime() {
-    const alert = await this.alertController.create({
-      cssClass: 'alertFirstTime',
-      header: this.variabiliService.translation.PREMETER.HEADER_FIRST_TIME,
-      subHeader: "",
-      message: this.variabiliService.translation.PREMETER.MESSAGE_FIRST_TIME,
-      buttons: [
-        {
-          text: this.variabiliService.translation.PREMETER.OK,
-          role: 'confirm',
-          handler: () => {
-            console.log("alertFirstTime OK")
-            this.preferencesService.set("firstTime", "no")
-          },
-        },
-      ]
-    });
-
-    await alert.present();
   }
 
 }

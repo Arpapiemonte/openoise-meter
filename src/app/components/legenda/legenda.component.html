@@ -1,0 +1,24 @@
+<div style="padding: 10px;">
+  <ion-grid>
+    <ion-row *ngFor="let range of coloriLivelliJSON" class="ion-justify-content-center">
+      <ion-col class="ion-align-self-center" size="3" style="text-align: center;">
+        <!-- <ion-icon *ngIf="range.min != 0" name="ellipse" size="large" [style.color]="range.color"></ion-icon>
+        <ion-icon *ngIf="range.min == 0" src="./assets/images/legenda/circle.svg" size="large"></ion-icon> -->
+        <div>
+          <svg width="50" height="50" viewBox="0 0 132.29166 132.29167" version="1.1" id="svg1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+            <defs id="defs1" />
+            <g id="layer1">
+              <circle
+                [style]="range.svgStyle"
+                id="path2" cx="66" cy="66" r="55" />
+            </g>
+          </svg>
+        </div>
+      </ion-col>
+      <ion-col class="ion-align-self-center" style="text-align: left;">
+        {{range.label}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

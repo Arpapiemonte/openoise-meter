@@ -25,6 +25,9 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+@import "~leaflet/dist/leaflet.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 ion-content {
     --ion-padding: 0px;
@@ -37,7 +40,13 @@ ion-tab-button {
 
 ion-segment-button {
     --indicator-color: rgb(61, 194, 255, 0.5);
-  }
+}
+
+ion-item-divider {
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    font-variant: small-caps;
+}
 
 .toastClass {
     text-align: center;
@@ -50,7 +59,37 @@ ion-segment-button {
 .alertFirstTime {
     --max-height: calc(100%);
     text-align: justify;
+
     .alert-message {
         max-height: calc(100%);
     }
 }
+
+
+.alertLong {
+    .alert-radio-label.sc-ion-alert-md {
+        font-size: small;
+    }
+}
+
+.measuresTitle {
+    background-color: var(--custom-background);
+    border-radius: 4px;
+    padding: 10px 10px 0px 10px;
+}
+
+.leafletButtonCustom {
+    background-color: #fff;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-size: 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }

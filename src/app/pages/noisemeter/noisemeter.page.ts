@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { NgZone } from '@angular/core';
+import { Optional } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { IonRouterOutlet } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular'
 import { ToastController } from '@ionic/angular';
 
+import { App } from '@capacitor/app';
+
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { AudioService } from '../../services/audio.service';
 import { FilesystemService } from 'src/app/services/filesystem.service';
+import { PreferencesService } from 'src/app/services/preferences.service';
 
 @Component({
   selector: 'app-noisemeter',
@@ -22,18 +28,38 @@ export class NoisemeterPage {
 
   playStatic: Boolean = true
 
+  markerStatus: Boolean = false
+
   countdownBoolean: boolean = false
   countdownNumberLocal: any
+  countdownInterval: any
 
   constructor(
     private zone: NgZone,
+    private router: Router,
     public platform: Platform,
     private alertController: AlertController,
     private toastController: ToastController,
     public variabiliService: VariabiliService,
     public audioService: AudioService,
     public filesystemService: FilesystemService,
+    private preferencesService: PreferencesService,
+    @Optional() private routerOutlet?: IonRouterOutlet,
   ) {
+
+    this.platform.backButton.subscribeWithPriority(-1, () => {
+      console.log("backButton")
+      if (!this.routerOutlet.canGoBack()) {
+        console.log("this.router.url", this.router.url)
+        if (this.router.url == '/pages/tabs/noisemeter') {
+          console.log("backButton exitApp")
+          App.exitApp();
+        } else {
+          this.router.navigate(['/pages/tabs/noisemeter'])
+        }
+      }
+    });
+
   }
 
   startCapture() {
@@ -68,6 +94,7 @@ export class NoisemeterPage {
     if (this.audioService.capture) {
       this.audioService.stopCapture()
       this.playStatic = true
+      this.markerStatus = false
       if (this.filesystemService.saveData) {
         this.presentAlert(
           this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
@@ -75,6 +102,9 @@ export class NoisemeterPage {
           this.filesystemService.nameFileWriting
         )
       }
+    } else if (this.countdownNumberLocal > 0) {
+      clearInterval(this.countdownInterval)
+      this.countdownBoolean = false
     }
   }
 
@@ -90,33 +120,42 @@ export class NoisemeterPage {
     }
   }
 
-  toggleChangeSave() {
+  async toggleChangeSave() {
     console.log("toggleChangeSave")
 
-    if (this.filesystemService.saveData) {
-      this.filesystemService.saveData = false
-      if (this.audioService.capture) {
-        this.presentAlert(
-          this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
-          '',
-          this.filesystemService.nameFileWriting
-        )
+    const permissions = await this.filesystemService.checkRequestPermissions()
+    if (permissions == "granted") {
+      if (this.filesystemService.saveData) {
+        if (this.audioService.capture) { 
+          this.audioService.writeStatus('STOP')
+        }
+        this.filesystemService.saveData = false
+        this.audioService.marker = false
+        this.markerStatus = false
+        if (this.audioService.capture) {
+          this.presentAlert(
+            this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT1,
+            '',
+            this.filesystemService.nameFileWriting
+          )
+        } else {
+          this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT5)
+        }
       } else {
-        this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT5)
-      }
-    } else {
-      this.filesystemService.saveData = true
-      if (this.audioService.capture) {
-        this.initializeFile()
-      } else {
-        this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT4)
+        this.filesystemService.saveData = true
+        if (this.audioService.capture) {
+          this.initializeFile()
+        } else {
+          this.presentToast(this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT4)
+        }
       }
     }
 
   }
 
-  initializeFile() {
-    this.filesystemService.inizializeFile()
+  async initializeFile() {
+    await this.filesystemService.inizializeFile()
+    this.filesystemService.saveDataStart = true
 
     this.presentToast(
       this.variabiliService.translation.SAVE_FILES.SAVE_BUTTON.SAVE_BUTTON_TEXT6 + this.filesystemService.nameFileWriting
@@ -154,17 +193,24 @@ export class NoisemeterPage {
     await toast.present();
   }
 
-  startCaptureWithCountdown() {
-    console.log("startCaptureWithCountdown")
-    this.countdownNumberLocal = this.variabiliService.countdownNumber
+  async startCaptureWithCountdown() {
+    console.log("startCaptureWithCountdown", this.variabiliService.countdownNumber)
+    if (!this.variabiliService.lastPosition) {
+      const locPermissions = await this.variabiliService.locPermissions()
+      console.log("NoisemeterPage locPermissions", locPermissions)
+    }
+    
+    this.countdownNumberLocal = Number(this.variabiliService.countdownNumber)
+    console.log("countdownNumberLocal", this.countdownNumberLocal)
+
     if (this.countdownNumberLocal > 0) {
       this.countdownBoolean = true
       var this_copy = this
-      var countdownInterval = setInterval(function () {
+      this.countdownInterval = setInterval(function () {
         console.log("countdownNumberLocal", this_copy.countdownNumberLocal)
         this_copy.countdownNumberLocal = this_copy.countdownNumberLocal - 1
         if (this_copy.countdownNumberLocal == 0) {
-          clearInterval(countdownInterval)
+          clearInterval(this_copy.countdownInterval)
           this_copy.countdownBoolean = false
           this_copy.audioService.startAudio()
           if (this_copy.filesystemService.saveData) {
@@ -180,7 +226,8 @@ export class NoisemeterPage {
     }
   }
 
-  autoStart() {
+  async autoStart() {
+
     this.platform.ready().then((readySource) => {
       console.log("platform ready", readySource)
       if (this.variabiliService.firstTime) {
@@ -188,6 +235,54 @@ export class NoisemeterPage {
         this.variabiliService.firstTime = false
       }
     })
+  }
+
+  startStopMarker() {
+    if (this.filesystemService.saveData) {
+      console.log('click start Marker!')
+      if (this.audioService.marker) {
+        this.audioService.marker = false
+        this.markerStatus = false
+      } else {
+        this.audioService.marker = true
+        this.markerStatus = true
+      }
+    }
+  }
+
+
+  async checkFirstTime() {
+    console.log("checkFirstTime")
+    var firstTime = await this.preferencesService.get('firstTime')
+    if (firstTime == null) {
+      console.log("firstTime")
+      this.alertFirstTime()
+    } else {
+      console.log("firstTime", firstTime)
+      this.autoStart()
+    }
+  }
+
+  async alertFirstTime() {
+    const alert = await this.alertController.create({
+      cssClass: 'alertFirstTime',
+      header: this.variabiliService.translation.PREMETER.HEADER_FIRST_TIME,
+      subHeader: "",
+      message: this.variabiliService.translation.PREMETER.MESSAGE_FIRST_TIME,
+      buttons: [
+        {
+          text: this.variabiliService.translation.PREMETER.OK,
+          role: 'confirm',
+          handler: () => {
+            console.log("alertFirstTime OK")
+            this.preferencesService.set("firstTime", "no")
+            this.autoStart()
+          },
+        },
+      ]
+    });
+
+    await alert.present();
   }
 
   ionViewWillEnter() {
@@ -202,6 +297,16 @@ export class NoisemeterPage {
           this.playStatic = true
         }
       }
+
+      if (this.audioService.marker) {
+        console.log("markerStatus: ", this.markerStatus)
+        if (this.markerStatus) {
+          this.markerStatus = false
+        } else {
+          this.markerStatus = true
+        }
+      }
+
       this.zone.run(() => {
         console.log('force update the screen');
       });
@@ -210,7 +315,7 @@ export class NoisemeterPage {
 
   ionViewDidEnter() {
     console.log("NoisemeterPage ionViewDidEnter")
-    this.autoStart()
+    this.checkFirstTime()
   }
 
   ionViewWillLeave() {

@@ -1,0 +1,22 @@
+.tabellaRighe {
+    border: 1px solid var(--custom-table-border);
+}
+
+.tabellaRighe:nth-child(even) {
+    background-color: var(--custom-table-background);
+}
+
+.tabellaCella {
+    padding: 2px;
+    border: 1px solid var(--custom-table-border);
+    border-collapse: collapse;
+}
+
+ion-row {
+    padding-top: 5px;
+}
+ion-col {
+    --ion-grid-column-padding: 0px;
+    font-size: small;
+    text-align: center;
+}

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InfoPage } from './info.page';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 import { InfoPageRoutingModule } from './info-routing.module';
 
 @NgModule({
@@ -11,7 +13,8 @@ import { InfoPageRoutingModule } from './info-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    InfoPageRoutingModule
+    InfoPageRoutingModule,
+    PdfViewerModule
   ],
   declarations: [InfoPage]
 })

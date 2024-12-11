@@ -93,6 +93,22 @@ export class GraficiService {
       },
       xaxis: 'x2',
       visible: this.variabiliService.chartVisibiltyGlobalsLAeqt
+    },
+    marker: {
+      x: [],
+      y: [],
+      name: 'Marker',
+      type: 'scatter',
+      mode: 'lines',
+      line: {
+        shape: 'hv',
+        color: 'rgba(255, 165, 0, 0.5)',
+        width: 25,
+      },
+      // fill: 'toself',
+      // fillcolor: 'rgba(255, 165, 0, 0.5)',
+      xaxis: 'x2',
+      visible: true
     }
   }
 
@@ -563,8 +579,10 @@ export class GraficiService {
 
       this.chartLAeqTimeRunningData.level.x[i] = x_value
       this.chartLAeqTimeRunningData.running.x[i] = x_value
+      this.chartLAeqTimeRunningData.marker.x[i] = x_value
       this.chartLAeqTimeRunningData.level.y[i] = 0
       this.chartLAeqTimeRunningData.running.y[i] = 0
+      this.chartLAeqTimeRunningData.marker.y[i] = null
 
       // x value for sonogramData
       this.chartSonogramData.value.x[i] = x_value
@@ -607,7 +625,7 @@ export class GraficiService {
       this.chartFFTData.db.y[i] = 0
     }
 
-    this.chartLAeqTimeRunning.data = [this.chartLAeqTimeRunningData.level, this.chartLAeqTimeRunningData.running]
+    this.chartLAeqTimeRunning.data = [this.chartLAeqTimeRunningData.level, this.chartLAeqTimeRunningData.running, this.chartLAeqTimeRunningData.marker]
     this.chartLAeqTimeRunning.layout.datarevision++
     this.chartThirdOctaves.data = [this.chartThirdOctavesData.max, this.chartThirdOctavesData.running, this.chartThirdOctavesData.level, this.chartThirdOctavesData.min]
     this.chartThirdOctaves.layout.datarevision++
@@ -685,8 +703,9 @@ export class GraficiService {
     // chartLAeqTimeRunning
     this.chartLAeqTimeRunningData.level.y = val.LAeqTimeRunningData.level.y
     this.chartLAeqTimeRunningData.running.y = val.LAeqTimeRunningData.running.y
+    this.chartLAeqTimeRunningData.marker.y = val.LAeqTimeRunningData.marker.y
 
-    this.chartLAeqTimeRunning.data = [this.chartLAeqTimeRunningData.level, this.chartLAeqTimeRunningData.running]
+    this.chartLAeqTimeRunning.data = [this.chartLAeqTimeRunningData.level, this.chartLAeqTimeRunningData.running, this.chartLAeqTimeRunningData.marker]
     this.chartLAeqTimeRunning.layout.datarevision++
 
 

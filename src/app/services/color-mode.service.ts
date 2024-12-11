@@ -1,6 +1,4 @@
-import { Inject,Injectable } from '@angular/core';
-
-import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
 import { VariabiliService } from './variabili.service';
 import { PreferencesService } from './preferences.service';
@@ -12,56 +10,96 @@ import { GraficiService } from './grafici.service';
 export class ColorModeService {
 
   constructor(
-    @Inject(DOCUMENT) private documentColorMode: Document,
     private preferencesService: PreferencesService,
     private variabiliService: VariabiliService,
     private graficiService: GraficiService
   ) { }
 
-  async inizializeColorMode() {
-    var colorMode = await this.preferencesService.get('colorMode')
-    if (colorMode == null) {
-      console.log("colorMode non esiste, la inizializzo")
-      this.preferencesService.set("colorMode", 'auto')
-      colorMode = 'auto'
-    } else {
-      console.log("colorMode esiste", colorMode)
-    }
-    this.variabiliService.colorMode = colorMode
-    this.setColorMode(colorMode)
-
+  setColorInterface() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    prefersDark.addEventListener('change', (e) => 
-    {
-      if (this.variabiliService.colorMode == 'auto') {
-        if (prefersDark.matches) {
-          this.graficiService.setColors('dark')
+
+    this.preferencesService.get('colorMode')
+      .then(res => {
+        console.log("colorMode", res)
+        if (res == null || res == "") {
+          this.preferencesService.set('colorMode', 'auto');
+          if (prefersDark.matches) {
+            this.setColorMode('dark')
+          } else {
+            this.setColorMode('light')
+          }
         } else {
-          this.graficiService.setColors('light')
+          switch (res) {
+            case 'auto':
+              if (prefersDark.matches) {
+                this.setColorMode('dark')
+              } else {
+                this.setColorMode('light')
+              }
+              break
+            case 'light':
+              this.setColorMode('light')
+              break
+            case 'dark':
+              this.setColorMode('dark')
+              break
+          }
         }
-      }
-    });
+      })
+      .catch(error => {
+        console.log("errore colorMode", error)
+      })
+
+    prefersDark.addEventListener('change', (e) => {
+      console.log("prefersDark addEventListener", prefersDark)
+      this.preferencesService.get('colorMode')
+        .then(res => {
+          if (res == "auto") {
+            if (prefersDark.matches) {
+              this.setColorMode('dark')
+            } else {
+              this.setColorMode('light')
+            }
+          }
+        })
+        .catch(error => {
+          console.log("errore colorMode", error)
+        })
+    })
+
   }
 
-  setColorMode(colorMode: string) {
-    this.documentColorMode.body.classList.remove('auto');
-    this.documentColorMode.body.classList.remove('dark');
-    this.documentColorMode.body.classList.remove('light');
-    this.documentColorMode.body.classList.add(colorMode);
-    this.preferencesService.set("colorMode", colorMode)
-
-    // console.log("prefersDark", prefersDark)
-    if (colorMode == 'auto') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-      if (prefersDark.matches) {
-        this.graficiService.setColors('dark')
-      } else {
-        this.graficiService.setColors('light')
-      }
-    } else if (colorMode == 'dark') {
+  setColorMode(color: string) {
+    console.log("setColorMode", color)
+    if (color == "dark") {
+      this.variabiliService.colorMode = 'dark'
       this.graficiService.setColors('dark')
+      document.body.classList.toggle('dark', true);
     } else {
+      this.variabiliService.colorMode = 'light'
       this.graficiService.setColors('light')
+      document.body.classList.toggle('dark', false);
     }
   }
+
+  setColorModeAuto(color: string) {
+
+    switch (color) {
+      case 'auto':
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        if (prefersDark.matches) {
+          this.setColorMode('dark')
+        } else {
+          this.setColorMode('light')
+        }
+        break
+      case 'light':
+        this.setColorMode('light')
+        break
+      case 'dark':
+        this.setColorMode('dark')
+        break
+    }
+  }
+
 }

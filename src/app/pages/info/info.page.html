@@ -1,18 +1,6 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
 
   <ion-list mode="ios">
-
-    <!-- <ion-list-header mode="ios">
-      <ion-label>VISUALIZZAZIONE</ion-label>
-    </ion-list-header> -->
     <ion-item-group>
       <ion-item-divider>
         <ion-label> {{ variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_TECHNICAL }} </ion-label>
@@ -43,6 +31,14 @@
         <ion-icon style="padding-right: 10px;" (click)="apriModal('ORIGIN')" name="build-outline"></ion-icon>
         <ion-label>
           <h2 (click)="apriModal('ORIGIN')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_ORIGIN}}</h2>
+          <p></p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon style="padding-right: 10px;" (click)="apriModal('COMMUNITY')" name="people-outline"></ion-icon>
+        <ion-label>
+          <h2 (click)="apriModal('COMMUNITY')">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_COMMUNITY}}
+          </h2>
           <p></p>
         </ion-label>
       </ion-item>
@@ -100,8 +96,7 @@
 
   </ion-list>
 
-
-  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillModalDismiss($event)">
+  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillModalDismiss($event)" (ionModalDidPresent)="caricaPdf($event)">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -117,6 +112,8 @@
             *ngIf="modalArgument === 'GLOSSARY'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_GLOSSARY}}</ion-title>
           <ion-title
             *ngIf="modalArgument === 'ORIGIN'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_ORIGIN}}</ion-title>
+          <ion-title
+            *ngIf="modalArgument === 'COMMUNITY'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_COMMUNITY}}</ion-title>
           <ion-title *ngIf="modalArgument === 'PRIVACY'">Privacy</ion-title>
           <ion-title
             *ngIf="modalArgument === 'CONTACTS'">{{variabiliService.translation.INFO.INFO_LABEL.INFO_LABEL_CONTACTS}}</ion-title>
@@ -127,7 +124,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <div *ngIf="modalArgument !== 'CREDITS'">
+        <div *ngIf="!(modalArgument === 'CREDITS' || modalArgument === 'PRIVACY')">
           <ion-card *ngFor="let card of cards">
             <ion-card-header>
               <ion-card-title>{{card.TITLE}}</ion-card-title>
@@ -136,15 +133,20 @@
             <ion-card-content innerHTML="{{card.TEXT}}">
             </ion-card-content>
             <div *ngIf="modalArgument === 'CONTACTS'" style="text-align: center; padding-bottom: 20px;">
-              <ion-button mode='ios' (click)="copiaMail()" style="--background:  rgb(61, 194, 255, 0.9);">openoise@arpa.piemonte.it</ion-button>
+              <ion-button mode='ios' (click)="copiaMail()"
+                style="--background:  rgb(61, 194, 255, 0.9);">openoise&#64;arpa.piemonte.it</ion-button>
             </div>
           </ion-card>
         </div>
+        <div *ngIf="modalArgument === 'PRIVACY'">
+          <div *ngIf="urlPDF" style="height: calc(100%);">
+            <pdf-viewer [src]="urlPDF" [render-text]="true" [original-size]="false"
+              style="width: 100%; height: 700px;"></pdf-viewer>
+          </div>
+        </div>
         <div *ngIf="modalArgument === 'CREDITS'">
-          <ion-card>
+          <!-- <ion-card>
             <ion-card-header>
-              <!-- <ion-card-title>CREDITS</ion-card-title> -->
-              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-justify-content-center">
@@ -173,9 +175,50 @@
                 </ion-col>
               </ion-row>
             </ion-card-content>
-          </ion-card>
+          </ion-card> -->
+          <div style="padding-top:20px;">
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="ion-align-self-center" style="text-align:center;" size="12" size-md>
+                <div style="padding: 0px 10px 10px 10px; text-align: center;">
+                  {{variabiliService.translation.INFO.CREDITS[0].CREDITS_ARPA}}
+                </div>
+                <ion-row class="ion-justify-content-center">
+                  <ion-col class="ion-align-self-center" style="text-align:center; ">
+                    <a target="_blank" href="https://www.arpa.piemonte.it" style="background-color: #FFFFFF">
+                      <img style="width:80%; max-width: 200px; background-color: #FFFFFF"
+                        src="./assets/loghi/logo_arpa_colori.svg" />
+                    </a>
+                  </ion-col>
+                  <ion-col class="ion-align-self-center" style="text-align:center;">
+                    <a target="_blank" href="https://www.snpambiente.it/">
+                      <img style="width:80%; max-width: 200px; background-color: #FFFFFF"
+                        src="./assets/loghi/logo_SNPA_COL.svg" />
+                    </a>
+                  </ion-col>
+                </ion-row>
+                <div style="padding:5px; text-align:center;">
+                  <a style="user-select:text !important; text-decoration-line: none !important;" target="_blank"
+                    href="https://www.arpa.piemonte.it">www.arpa.piemonte.it</a>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
         </div>
       </ion-content>
+      <ion-footer *ngIf="modalArgument === 'PRIVACY'">
+        <ion-item>
+          <ion-toggle color="secondary" mode="md" [checked]="variabiliService.privacyAccepted"
+            (ionChange)="toggleChangePrivacy($event)">
+            <ion-label class="ion-text-wrap">
+              <h2>{{variabiliService.translation.INFO.PRIVACY[0].PRIVACY_ACCEPTATION}}</h2>
+              <p *ngIf="!variabiliService.privacyAccepted">
+                {{variabiliService.translation.INFO.PRIVACY[0].PRIVACY_NOT_ACCEPTED}}</p>
+              <p *ngIf="variabiliService.privacyAccepted">
+                {{variabiliService.translation.INFO.PRIVACY[0].PRIVACY_ACCEPTED}}</p>
+            </ion-label>
+          </ion-toggle>
+        </ion-item>
+      </ion-footer>
     </ng-template>
   </ion-modal>
 </ion-content>

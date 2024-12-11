@@ -1,0 +1,57 @@
+[
+  {
+    "min": 0,
+    "max": 35,
+    "color": "#fffeef"
+  },
+  {
+    "min": 35,
+    "max": 40,
+    "color": "#a0babf"
+  },
+  {
+    "min": 40,
+    "max": 45,
+    "color": "#b8d6d1"
+  },
+  {
+    "min": 45,
+    "max": 50,
+    "color": "#cee4cc"
+  },
+  {
+    "min": 50,
+    "max": 55,
+    "color": "#e2f2bf"
+  },
+  {
+    "min": 55,
+    "max": 60,
+    "color": "#f3c683"
+  },
+  {
+    "min": 60,
+    "max": 65,
+    "color": "#e87e4d"
+  },
+  {
+    "min": 65,
+    "max": 70,
+    "color": "#cd463e"
+  },
+  {
+    "min": 70,
+    "max": 75,
+    "color": "#a11a4d"
+  },
+  {
+    "min": 75,
+    "max": 80,
+    "color": "#75085c"
+  },
+  {
+    "min": 80,
+    "max": 150,
+    "color": "#430a4a"
+  }
+]

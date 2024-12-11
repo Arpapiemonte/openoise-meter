@@ -1,6 +1,6 @@
 <ion-card>
   <div style="margin:10px 5px 0px 5px;">
-    <ion-segment value="chartLAeqTimeRunning" mode="ios" (ionChange)="segmentGrafico($event)">
+    <ion-segment swipe-gesture="false" value="chartLAeqTimeRunning" mode="ios" (ionChange)="segmentGrafico($event)">
       <ion-segment-button value="chartLAeqTimeRunning">
         <ion-label style="font-weight: normal;">{{variabiliService.translation.CHARTS.GLOBALS}}</ion-label>
       </ion-segment-button>
