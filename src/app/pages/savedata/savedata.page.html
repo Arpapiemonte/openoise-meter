@@ -47,7 +47,7 @@
                     name="cloud-upload-outline" size="large"></ion-icon>
                   <ion-icon
                     *ngIf="variabiliService.metadataFromLabelToValue(file.metadata.CLOUD).value === 'cloud-true'"
-                    name="cloud-done-outline" size="large" color="secondary"></ion-icon>
+                    name="cloud-done-outline" size="large" style="color: var(--custom-selection);"></ion-icon>
                   <ion-label>{{file.size_kb}} kB</ion-label>
                 </ion-tab-button>
               </ion-col>

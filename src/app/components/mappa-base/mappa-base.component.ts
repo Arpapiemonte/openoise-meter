@@ -1,4 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { 
+  IonCol,
+  IonRow,
+} from '@ionic/angular/standalone';
 
 import { MappaService } from 'src/app/services/mappa.service';
 
@@ -6,8 +12,13 @@ import { MappaService } from 'src/app/services/mappa.service';
   selector: 'app-mappa-base',
   templateUrl: './mappa-base.component.html',
   styleUrls: ['./mappa-base.component.scss'],
+    imports: [
+      IonCol,
+      IonRow,
+      CommonModule,
+    ]
 })
-export class MappaBaseComponent implements OnInit {
+export class MappaBaseComponent  implements OnInit {
   @Output() chiudiDaComponent = new EventEmitter<any>();
 
   constructor(
@@ -25,5 +36,6 @@ export class MappaBaseComponent implements OnInit {
   ngOnInit() {
     console.log("PASS")
   }
+
 
 }

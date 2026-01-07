@@ -1,11 +1,3 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
 
   <div *ngIf="countdownBoolean" class="countdownContainer">
@@ -21,39 +13,29 @@
 </ion-content>
 
 <ion-tab-bar>
-  <!-- <ion-tab-button (click)="startPauseCapture()">
-    <ion-icon *ngIf="!audioService.capture" name="play-outline"></ion-icon>
-    <ion-label *ngIf="!audioService.capture">Start</ion-label>
-    <ion-icon *ngIf="audioService.pause && playStatic" name="play" style="color: var(--ion-color-secondary)"></ion-icon>
-    <ion-label *ngIf="audioService.pause && playStatic" style="color: var(--ion-color-secondary)">Restart</ion-label>
-    <ion-icon *ngIf="audioService.pause && !playStatic" name="play"></ion-icon>
-    <ion-label *ngIf="audioService.pause && !playStatic">Restart</ion-label>
-    <ion-icon *ngIf="audioService.capture && !audioService.pause" name="pause-outline"></ion-icon>
-    <ion-label *ngIf="audioService.capture && !audioService.pause">Pause</ion-label>
-  </ion-tab-button> -->
   <ion-tab-button (click)="startCapture()" mode="md">
     <ion-icon *ngIf="!audioService.capture" name="play-outline"></ion-icon>
     <ion-label *ngIf="!audioService.capture">{{variabiliService.translation.NOISE_METER.START}}</ion-label>
-    <ion-icon *ngIf="audioService.capture" name="play" style="color: var(--ion-color-secondary)"></ion-icon>
+    <ion-icon *ngIf="audioService.capture" name="play" style="color: var(--custom-selection)"></ion-icon>
     <ion-label *ngIf="audioService.capture"
-      style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.START}}</ion-label>
+      style="color: var(--custom-selection)">{{variabiliService.translation.NOISE_METER.START}}</ion-label>
   </ion-tab-button>
   <ion-tab-button (click)="pauseCapture()" mode="md">
     <ion-icon *ngIf="!audioService.pause" name="pause"></ion-icon>
     <ion-label *ngIf="!audioService.pause">{{variabiliService.translation.NOISE_METER.PAUSE}}</ion-label>
     <ion-icon *ngIf="audioService.pause && playStatic" name="pause"
-      style="color: var(--ion-color-secondary)"></ion-icon>
+      style="color: var(--custom-selection)"></ion-icon>
     <ion-label *ngIf="audioService.pause && playStatic"
-      style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.PAUSE}}</ion-label>
+      style="color: var(--custom-selection)">{{variabiliService.translation.NOISE_METER.PAUSE}}</ion-label>
     <ion-icon *ngIf="audioService.pause && !playStatic" name="pause" style="color: rgb(255,255,255,0)"></ion-icon>
     <ion-label *ngIf="audioService.pause && !playStatic"
-      style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.PAUSE}}</ion-label>
+      style="color: var(--custom-selection)">{{variabiliService.translation.NOISE_METER.PAUSE}}</ion-label>
   </ion-tab-button>
   <ion-tab-button (click)="stopCapture()" mode="md">
     <ion-icon *ngIf="!audioService.capture && !countdownBoolean" name="stop"
-      style="color: var(--ion-color-secondary)"></ion-icon>
+      style="color: var(--custom-selection)"></ion-icon>
     <ion-label *ngIf="!audioService.capture && !countdownBoolean"
-      style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.STOP}}</ion-label>
+      style="color: var(--custom-selection)">{{variabiliService.translation.NOISE_METER.STOP}}</ion-label>
     <ion-icon *ngIf="audioService.capture || countdownBoolean" name="stop-outline"></ion-icon>
     <ion-label
       *ngIf="audioService.capture || countdownBoolean">{{variabiliService.translation.NOISE_METER.STOP}}</ion-label>
@@ -65,9 +47,9 @@
   <ion-tab-button (click)="toggleChangeSave()" mode="md">
     <ion-icon *ngIf="!filesystemService.saveData" name="toggle-outline" style="transform: rotate(180deg);"></ion-icon>
     <ion-label *ngIf="!filesystemService.saveData">{{variabiliService.translation.NOISE_METER.SAVE}}</ion-label>
-    <ion-icon *ngIf="filesystemService.saveData" name="toggle" style="color: var(--ion-color-secondary)"></ion-icon>
+    <ion-icon *ngIf="filesystemService.saveData" name="toggle" style="color: var(--custom-selection)"></ion-icon>
     <ion-label *ngIf="filesystemService.saveData"
-      style="color: var(--ion-color-secondary)">{{variabiliService.translation.NOISE_METER.SAVE}}</ion-label>
+      style="color: var(--custom-selection)">{{variabiliService.translation.NOISE_METER.SAVE}}</ion-label>
   </ion-tab-button>
   <ion-tab-button [disabled]="!filesystemService.saveData" mode="md" (click)="startStopMarker()">
     <ion-icon *ngIf="!audioService.marker" name="flag-outline"></ion-icon>
@@ -77,3 +59,4 @@
     <ion-label *ngIf="audioService.marker" style="color: rgba(255, 165, 0, 1)">Marker</ion-label>
   </ion-tab-button>
 </ion-tab-bar>
+

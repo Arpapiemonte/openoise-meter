@@ -1,26 +1,72 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { AlertController } from '@ionic/angular'
-import { ModalController } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonModal,
+  IonTabButton,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import {
+  arrowBackOutline,
+  closeCircleOutline,
+  filter,
+  peopleOutline,
+  personOutline,
+} from 'ionicons/icons';
+
+import { AlertController } from '@ionic/angular/standalone'
+import { ModalController } from '@ionic/angular/standalone';
 
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { FilesystemService } from 'src/app/services/filesystem.service';
 import { MappaService } from 'src/app/services/mappa.service';
 import { RendererService } from 'src/app/services/renderer.service';
+
 import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { LegendaComponent } from 'src/app/components/legenda/legenda.component';
+import { MappaBaseComponent } from 'src/app/components/mappa-base/mappa-base.component';
 
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
+import { MarkerClusterGroup, markerClusterGroup } from 'leaflet';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
+  standalone: true,
+  imports: [
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonFooter,
+    IonHeader,
+    IonIcon,
+    IonLabel,
+    IonModal,
+    IonTabButton,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    LegendaComponent,
+    MappaBaseComponent,
+  ]
 })
 export class MapPage implements OnInit {
 
   map: any
-  mapDiv: boolean = false
   mappaBaseArray: any = []
   mapCenter: any
   mapZoom: any
@@ -58,6 +104,15 @@ export class MapPage implements OnInit {
     private mappaService: MappaService,
     private rendererService: RendererService,
   ) {
+    addIcons({
+      arrowBackOutline,
+      closeCircleOutline,
+      filter,
+      peopleOutline,
+      personOutline,
+
+    });
+
     this.subscriptionMappaBase = this.mappaService.getMappaBaseS().subscribe((val: any) => {
       console.log('getMappaBaseBS mappaComponent', val)
       if (this.map) {
@@ -105,7 +160,7 @@ export class MapPage implements OnInit {
     }
 
     // EVENTS
-    this.map.on('moveend', function (ev) {
+    this.map.on('moveend', function (ev: any) {
       console.log("map moveend")
       console.log("this_copy.map.getCenter()", this_copy.map.getCenter())
       console.log("this_copy.map.getZoom()", this_copy.map.getZoom())
@@ -114,12 +169,12 @@ export class MapPage implements OnInit {
     })
 
     // BOTTONI
-    function newButton(position: string, url: string, funzione) {
+    function newButton(position: string, url: string, funzione: ((this: GlobalEventHandlers, ev: MouseEvent) => any) | null) {
       return L.Control.extend({
         options: {
           position: position
         },
-        onAdd: function (map) {
+        onAdd: function (map: any) {
           var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
           var a = L.DomUtil.create('div', 'leafletButtonCustom', container);
           a.style.backgroundImage = "url(" + url + ")";
@@ -165,7 +220,7 @@ export class MapPage implements OnInit {
       }
       // COMMENTATA LA PARTE CON ESRI
       // if (this.mappaService.mappaBaseAttuale.type == "basemapEsri") {
-      //   var apikey = ""
+      //   var apikey = "AAPK0074ac5cd0964369944145c5e84c03c7WlvE3QeAgQIrqQYCUZVFIWczDMH1WbLy2QsD5GZuHqgE9xt_gq8vqN18UMHoHeVJ"
       //   this.mappaBaseArray.push(
       //     LesriVector.vectorBasemapLayer(this.mappaService.mappaBaseAttuale.basemapEsri, {
       //       // provide either apikey or token
@@ -242,7 +297,7 @@ export class MapPage implements OnInit {
     } else {
       if (!this.cloudFeatures) {
         console.log("reading cloudFeatures")
-        const url = ""
+        const url = "https://utility.arpa.piemonte.it/post_opennoise/openoise_measures.json"
         let response = await fetch(url, { cache: "no-cache" });
         let cloudMeasures = await response.json();
         console.log("cloudMeasures", cloudMeasures)
@@ -252,7 +307,7 @@ export class MapPage implements OnInit {
     }
 
     if (features.length > 0) {
-      var measuresGEOJSON = {
+      var measuresGEOJSON: any = {
         "type": "FeatureCollection",
         "name": "Misure locali",
         "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
@@ -272,11 +327,32 @@ export class MapPage implements OnInit {
       // })
 
       // cluster misure
-      this.layerMeasuresCluster = L.markerClusterGroup(
+      this.layerMeasuresCluster = markerClusterGroup(
         {
           spiderfyDistanceMultiplier: 3,
+          iconCreateFunction: function (cluster) {
+            const count = cluster.getChildCount();
+            let sizeClass = ' marker-cluster-small';
+            let anchor: [number, number] = [20, 20];
+
+            if (count >= 10 && count < 100) {
+              sizeClass = ' marker-cluster-medium';
+              anchor = [30, 30];
+            } else if (count >= 100) {
+              sizeClass = ' marker-cluster-large';
+              anchor = [40, 40];
+            }
+
+            return L.divIcon({
+              html: `<div>${count}</div>`,
+              className: 'marker-cluster' + sizeClass,
+              iconAnchor: anchor
+              // iconSize: null // lasciato null, ci pensa il CSS
+            });
+          }
         }
       );
+
       this.layerMeasuresCluster.addLayer(this.layerMeasures);
       // this.layerMeasuresCluster.addLayer(L.marker(L.getRandomLatLng(this.map)))
       this.map.addLayer(this.layerMeasuresCluster)
@@ -302,7 +378,7 @@ export class MapPage implements OnInit {
       this.getPosition(true)
     }
 
-    function onEachFeature(feature, layer) {
+    function onEachFeature(feature: { properties: { metadata: { popupContent: string; }; }; }, layer: { bindPopup: (arg0: HTMLDivElement) => void; }) {
 
       var modalType = ""
       if (this_copy.cloudMeasuresBoolean) {
@@ -526,14 +602,13 @@ export class MapPage implements OnInit {
       var center = L.latLng(lat, lon)
       var zoom = 16
 
-      var previsioniIcon = L.Icon.extend({
-        options: {
-          iconSize: [40, 32],
-        }
+      const previsioniIcon = L.icon({
+        iconUrl: './assets/images/mappa/pin_red.svg',
+        iconSize: [40, 32],
       });
 
       if (boolean) {
-        var markerPosition = L.marker(center, { icon: new previsioniIcon({ iconUrl: "./assets/images/mappa/pin_red.svg" }) })
+        const markerPosition = L.marker(center, { icon: previsioniIcon });
         markerPosition.addTo(this.map)
         var markerVisible = true
 
@@ -593,7 +668,7 @@ export class MapPage implements OnInit {
   }
 
   async readCloudData() {
-    const url = ""
+    const url = "https://utility.arpa.piemonte.it/post_opennoise/openoise_data.json"
     let response = await fetch(url, { cache: "no-cache" });
     let data = await response.json();
     console.log("cloud data", data)
@@ -601,18 +676,18 @@ export class MapPage implements OnInit {
 
   ionViewWillEnter() {
     console.log("MapPage ionViewWillEnter")
-    this.mapDiv = true
   }
 
   ionViewDidEnter() {
     console.log("MapPage ionViewDidEnter")
-    this.creaMappa()
+    if (!this.map) {
+      this.creaMappa()
+    }
     this.checkNetwork()
   }
 
   ionViewWillLeave() {
     console.log("MapPage ionViewWillLeave")
-    this.mapDiv = false
     this.localFeatures = false
     this.cloudFeatures = false
   }
@@ -629,5 +704,6 @@ export class MapPage implements OnInit {
     console.log("MapPage ngOnDestroy")
     this.subscriptionMappaBase.unsubscribe()
   }
+
 
 }

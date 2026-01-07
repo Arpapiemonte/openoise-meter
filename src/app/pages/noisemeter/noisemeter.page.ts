@@ -1,14 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgZone } from '@angular/core';
 import { Optional } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { IonRouterOutlet } from '@ionic/angular';
-import { Platform } from '@ionic/angular';
-import { AlertController } from '@ionic/angular'
-import { ToastController } from '@ionic/angular';
+import { IonRouterOutlet } from '@ionic/angular/standalone';
+import { Platform } from '@ionic/angular/standalone';
+import { AlertController } from '@ionic/angular/standalone'
+import { ToastController } from '@ionic/angular/standalone';
+
+import {
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonTabBar,
+  IonTabButton,
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import {
+  flag,
+  flagOutline,
+  pause,
+  play,
+  playOutline,
+  refreshOutline,
+  stop,
+  stopOutline,
+  toggle,
+  toggleOutline
+} from 'ionicons/icons';
 
 import { App } from '@capacitor/app';
+
+import { GraficiComponent } from 'src/app/components/grafici/grafici.component';
+import { LivelliComponent } from 'src/app/components/livelli/livelli.component';
 
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { AudioService } from '../../services/audio.service';
@@ -17,10 +44,22 @@ import { PreferencesService } from 'src/app/services/preferences.service';
 
 @Component({
   selector: 'app-noisemeter',
-  templateUrl: 'noisemeter.page.html',
-  styleUrls: ['noisemeter.page.scss']
+  templateUrl: './noisemeter.page.html',
+  styleUrls: ['./noisemeter.page.scss'],
+  standalone: true,
+  imports: [
+    IonContent,
+    IonIcon,
+    IonLabel,
+    IonTabBar,
+    IonTabButton,
+    CommonModule,
+    FormsModule,
+    GraficiComponent,
+    LivelliComponent
+  ]
 })
-export class NoisemeterPage {
+export class NoisemeterPage implements OnInit {
 
   audioSubscribe: any
 
@@ -46,10 +85,23 @@ export class NoisemeterPage {
     private preferencesService: PreferencesService,
     @Optional() private routerOutlet?: IonRouterOutlet,
   ) {
+    addIcons({
+      flag,
+      flagOutline,
+      pause,
+      play,
+      playOutline,
+      refreshOutline,
+      stop,
+      stopOutline,
+      toggle,
+      toggleOutline,
+    });
+
 
     this.platform.backButton.subscribeWithPriority(-1, () => {
       console.log("backButton")
-      if (!this.routerOutlet.canGoBack()) {
+      if (!this.routerOutlet?.canGoBack()) {
         console.log("this.router.url", this.router.url)
         if (this.router.url == '/pages/tabs/noisemeter') {
           console.log("backButton exitApp")
@@ -61,6 +113,7 @@ export class NoisemeterPage {
     });
 
   }
+
 
   startCapture() {
     if (!this.audioService.capture) {
@@ -126,7 +179,7 @@ export class NoisemeterPage {
     const permissions = await this.filesystemService.checkRequestPermissions()
     if (permissions == "granted") {
       if (this.filesystemService.saveData) {
-        if (this.audioService.capture) { 
+        if (this.audioService.capture) {
           this.audioService.writeStatus('STOP')
         }
         this.filesystemService.saveData = false
@@ -169,7 +222,7 @@ export class NoisemeterPage {
     )
   }
 
-  async presentAlert(header: string, subHeader: string, message: string) {
+  async presentAlert(header: any, subHeader: any, message: any) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subHeader,
@@ -199,7 +252,7 @@ export class NoisemeterPage {
       const locPermissions = await this.variabiliService.locPermissions()
       console.log("NoisemeterPage locPermissions", locPermissions)
     }
-    
+
     this.countdownNumberLocal = Number(this.variabiliService.countdownNumber)
     console.log("countdownNumberLocal", this.countdownNumberLocal)
 
@@ -231,8 +284,11 @@ export class NoisemeterPage {
     this.platform.ready().then((readySource) => {
       console.log("platform ready", readySource)
       if (this.variabiliService.firstTime) {
-        this.startCaptureWithCountdown()
+
         this.variabiliService.firstTime = false
+        if (this.variabiliService.autoStart) {
+          this.startCaptureWithCountdown()
+        }
       }
     })
   }
@@ -333,5 +389,6 @@ export class NoisemeterPage {
   ngOnInit() {
     console.log("NoisemeterPage ngOnInit")
   }
+
 
 }

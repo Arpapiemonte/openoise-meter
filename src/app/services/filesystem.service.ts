@@ -4,12 +4,10 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 //import { Geolocation } from '@capacitor/geolocation';
 import { Subject } from 'rxjs';
 
-import { AlertController } from '@ionic/angular'
+import { AlertController } from '@ionic/angular/standalone'
 
 import { VariabiliService } from './variabili.service';
-
-import * as moment from 'moment'
-import 'moment/locale/it'
+import { DatetimeService } from './datetime.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +22,12 @@ export class FilesystemService {
 
   saveData: boolean = false
   saveDataStart: boolean = false
-  nameFileWriting: string
+  nameFileWriting: string | undefined
 
   constructor(
     private alertController: AlertController,
-    private variabiliService: VariabiliService
+    private variabiliService: VariabiliService,
+    private datetimeService: DatetimeService,
   ) {
   }
 
@@ -80,7 +79,7 @@ export class FilesystemService {
   async inizializeFile() {
     // console.log("inizializeFile")
 
-    this.nameFileWriting = moment(new Date()).format("YYYY-MM-DD-HHmmss") + this.variabiliService.saveOptions.extension
+    this.nameFileWriting = this.datetimeService.newDate().format("yyyy-MM-dd-HHmmss") + this.variabiliService.saveOptions.extension
     this.setNameFileWritingS(this.nameFileWriting)
     await this.writeFile(
       this.nameFileWriting,
@@ -291,14 +290,14 @@ export class FilesystemService {
     console.log("files", files)
 
     var filesOutput = []
-    var now = moment()
+    var now = this.datetimeService.newDate()
     // console.log("now", now)
     if (files) {
       for (let file of files) {
         file["size_kb"] = (file.size / 1000).toFixed(0)
         file["checked"] = false
-        file["data_label"] = this.formatDate(Number(file.ctime))
-        var time = this.differenzaTempi(now, Number(file.ctime))
+        file["data_label"] = this.formatDate(Number(file.ctime)/1000)
+        var time = this.differenzaTempi(now, this.datetimeService.newDate(Number(file.ctime)/1000))
         file["diff"] = time.diff
         file["diff_label"] = time.diff_label
         file["metadata"] = await this.getMetadata(file.name)
@@ -313,12 +312,12 @@ export class FilesystemService {
   formatDate(date: any) {
     var output = ''
     if (date != '' && this.variabiliService.language === 'en') {
-      moment.locale('en-GB');
-      output = moment(date).format("MM/DD/YYYY HH:mm")
+      this.datetimeService.setLanguage('enUS')
+      output = this.datetimeService.newDate(date).format('EEE MM/dd HH:mm:ss')
     } else {
       if (date != '' && this.variabiliService.language === 'it') {
-        moment.locale('it-IT');
-        output = moment(date).format("DD/MM/YYYY HH:mm")
+        this.datetimeService.setLanguage('it')
+        output = this.datetimeService.newDate(date).format('EEE dd/MM HH:mm:ss')
       }
     }
     return output
@@ -326,17 +325,16 @@ export class FilesystemService {
 
 
   differenzaTempi(time1: any, time2: any) {
-
     var output = {
-      'diff': '',
+      'diff': 0,
       'diff_label': ''
     }
 
-    var giorni = time1.diff(moment(time2), 'days')
-    var ore = time1.diff(moment(time2), 'hours')
-    var minuti = time1.diff(moment(time2), 'minutes')
+    var giorni = this.datetimeService.diffInDays(time1.date, time2.date)
+    var ore = this.datetimeService.diffInHours(time1.date, time2.date)
+    var minuti = this.datetimeService.diffInMinutes(time1.date, time2.date)
 
-    output.diff = time1.diff(moment(time2))
+    output.diff = this.datetimeService.diffInMilliseconds(time1.date, time2.date)
 
     if (giorni > 0) {
       output.diff_label = giorni + this.variabiliService.translation.SAVE_FILES.SAVE_FILES_TIME1
@@ -399,7 +397,7 @@ export class FilesystemService {
   }
 
   sortFile(files: any, order: string) {
-    files.sort(function (a, b) {
+    files.sort(function (a: { diff: any; }, b: { diff: any; }) {
       var x = a.diff;
       var y = b.diff;
       if (order == 'asc') {

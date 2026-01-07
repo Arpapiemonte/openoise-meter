@@ -2,7 +2,7 @@
 
   <div style="height: 100%;">
     <!-- <div id="mapid" style="width:100%; height: calc(100% - 140px);"></div> -->
-    <div *ngIf="mapDiv" id="mapid" style="width:100%; height: calc(100%);"></div>
+    <div id="mapid" style="width:100%; height: calc(100%);"></div>
   </div>
 
   <ion-modal [isOpen]="isInlineModalOpen" (willDismiss)="onWillInlineModalDismiss($event)">
@@ -59,9 +59,10 @@
         <ion-icon *ngIf="filters.length === 0" name="filter" (click)="openFilter()"></ion-icon>
         <ion-label *ngIf="filters.length === 0">{{ this.variabiliService.translation.MAP.FILTERS2 }}</ion-label>
         <ion-icon *ngIf="filters.length > 0" name="filter" (click)="openFilter()"
-          style="color: var(--ion-color-secondary)"></ion-icon>
-        <ion-label *ngIf="filters.length > 0" style="color: var(--ion-color-secondary)">{{ this.variabiliService.translation.MAP.FILTERS2 }}</ion-label>
+          style="color: var(--custom-selection)"></ion-icon>
+        <ion-label *ngIf="filters.length > 0" style="color: var(--custom-selection)">{{ this.variabiliService.translation.MAP.FILTERS2 }}</ion-label>
       </ion-tab-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+

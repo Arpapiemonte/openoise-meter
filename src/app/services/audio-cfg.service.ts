@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular/standalone';
 
 import { VariabiliService } from './variabili.service';
 
@@ -10,8 +10,8 @@ declare var audioinput: any;
 })
 export class AudioCfgService {
 
-  freqResolution: number;
-  bufferFFT: number;
+  freqResolution: number = 0;
+  bufferFFT: number = 0
   captureCfg: any;
 
   samplerate: number = 44100;

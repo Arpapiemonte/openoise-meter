@@ -9,7 +9,7 @@
 .colAgeSelected {
     padding: 8px 0px;
     text-align: center;
-    background-color: var(--ion-color-secondary);
+    background-color: var(--custom-selection);
     border-radius: 10px;
     font-size: small;
     font-weight: bold;
@@ -22,6 +22,6 @@ ion-segment-button {
 
 .modalPicker {
     --height: auto;
-  
+
     align-items: end;
-  }
+}

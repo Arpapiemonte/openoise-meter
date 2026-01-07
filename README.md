@@ -55,19 +55,19 @@ openoise@arpa.piemonte.it
 ```
 Ionic:
 
-   Ionic CLI                     : 7.2.0
-   Ionic Framework               : @ionic/angular 8.1.0
-   @angular-devkit/build-angular : 17.3.6
-   @angular-devkit/schematics    : 17.3.6
-   @angular/cli                  : 17.3.6
-   @ionic/angular-toolkit        : 11.0.1
+   Ionic CLI                     : 7.2.0 
+   Ionic Framework               : @ionic/angular 8.5.3
+   @angular-devkit/build-angular : 19.2.6
+   @angular-devkit/schematics    : 19.2.6
+   @angular/cli                  : 19.2.6
+   @ionic/angular-toolkit        : 12.1.1
 
 Capacitor:
 
-   Capacitor CLI      : 6.0.0
-   @capacitor/android : 6.0.0
-   @capacitor/core    : 6.0.0
-   @capacitor/ios     : 6.0.0
+   Capacitor CLI      : 7.2.0
+   @capacitor/android : 7.2.0
+   @capacitor/core    : 7.2.0
+   @capacitor/ios     : 7.2.0
 
 Utility:
 

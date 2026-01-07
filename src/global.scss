@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -25,27 +25,53 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-@import "~leaflet/dist/leaflet.css";
-@import "~leaflet.markercluster/dist/MarkerCluster.css";
-@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+@import "@ionic/angular/css/palettes/dark.class.css";
+// @import '@ionic/angular/css/palettes/dark.system.css';
+
+// @import "leaflet/dist/leaflet.css";
+// @import "leaflet.markercluster/dist/MarkerCluster.css";
+// @import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
 
 ion-content {
     --ion-padding: 0px;
 }
 
 ion-tab-button {
-    --color-focused: var(--ion-color-secondary);
-    --color-selected: var(--ion-color-secondary);
+    --color-focused: var(--custom-selection);
+    --color-selected: var(--custom-selection);
 }
 
 ion-segment-button {
     --indicator-color: rgb(61, 194, 255, 0.5);
+    --color: var(--custom-segment-text);
 }
 
 ion-item-divider {
     --padding-top: 5px;
     --padding-bottom: 5px;
     font-variant: small-caps;
+}
+
+ion-radio {
+    --color-checked: var(--custom-selection);
+}
+
+ion-toogle {
+    --handle-background-checked: var(--custom-selection);
+    --track-background-checked: var(--custom-selection);
+}
+
+ion-range {
+    --bar-background-active: var(--custom-selection);
 }
 
 .toastClass {
@@ -92,4 +118,59 @@ ion-item-divider {
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-  }
+}
+
+.marker-cluster {
+    border-radius: 50% !important;
+    background-color: transparent !important;
+    width: 50px !important;
+    height: 50px !important;
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.marker-cluster div {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    background-color: rgba(230, 240, 255, 1) !important;
+    border: 5px solid rgba(0, 102, 255, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    color: black !important;
+}
+
+
+.marker-cluster-small {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: small !important;
+}
+
+.marker-cluster-medium {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: large !important;
+}
+
+.marker-cluster-large {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: xx-large !important;
+}
+
+.marker-cluster-small div {
+    font-size: small !important;
+}
+
+.marker-cluster-medium div {
+    font-size: large !important;
+}
+
+.marker-cluster-large div {
+    font-size: xx-large !important;
+}

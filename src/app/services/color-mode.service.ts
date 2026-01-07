@@ -74,11 +74,11 @@ export class ColorModeService {
     if (color == "dark") {
       this.variabiliService.colorMode = 'dark'
       this.graficiService.setColors('dark')
-      document.body.classList.toggle('dark', true);
+      document.documentElement.classList.toggle('ion-palette-dark', true);
     } else {
       this.variabiliService.colorMode = 'light'
       this.graficiService.setColors('light')
-      document.body.classList.toggle('dark', false);
+      document.documentElement.classList.toggle('ion-palette-dark', false);
     }
   }
 

@@ -1,11 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { 
+  IonCol,
+  IonGrid,
+  IonRow,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-legenda',
   templateUrl: './legenda.component.html',
   styleUrls: ['./legenda.component.scss'],
+  imports: [
+    IonCol,
+    IonGrid,
+    IonRow,
+    CommonModule
+  ]
 })
-export class LegendaComponent implements OnInit {
+export class LegendaComponent  implements OnInit {
 
   coloriLivelliJSON: any
 
@@ -25,5 +38,6 @@ export class LegendaComponent implements OnInit {
   }
 
   ngOnInit() { }
+
 
 }

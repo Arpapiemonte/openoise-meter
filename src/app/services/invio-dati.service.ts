@@ -1,7 +1,14 @@
+// per vedere i dati
+// https://utility.arpa.piemonte.it/post_opennoise/openoise_view.php
+// per mandare i dati
+// https://utility.arpa.piemonte.it/post_opennoise/openoise_insert_and_json.php
+// per scaricare i dati
+// https://utility.arpa.piemonte.it/post_opennoise/openoise_data.json
+
+
 import { Injectable } from '@angular/core';
 
-import { AlertController } from '@ionic/angular';
-// import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 
 import { Network } from '@capacitor/network';
 import { Device } from '@capacitor/device';
@@ -157,7 +164,7 @@ export class InvioDatiService {
      }
      formBody = formBody.join("&");
  
-     const response = await fetch("", {
+     const response = await fetch("https://utility.arpa.piemonte.it/post_opennoise/send_data_calibrazioni.php", {
        method: "POST",
        headers: {
          "Content-Type": "application/x-www-form-urlencoded",
@@ -237,7 +244,7 @@ export class InvioDatiService {
      }
      formBody = formBody.join("&");
  
-     const response = await fetch("", {
+     const response = await fetch("https://utility.arpa.piemonte.it/post_opennoise/send_data_misure.php", {
        method: "POST",
        headers: {
          "Content-Type": "application/x-www-form-urlencoded",
@@ -379,7 +386,7 @@ export class InvioDatiService {
     }
     formBody = formBody.join("&");
 
-    const response = await fetch("", {
+    const response = await fetch("https://utility.arpa.piemonte.it/post_opennoise/openoise_insert_and_json.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

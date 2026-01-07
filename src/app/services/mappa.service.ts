@@ -110,7 +110,7 @@ export class MappaService {
     //   "type": "tileLayer",
     //   "name": "osm_3857",
     //   "label": "osm_3857",
-    //   "tileLayerURL": "",
+    //   "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/osm_3857/grid_arpa/{z}/{x}/{y}.png",
     //   // "attribution": "",
     //   "thumb": "assets/images/base/openstreetmap.png",
     //   "opacity": 1
@@ -119,7 +119,7 @@ export class MappaService {
     //   "type": "tileLayer",
     //   "name": "arcgis_imagery_TOPO_layer_3857",
     //   "label": "arcgis_imagery_TOPO_layer_3857",
-    //   "tileLayerURL": "",
+    //   "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/arcgis_imagery_TOPO_layer_3857/grid_arpa/{z}/{x}/{y}.png",
     //   // "attribution": "",
     //   "thumb": "assets/images/base/World_Topo_Map.png",
     //   "opacity": 1
@@ -128,7 +128,7 @@ export class MappaService {
     //   "type": "tileLayer",
     //   "name": "arcgis_imagery_layer_3857",
     //   "label": "arcgis_imagery_layer_3857",
-    //   "tileLayerURL": "",
+    //   "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/arcgis_imagery_layer_3857/grid_arpa/{z}/{x}/{y}.png",
     //   // "attribution": "",
     //   "thumb": "assets/images/base/10df2279f9684e4a9f6a7f08febac2a9.png",
     //   "opacity": 1
@@ -140,7 +140,7 @@ export class MappaService {
       "type": "tileLayer",
       "name": "proxyArpa_arcgis_imagery_TOPO_layer_3857",
       "label": this.variabiliService.translation.MAP.TOPO, //"Topografica",
-      "tileLayerURL": "",
+      "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/arcgis_imagery_TOPO_layer_3857/grid_arpa/{z}/{x}/{y}.png",
       "attribution": "",
       "thumb": "assets/images/base/World_Topo_Map.png",
       "opacity": 1
@@ -149,7 +149,7 @@ export class MappaService {
       "type": "tileLayer",
       "name": "proxyArpa_osm_3857",
       "label": "OpenStreetMap",
-      "tileLayerURL": "",
+      "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/osm_3857/grid_arpa/{z}/{x}/{y}.png",
       "attribution": "",
       "thumb": "assets/images/base/openstreetmap.png",
       "opacity": 1
@@ -158,7 +158,7 @@ export class MappaService {
       "type": "tileLayer",
       "name": "proxyArpa_arcgis_imagery_layer_3857",
       "label": this.variabiliService.translation.MAP.ORTO, //"Ortofoto",
-      "tileLayerURL": "",
+      "tileLayerURL": "https://mapproxy.arpa.piemonte.it/mapproxy/wmts/arcgis_imagery_layer_3857/grid_arpa/{z}/{x}/{y}.png",
       "attribution": "",
       "thumb": "assets/images/base/10df2279f9684e4a9f6a7f08febac2a9.png",
       "opacity": 1

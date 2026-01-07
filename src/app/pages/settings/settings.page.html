@@ -20,28 +20,28 @@
                   < 20</ion-label>
               </ion-segment-button>
               <ion-segment-button value="20-30">
-                <ion-label>20-30</ion-label>
+                <ion-label>20-29</ion-label>
               </ion-segment-button>
               <ion-segment-button value="30-40">
-                <ion-label>30-40</ion-label>
+                <ion-label>30-39</ion-label>
               </ion-segment-button>
               <ion-segment-button value="40-50">
-                <ion-label>40-50</ion-label>
+                <ion-label>40-49</ion-label>
               </ion-segment-button>
             </ion-segment>
             <ion-segment swipe-gesture="false" value="{{variabiliService.userData.age}}"
               style="margin-top: 0px;padding-top:0px;" (ionChange)="segmentChangedUserAge($event)">
               <ion-segment-button value="50-60">
-                <ion-label>50-60</ion-label>
+                <ion-label>50-59</ion-label>
               </ion-segment-button>
               <ion-segment-button value="60-70">
-                <ion-label>60-70</ion-label>
+                <ion-label>60-69</ion-label>
               </ion-segment-button>
               <ion-segment-button value="70-80">
-                <ion-label>70-80</ion-label>
+                <ion-label>70-79</ion-label>
               </ion-segment-button>
               <ion-segment-button value=">80">
-                <ion-label>> 80</ion-label>
+                <ion-label>&ge; 80</ion-label>
               </ion-segment-button>
             </ion-segment>
           </p>
@@ -74,22 +74,22 @@
               <ion-radio-group mode="md" [allowEmptySelection]="false" value="{{variabiliService.userData.type}}"
                 (ionChange)="userTypeRadioGroup($event)">
                 <ion-item>
-                  <ion-radio value="beginner"
-                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_BEGINNER}}
+                  <ion-radio
+                    value="beginner">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_BEGINNER}}
                     <ion-label class="ion-text-wrap"
                       style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_BEGINNER_SUB}}</ion-label>
                   </ion-radio>
                 </ion-item>
                 <ion-item>
-                  <ion-radio value="intermediate"
-                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_INTERMEDIATE}}
+                  <ion-radio
+                    value="intermediate">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_INTERMEDIATE}}
                     <ion-label class="ion-text-wrap"
                       style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_INTERMEDIATE_SUB}}</ion-label>
                   </ion-radio>
                 </ion-item>
                 <ion-item>
-                  <ion-radio value="advanced"
-                    color="secondary">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_ADVANCED}}
+                  <ion-radio
+                    value="advanced">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_ADVANCED}}
                     <ion-label class="ion-text-wrap"
                       style="font-size: small;">{{variabiliService.translation.SETTINGS.USERDATA.USERDATA_USERTYPE_ADVANCED_SUB}}</ion-label>
                   </ion-radio>
@@ -121,7 +121,7 @@
         </ion-label>
         <ion-icon *ngIf="!variabiliService.calibrationCloud" name="cloud-upload-outline" size="large"></ion-icon>
         <ion-icon *ngIf="variabiliService.calibrationCloud" name="cloud-done-outline" size="large"
-          color="secondary"></ion-icon>
+          style="color: var(--custom-selection);"></ion-icon>
       </ion-item>
 
       <ion-item-divider>
@@ -136,8 +136,8 @@
             }} - {{variabiliService.translation.SETTINGS.YAXIS_RANGE.YAXIS_RANGE_MAX}}: {{
             this.variabiliService.range.upper }}</p>
           <div>
-            <ion-range color="secondary" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true"
-              [min]="-20" [max]="130" [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
+            <ion-range mode="ios" [dualKnobs]="true" [pin]="true" [ticks]="true" [step]="10" [snaps]="true" [min]="-20"
+              [max]="130" [value]="modalRange" (ionKnobMoveEnd)="rangeAssiMoveEnd($event)"></ion-range>
           </div>
         </ion-label>
       </ion-item>
@@ -156,6 +156,17 @@
             </ion-segment>
           </p>
         </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-toggle mode="md" [checked]="variabiliService.autoStart" (ionChange)="toggleChangeAvvioAutomatico($event)">
+          <ion-label class="ion-text-wrap">
+            <h2>{{variabiliService.translation.SETTINGS.AUTOSTART.AUTOSTART_TITLE}}</h2>
+            <p *ngIf="variabiliService.autoStart">
+              {{variabiliService.translation.SETTINGS.AUTOSTART.ON}}</p>
+            <p *ngIf="!variabiliService.autoStart">
+              {{variabiliService.translation.SETTINGS.AUTOSTART.OFF}}</p>
+          </ion-label>
+        </ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>
@@ -202,7 +213,7 @@
               200 - 10000 Hz</span>
           </p>
           <div>
-            <ion-range color="secondary" [disabled]="audioService.capture" [dualKnobs]="true" [pin]="false" [ticks]="true" [step]="1"
+            <ion-range  [disabled]="audioService.capture" [dualKnobs]="true" [pin]="false" [ticks]="true" [step]="1"
               [snaps]="true" [min]="0" [max]="31" [value]="rangeFreq" (ionChange)="rangeFreqChange($event)"></ion-range>
           </div>
         </ion-label>
@@ -217,8 +228,7 @@
         <ion-label>{{variabiliService.translation.SETTINGS.VIEW.VIEW_LABEL.VIEW_TITLE}}</ion-label>
       </ion-item-divider>
       <ion-item>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.ruotaSchermo"
-          (ionChange)="toggleChangeRuotaSchermo($event)">
+        <ion-toggle mode="md" [checked]="variabiliService.ruotaSchermo" (ionChange)="toggleChangeRuotaSchermo($event)">
           <ion-label class="ion-text-wrap">
             <h2>{{variabiliService.translation.SETTINGS.VIEW.ORIENTATION.ORIENTATION_TITLE}}</h2>
             <p *ngIf="variabiliService.ruotaSchermo">
@@ -322,13 +332,13 @@
             <ion-segment swipe-gesture="false" value="{{this.variabiliService.saveOptions.date_format}}"
               [(ngModel)]="this.variabiliService.saveOptions.date_format" (ionChange)="setDateFormat($event)"
               style="margin-top: 5px;">
-              <ion-segment-button value="YYYY-MM-DD">
+              <ion-segment-button value="yyyy-MM-dd">
                 <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_YMD}}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="DD-MM-YYYY">
+              <ion-segment-button value="dd-MM-yyyy">
                 <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_DMY}}</ion-label>
               </ion-segment-button>
-              <ion-segment-button value="MM-DD-YYYY">
+              <ion-segment-button value="MM-dd-yyyy">
                 <ion-label>{{variabiliService.translation.SETTINGS.SAVE_DATA.DATE_FORMAT_MDY}}</ion-label>
               </ion-segment-button>
             </ion-segment>
@@ -385,7 +395,7 @@
         </ion-label>
       </ion-item>
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
+        <ion-toggle mode="md" [checked]="variabiliService.saveOptions.bandLZeq"
           (ionChange)="toggleChangeSaveLZeq($event)">
           <ion-label>
             <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LAEQ}}</h2>
@@ -397,7 +407,7 @@
         </ion-toggle>
       </ion-item>
       <ion-item [disabled]="fileSystemService.saveData && audioService.capture">
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
+        <ion-toggle mode="md" [checked]="variabiliService.saveOptions.bandLZmin"
           (ionChange)="toggleChangeSaveLZmin($event)">
           <ion-label>
             <h2>{{variabiliService.translation.SETTINGS.SAVE_DATA.SAVE_DATA_BAND_LZMIN}}</h2>
@@ -416,7 +426,7 @@
           <p *ngIf="!variabiliService.saveOptions.debug">{{variabiliService.translation.SETTINGS.SAVE_DATA.FALSE}}
           </p>
         </ion-label>
-        <ion-toggle color="secondary" mode="md" [checked]="variabiliService.saveOptions.debug"
+        <ion-toggle  mode="md" [checked]="variabiliService.saveOptions.debug"
           (ionChange)="toggleChangeSaveDebug($event)"></ion-toggle>
       </ion-item> -->
 
@@ -462,7 +472,7 @@
             </ion-card-content>
           </ion-card>
 
-          <ion-card>
+          <ion-card *ngIf="!isModalPickerOpen">
             <ion-card-header>
               <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_VALUE_TEXT}}</ion-card-title>
               <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
@@ -480,47 +490,70 @@
                 </ion-col>
               </ion-row>
               <div style="padding-top:20px;">
-                <ion-button (click)="apriPickerCalibrazione()" style="--background:  rgb(61, 194, 255, 0.9);">
+                <ion-button (click)="apriPickerCalibrazione()" style="--background: var(--custom-selection);">
                   {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_BUTTON}}
                 </ion-button>
-                <ion-modal class="modalPicker" [isOpen]="isModalPickerOpen"
-                  (willDismiss)="onWillModalPickerDismiss($event)">
-                  <ng-template>
-                    <ion-toolbar>
-                      <ion-buttons slot="start">
-                        <ion-button color="primary" (click)="modalPickerCancel()">{{variabiliService.translation.SETTINGS.CALIBRATION
-                          .CALIBRATION_CANCEL}}</ion-button>
-                      </ion-buttons>
-                      <ion-buttons slot="end">
-                        <ion-button color="primary" (click)="modalPickerOk()">{{variabiliService.translation.SETTINGS.CALIBRATION
-                          .CALIBRATION_OK}}</ion-button>
-                      </ion-buttons>
-                    </ion-toolbar>
-                    <ion-picker mode="ios">
-                        <ion-picker-column mode="ios" value="{{currentValueModalPickerInteger}}" (ionChange)="onIonChangeModalPickerInteger($event)">
-                          <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
-                            .CALIBRATION_INTEGER}}</div>
-                        <ion-picker-column-option *ngFor="let int of calibrazioneInteger" value="{{int}}"
-                          disabled="false">{{int}}</ion-picker-column-option>
-                      </ion-picker-column>
-                      <ion-picker-column mode="ios" value="{{currentValueModalPickerDecimal}}" (ionChange)="onIonChangeModalPickerDecimal($event)">
-                        <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
-                          .CALIBRATION_DECIMAL}}</div>
-                        <ion-picker-column-option *ngFor="let dec of calibrazioneDecimal" value="{{dec}}"
-                          disabled="false">{{dec}}</ion-picker-column-option>
-                      </ion-picker-column>
-                    </ion-picker>
-                  </ng-template>
-                </ion-modal>
               </div>
             </ion-card-content>
           </ion-card>
+          <!-- PICKER CALIBRAZIONE-->
+          <ion-modal class="modalPicker" [isOpen]="isModalPickerOpen" (willDismiss)="onWillModalPickerDismiss($event)">
+            <ng-template>
+              <ion-toolbar
+                style="--background: var(--ion-color-light); --border-color: var(--ion-color-medium);  --border-width: 1px 0px 1px 0px; text-align: center;">
+                <ion-title>
+                  {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_PICKER_TITLE}}
+                </ion-title>
+              </ion-toolbar>
+              <ion-row class="ion-justify-content-center ion-align-items-center">
+                <ion-col class="ion-text-end" style="font-size: large;">
+
+                </ion-col>
+                <ion-col class="ion-align-self-center ion-text-center" style="font-size: 40px; font-weight: bold;">
+                  {{(variabiliService.dbGain).toFixed(1)}}
+                </ion-col>
+                <ion-col class="ion-text-start" style="font-size: large;">
+                  dBA
+                </ion-col>
+              </ion-row>
+              <div style="text-align: center; font-size: small; font-weight: normal;">
+                {{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_PICKER_VALUE_PREVIOUS}}:
+                {{(dbGainPrevious).toFixed(1)}} dBA
+              </div>
+              <ion-picker mode="ios">
+                <ion-picker-column mode="ios" value="{{currentValueModalPickerInteger}}"
+                  (ionChange)="onIonChangeModalPickerInteger($event)">
+                  <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
+                    .CALIBRATION_INTEGER}}</div>
+                  <ion-picker-column-option *ngFor="let int of calibrazioneInteger" value="{{int}}"
+                    disabled="false">{{int}}</ion-picker-column-option>
+                </ion-picker-column>
+                <ion-picker-column mode="ios" value="{{currentValueModalPickerDecimal}}"
+                  (ionChange)="onIonChangeModalPickerDecimal($event)">
+                  <div slot="prefix">{{variabiliService.translation.SETTINGS.CALIBRATION
+                    .CALIBRATION_DECIMAL}}</div>
+                  <ion-picker-column-option *ngFor="let dec of calibrazioneDecimal" value="{{dec}}"
+                    disabled="false">{{dec}}</ion-picker-column-option>
+                </ion-picker-column>
+              </ion-picker>
+              <div
+                style="background: var(--ion-color-light); border-top: 1px solid var(--ion-color-medium); text-align: center;">
+                <ion-button style="--background:  var(--custom-selection); padding: 0px 10px"
+                  (click)="modalPickerCancel()">{{variabiliService.translation.SETTINGS.CALIBRATION
+                  .CALIBRATION_CANCEL}}
+                </ion-button>
+                <ion-button style="--background:  var(--custom-selection); padding: 0px 10px"
+                  (click)="modalPickerOk()">{{variabiliService.translation.SETTINGS.CALIBRATION
+                  .CALIBRATION_OK}}
+                </ion-button>
+              </div>
+            </ng-template>
+          </ion-modal>
 
           <ion-card style="text-align: left;">
-            <ion-card-header>
+            <!-- <ion-card-header>
               <ion-card-title>{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TITLE1}}</ion-card-title>
-              <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
-            </ion-card-header>
+            </ion-card-header> -->
             <ion-card-content innerHTML="{{variabiliService.translation.SETTINGS.CALIBRATION.CALIBRATION_TEXT}}">
             </ion-card-content>
           </ion-card>
@@ -532,7 +565,7 @@
             <ion-card-content>
               {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_TEXT}}
               <div style="text-align: right;">
-                <ion-button (click)="sendDataCalibration()" style="--background:  rgb(61, 194, 255, 0.9);">
+                <ion-button (click)="sendDataCalibration()" style="--background:  var(--custom-selection);">
                   {{variabiliService.translation.SETTINGS.SEND_CALIBDATA.SEND_CALIBDATA_BUTTONTEXT}}
                 </ion-button>
               </div>

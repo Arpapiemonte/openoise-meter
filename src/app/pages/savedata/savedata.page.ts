@@ -1,11 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { 
+  IonCheckbox,
+  IonCol,
+  IonContent, 
+  IonIcon,
+  IonItem,
+  IonItemGroup,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+  IonRow,
+  IonTabBar,
+  IonTabButton,
+} from '@ionic/angular/standalone';
 
-import { ActionSheetController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { 
+  closeOutline,
+  cloudDoneOutline,
+  cloudUploadOutline,
+  createOutline,
+  eyeOutline, 
+  openOutline, 
+  shareSocialOutline, 
+  swapVerticalOutline, 
+  trashOutline
+} from 'ionicons/icons';
 
+
+import { ActionSheetController } from '@ionic/angular/standalone';
+import { AlertController } from '@ionic/angular/standalone';
+import { ModalController } from '@ionic/angular/standalone';
 import { Share } from '@capacitor/share';
 
-import { ModalController } from '@ionic/angular';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 import { FilesystemService } from 'src/app/services/filesystem.service';
@@ -13,24 +42,39 @@ import { FilesystemService } from 'src/app/services/filesystem.service';
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { InvioDatiService } from 'src/app/services/invio-dati.service';
 import { PreferencesService } from 'src/app/services/preferences.service';
-//import { Optional } from '@angular/core';
-import { Router } from '@angular/router';
-//import { IonRouterOutlet } from '@ionic/angular';
 
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-saveddata',
-  templateUrl: './saveddata.page.html',
-  styleUrls: ['./saveddata.page.scss'],
+  selector: 'app-savedata',
+  templateUrl: './savedata.page.html',
+  styleUrls: ['./savedata.page.scss'],
+  standalone: true,
+  imports: [
+    IonCheckbox,
+    IonCol,
+    IonContent, 
+    IonIcon,
+    IonItem,
+    IonItemGroup,
+    IonItemDivider,
+    IonLabel,
+    IonList,
+    IonRow,
+    IonTabBar,
+    IonTabButton,
+    CommonModule, 
+    FormsModule]
 })
-export class SaveddataPage implements OnInit {
+export class SavedataPage implements OnInit {
+
 
   files: any = []
   order = 'desc'
 
   modificaMoltiVariable: boolean = false
 
-  multiFiles = []
+  multiFiles: any = []
 
   fileOpen: string = ''
   fileOpenArrayMetadata: any
@@ -51,7 +95,19 @@ export class SaveddataPage implements OnInit {
     private preferencesService: PreferencesService,
     private router: Router,
     //@Optional() private routerOutlet?: IonRouterOutlet,
-  ) { }
+  ) {
+    addIcons({
+      closeOutline,
+      cloudDoneOutline,
+      cloudUploadOutline,
+      createOutline,
+      eyeOutline,
+      openOutline,
+      shareSocialOutline,
+      swapVerticalOutline,
+      trashOutline,      
+    });
+   }
 
   async recuperaFiles() {
     this.files = await this.filesystemService.recuperaFiles()

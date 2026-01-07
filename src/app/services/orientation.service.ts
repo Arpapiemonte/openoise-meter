@@ -9,8 +9,8 @@ import { Device } from '@capacitor/device';
 })
 export class OrientationService {
 
-  rotateIOS: string
-  platform: string
+  rotateIOS: string | undefined
+  platform: string | undefined
 
   constructor() {
 

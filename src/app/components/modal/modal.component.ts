@@ -1,7 +1,36 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { Platform } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCheckbox,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonItemGroup,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+  IonRadio,
+  IonRadioGroup,
+  IonRange,
+  IonTextarea,
+  IonTitle,
+  IonToolbar
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { arrowBackOutline } from 'ionicons/icons';
+
+import { Platform } from '@ionic/angular/standalone';
+import { ModalController } from '@ionic/angular/standalone';
 
 import { VariabiliService } from 'src/app/services/variabili.service';
 import { FilesystemService } from 'src/app/services/filesystem.service';
@@ -10,6 +39,31 @@ import { FilesystemService } from 'src/app/services/filesystem.service';
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
+  imports: [
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCheckbox,
+    IonContent,
+    IonFooter,
+    IonHeader,
+    IonIcon,
+    IonItem,
+    IonItemGroup,
+    IonItemDivider,
+    IonLabel,
+    IonList,
+    IonRadio,
+    IonRadioGroup,
+    IonRange,
+    IonTextarea,
+    IonTitle,
+    IonToolbar,
+    CommonModule
+  ]
 })
 export class ModalComponent implements OnInit {
   @Input() modalType: any;
@@ -21,13 +75,18 @@ export class ModalComponent implements OnInit {
 
   metadataGroups: any = []
 
+  nMetadataCompiled = 0
+  nMetadataTotal = 8
+
   constructor(
     private platform: Platform,
     private modalCtrl: ModalController,
     public variabiliService: VariabiliService,
     private filesystemService: FilesystemService,
   ) {
-
+    addIcons({
+      arrowBackOutline,
+    });
   }
 
   cancel() {
@@ -104,6 +163,7 @@ export class ModalComponent implements OnInit {
     console.log('textareaIonInputEventDetail Current value:', ev);
     console.log('textareaIonInputEventDetail Current value:', JSON.stringify(ev.target.value));
     this.file.metadata.DESCRIPTION = ev.target.value
+    this.countMetadataCompiled()
   }
 
   handleChangeRadioGroup(ev: any) {
@@ -111,7 +171,7 @@ export class ModalComponent implements OnInit {
 
     var metadata = this.variabiliService.metadataFromValueToLabel(ev.detail.value)
     this.file.metadata[metadata.metadataProperty] = metadata.label
-
+    this.countMetadataCompiled()
   }
 
   feelingInput(ev: any) {
@@ -119,6 +179,7 @@ export class ModalComponent implements OnInit {
     if (this.modalType == "metadata") {
       this.file.metadata.FEELING = this.variabiliService.metadataFromValueToLabel(ev.detail.value).label
     }
+    this.countMetadataCompiled()
   }
 
   appropriateInput(ev: any) {
@@ -126,6 +187,7 @@ export class ModalComponent implements OnInit {
     if (this.modalType == "metadata") {
       this.file.metadata.APPROPRIATE = this.variabiliService.metadataFromValueToLabel(ev.detail.value).label
     }
+    this.countMetadataCompiled()
   }
 
   setModal() {
@@ -351,6 +413,36 @@ export class ModalComponent implements OnInit {
           }
         }
       }
+
+      this.countMetadataCompiled()
+    }
+  }
+
+  countMetadataCompiled() {
+    this.nMetadataCompiled = 0
+    if (this.file.metadata.DESCRIPTION.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (this.file.metadata.TYPE.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (this.file.metadata.ENVIRONMENT.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (this.file.metadata.SOURCE.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (this.file.metadata.WEATHER.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (this.file.metadata.WHYTAKENOISE.length > 0) {
+      this.nMetadataCompiled++
+    }
+    if (Number(this.variabiliService.metadataFromLabelToValue(this.file.metadata.APPROPRIATE).value) > -1) {
+      this.nMetadataCompiled++
+    }
+    if (Number(this.variabiliService.metadataFromLabelToValue(this.file.metadata.FEELING).value) > -1) {
+      this.nMetadataCompiled++
     }
   }
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 import { KeepAwake } from '@capacitor-community/keep-awake';
 
-import { AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { Device } from '@capacitor/device';
@@ -20,7 +21,7 @@ import { FilesystemService } from './services/filesystem.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
 
@@ -53,11 +54,11 @@ export class AppComponent {
 
   async inizializzaApp() {
 
+    await this.recuperaPreferences()
+
     await this.setLanguage()
 
     await this.keepAwake()
-
-    await this.recuperaPreferences()
 
     this.colorModeService.setColorInterface()
 
@@ -73,15 +74,23 @@ export class AppComponent {
 
   async recuperaPreferences() {
 
-    var ruotaSchermo = await this.preferencesService.get('ruotaSchermo')
-    if (ruotaSchermo == null) {
-      console.log("ruotaSchermo non esiste, la inizializzo")
-      this.preferencesService.set("ruotaSchermo", this.variabiliService.ruotaSchermo)
+    var countdownNumber = await this.preferencesService.get('countdownNumber')
+    if (countdownNumber == null) {
+      console.log("countdownNumber non esiste, la inizializzo")
+      this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber)
     } else {
-      console.log("ruotaSchermo esiste", ruotaSchermo)
-      this.variabiliService.ruotaSchermo = ruotaSchermo
+      console.log("countdownNumber esiste", countdownNumber)
+      this.variabiliService.countdownNumber = String(countdownNumber)
     }
-    this.orientationService.rotateOrientation(this.variabiliService.ruotaSchermo)
+
+    var autoStart = await this.preferencesService.get('autoStart')
+    if (autoStart == null) {
+      console.log("autoStart non esiste, la inizializzo")
+      this.preferencesService.set("autoStart", this.variabiliService.autoStart)
+    } else {
+      console.log("autoStart esiste", autoStart)
+      this.variabiliService.autoStart = autoStart
+    }
 
     var dbGain = await this.preferencesService.get('dbGain')
     if (dbGain == null) {
@@ -91,6 +100,16 @@ export class AppComponent {
       console.log("dbGain esiste", dbGain)
       this.variabiliService.dbGain = dbGain
     }
+
+    var ruotaSchermo = await this.preferencesService.get('ruotaSchermo')
+    if (ruotaSchermo == null) {
+      console.log("ruotaSchermo non esiste, la inizializzo")
+      this.preferencesService.set("ruotaSchermo", this.variabiliService.ruotaSchermo)
+    } else {
+      console.log("ruotaSchermo esiste", ruotaSchermo)
+      this.variabiliService.ruotaSchermo = ruotaSchermo
+    }
+    this.orientationService.rotateOrientation(this.variabiliService.ruotaSchermo)
 
     var rangeAssi = await this.preferencesService.get('rangeAssi')
     if (rangeAssi == null) {
@@ -117,6 +136,10 @@ export class AppComponent {
       }
       if (!("date_format" in saveOptions)) {
         saveOptions["date_format"] = this.variabiliService.saveOptions.date_format
+      } else {
+        if (saveOptions["date_format"] == "YYYY-MM-DD") saveOptions["date_format"] = "yyyy-MM-dd"
+        if (saveOptions["date_format"] == "DD-MM-YYYY") saveOptions["date_format"] = "dd-MM-yyyy"
+        if (saveOptions["date_format"] == "MM-DD-YYYY") saveOptions["date_format"] = "MM-dd-yyyy"
       }
       if (!("debug" in saveOptions)) {
         saveOptions["debug"] = this.variabiliService.saveOptions.debug
@@ -141,15 +164,6 @@ export class AppComponent {
     } else {
       console.log("levelsOrientation esiste", levelsOrientation)
       this.variabiliService.levelsOrientation = levelsOrientation
-    }
-
-    var countdownNumber = await this.preferencesService.get('countdownNumber')
-    if (countdownNumber == null) {
-      console.log("countdownNumber non esiste, la inizializzo")
-      this.preferencesService.set("countdownNumber", this.variabiliService.countdownNumber)
-    } else {
-      console.log("countdownNumber esiste", countdownNumber)
-      this.variabiliService.countdownNumber = String(countdownNumber)
     }
 
     var rangeFreqHz = await this.preferencesService.get('rangeFreqHz')
@@ -257,7 +271,7 @@ export class AppComponent {
           this.preferencesService.set('mappaBaseLeafletIniziale', JSON.stringify(this.mappaService.mappeBaseLeaflet[0]));
         } else {
           console.log("AppComponent mappaBaseLeafletIniziale", res)
-          let obj = this.mappaService.mappeBaseLeaflet.find(o => o.name === res.name);
+          let obj = this.mappaService.mappeBaseLeaflet.find((o: { name: any; }) => o.name === res.name);
           console.log("obj", obj)
           if (obj) {
             this.mappaService.mappaBaseAttuale = obj
@@ -290,5 +304,4 @@ export class AppComponent {
     }
 
   }
-
 }

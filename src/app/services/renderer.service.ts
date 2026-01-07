@@ -16,7 +16,7 @@ export class RendererService {
   coloriLivelli() {
     console.log("rendererService coloriLivelli")
 
-    var circleMarker = {
+    var circleMarker: any = {
       radius: 12,
       fillColor: "#FFFFFF",
       color: "#FFFFFF",
@@ -38,7 +38,7 @@ export class RendererService {
           return L.circleMarker(latlng, circleMarker)
         }
       }
-
+      return L.circleMarker(latlng, circleMarker)
     }
   }
 

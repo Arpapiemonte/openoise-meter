@@ -112,7 +112,7 @@ export class GraficiService {
     }
   }
 
-  public chartLAeqTimeRunning = {
+  public chartLAeqTimeRunning: any = {
     // data: [
     //   { x: [], y: [], type: 'scatter', name: 'LAeq(1s)' },
     //   { x: [], y: [], type: 'scatter', name: 'LAeq(t)' },
@@ -231,7 +231,7 @@ export class GraficiService {
     }
   }
 
-  public chartThirdOctaves = {
+  public chartThirdOctaves: any = {
     data: [],
     layout: {
       // autosize: true,
@@ -348,7 +348,7 @@ export class GraficiService {
     }
   }
 
-  public chartSonogram = {
+  public chartSonogram: any = {
     data: [],
     layout: {
       // autosize: true,

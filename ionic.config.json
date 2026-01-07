@@ -1,7 +1,7 @@
 {
-  "name": "OpeNoise Meter",
+  "name": "openoise_c7",
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular-standalone"
 }

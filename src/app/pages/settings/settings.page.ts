@@ -1,9 +1,47 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgZone } from '@angular/core';
-import { IonModal } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonItemGroup,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+  IonModal,
+  IonPicker,
+  IonPickerColumn,
+  IonPickerColumnOption,
+  IonRadio,
+  IonRadioGroup,
+  IonRange,
+  IonRow,
+  IonSegment,
+  IonSegmentButton,
+  IonTitle,
+  IonToggle,
+  IonToolbar
+} from '@ionic/angular/standalone';
 
+import { addIcons } from 'ionicons';
+import {
+  arrowBackOutline,
+  cloudDoneOutline,
+  cloudUploadOutline,
+
+} from 'ionicons/icons';
+
+import { AlertController } from '@ionic/angular/standalone';
 
 import { Device } from '@capacitor/device';
 
@@ -20,34 +58,68 @@ import { InvioDatiService } from 'src/app/services/invio-dati.service';
 
 @Component({
   selector: 'app-settings',
-  templateUrl: 'settings.page.html',
-  styleUrls: ['settings.page.scss'],
+  templateUrl: './settings.page.html',
+  styleUrls: ['./settings.page.scss'],
+  standalone: true,
+  imports: [
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonContent,
+    IonHeader,
+    IonIcon,
+    IonItem,
+    IonItemGroup,
+    IonItemDivider,
+    IonLabel,
+    IonList,
+    IonModal,
+    IonPicker,
+    IonPickerColumn,
+    IonPickerColumnOption,
+    IonRadio,
+    IonRadioGroup,
+    IonRange,
+    IonRow,
+    IonSegment,
+    IonSegmentButton,
+    IonTitle,
+    IonToggle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+  ]
 })
-export class SettingsPage {
-  @ViewChild(IonModal) modal: IonModal;
+export class SettingsPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal | undefined;
 
   logDeviceInfo: any;
   platform: any;
 
   audioSubscribe: any;
 
-  calibrazioneInteger = [];
-  calibrazioneDecimal = [];
+  calibrazioneInteger: any = [];
+  calibrazioneDecimal: any = [];
 
   isModalOpen = false;
   isModalPickerOpen = false
   currentValueModalPickerInteger = 0
   currentValueModalPickerDecimal = 0
+  dbGainPrevious = 0
 
   modalArgument = '';
   modalRange: any;
 
-  selectedSeparator1: boolean;
-  selectedSeparator2: boolean;
-  selectedSeparator3: boolean;
+  selectedSeparator1: boolean | undefined;
+  selectedSeparator2: boolean | undefined;
+  selectedSeparator3: boolean | undefined;
 
-  selectedDecimal1: boolean;
-  selectedDecimal2: boolean;
+  selectedDecimal1: boolean | undefined;
+  selectedDecimal2: boolean | undefined;
 
   labelFieldSeparator: string = '';
   labelDecSeparator: string = '';
@@ -79,6 +151,13 @@ export class SettingsPage {
     private colorModeService: ColorModeService,
     public invioDatiService: InvioDatiService
   ) {
+    addIcons({
+      arrowBackOutline,
+      cloudUploadOutline,
+      cloudDoneOutline
+    });
+
+
     for (let i = -50; i <= 50; i++) {
       this.calibrazioneInteger.push(i);
     }
@@ -98,14 +177,15 @@ export class SettingsPage {
     }
   }
 
-  async apriPickerCalibrazione() { 
+  async apriPickerCalibrazione() {
     console.log("apriPickerCalibrazione")
     this.currentValueModalPickerInteger = Math.trunc(this.variabiliService.dbGain);
     this.currentValueModalPickerDecimal =
       Math.abs(
         Number((this.variabiliService.dbGain - this.currentValueModalPickerInteger).toFixed(1))
       ) * 10;
-
+    
+    this.dbGainPrevious = this.variabiliService.dbGain
     this.isModalPickerOpen = true
   }
 
@@ -147,12 +227,12 @@ export class SettingsPage {
       buttons: [
         {
           text: this.variabiliService.translation.SETTINGS.CALIBRATION
-          .CALIBRATION_CANCEL,
+            .CALIBRATION_CANCEL,
           role: 'cancel',
         },
         {
           text: this.variabiliService.translation.SETTINGS.CALIBRATION
-          .CALIBRATION_YES,
+            .CALIBRATION_YES,
           handler(data: String) {
             console.log('Ok calibration equal to zero');
             this_copy.presentAlertCalibType();
@@ -202,9 +282,9 @@ export class SettingsPage {
           label:
             this.platform == 'ios'
               ? this.variabiliService.translation.SETTINGS.SEND_CALIBDATA
-                  .SEND_CALIBDATA_CALIBTYPE4_IOS
+                .SEND_CALIBDATA_CALIBTYPE4_IOS
               : this.variabiliService.translation.SETTINGS.SEND_CALIBDATA
-                  .SEND_CALIBDATA_CALIBTYPE4_ANDROID,
+                .SEND_CALIBDATA_CALIBTYPE4_ANDROID,
           value: 'Confronto4',
         },
       ],
@@ -320,7 +400,7 @@ export class SettingsPage {
           role: 'cancel',
         },
         {
-            text: 'OK',
+          text: 'OK',
           handler(res) {
             console.log('presentAlertExternalMicType res', res);
             //this_copy.invioDatiService.sendDataCalibration(this_copy.variabiliService.userData, this_copy.calibType, this_copy.micType,res[0])
@@ -419,7 +499,7 @@ export class SettingsPage {
           handler: () => {
             console.log('cambio calibrazione OK');
             this.variabiliService.dbGain = newDBGain;
-            console.log('this.variabiliService.dbGain new: ',this.variabiliService.dbGain);
+            console.log('this.variabiliService.dbGain new: ', this.variabiliService.dbGain);
             this.preferencesService.set('dbGain', this.variabiliService.dbGain);
             this.preferencesService.set('calibrationCloud', false);
             this.variabiliService.calibrationCloud = false;
@@ -514,6 +594,16 @@ export class SettingsPage {
   segmentChangedMainLevel(event: any) {
     console.log('this.mainLevel: ', this.variabiliService.mainLevel);
     this.preferencesService.set('mainLevel', this.variabiliService.mainLevel);
+  }
+
+  toggleChangeAvvioAutomatico(event: any) {
+    console.log('toggleChangeAvvioAutomatico', event.detail.checked);
+
+    this.variabiliService.autoStart = event.detail.checked;
+    this.preferencesService.set(
+      'autoStart',
+      this.variabiliService.autoStart
+    );
   }
 
   toggleChangeRuotaSchermo(event: any) {
@@ -704,28 +794,28 @@ export class SettingsPage {
       buttons: [
         {
           text: this.variabiliService.translation.SETTINGS.CALIBRATION
-          .CALIBRATION_CANCEL,
+            .CALIBRATION_CANCEL,
           role: 'cancel',
         },
         {
           text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA
-          .PRIVACY_VIEW,
+            .PRIVACY_VIEW,
           handler(data: String) {
             console.log('Leggi privacy');
-            this_copy.router.navigate(['/pages/tabs/info'],{
+            this_copy.router.navigate(['/pages/tabs/info'], {
               queryParams: {
-                 value : 'PRIVACY'
-                },
-              })
+                value: 'PRIVACY'
+              },
+            })
           },
         },
         {
           text: this.variabiliService.translation.SETTINGS.SEND_CALIBDATA
-          .PRIVACY_ACCEPTED,
+            .PRIVACY_ACCEPTED,
           handler(data: String) {
             console.log('Ok privacy');
             this_copy.variabiliService.privacyAccepted = true
-            this_copy.preferencesService.set('privacyAccepted',true)
+            this_copy.preferencesService.set('privacyAccepted', true)
             this_copy.sendDataCalibration();
           },
         },
@@ -773,4 +863,5 @@ export class SettingsPage {
   ngOnInit() {
     console.log('SettingsPage ngOnInit');
   }
+
 }

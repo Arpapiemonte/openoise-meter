@@ -104,7 +104,7 @@
           </div>
         </div>
         <div *ngIf="modalType === 'metadata'">
-          <ion-radio-group mode="md" value="{{group.groupRadioMetadataValue}}" [allowEmptySelection]="true"
+          <ion-radio-group mode="md" value="{{group.groupRadioMetadataValue}}" [allowEmptySelection]="false"
             (ionChange)="handleChangeRadioGroup($event)">
             <div *ngFor="let divider of group.dividers">
               <ion-item-divider mode="md" *ngIf="divider.dividersName">
@@ -167,3 +167,8 @@
     </ion-list>
   </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title style="font-size: large; text-align: center;">{{variabiliService.translation.SAVE_FILES.EDIT_DESCRIPTION.COMPILED}}: {{nMetadataCompiled}} / {{nMetadataTotal}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -4,12 +4,11 @@ import { VariabiliService } from './variabili.service';
 import { AudioCfgService } from './audio-cfg.service';
 import { GraficiService } from './grafici.service';
 import { FilesystemService } from './filesystem.service';
+import { DatetimeService } from './datetime.service';
 
 declare var audioinput: any;
-import fft from 'fourier-transform/asm';
-
-import * as moment from 'moment'
-import 'moment/locale/it';
+// import fft from 'fourier-transform/asm';
+const fft = require('fourier-transform/asm') as any;
 
 @Injectable({
   providedIn: 'root'
@@ -231,7 +230,7 @@ export class AudioService {
   dbAFftTime: Array<number> = [];
 
   onAudio: any;
-  firstGoodValueGlobal: number;
+  firstGoodValueGlobal: number | undefined;
   firstGoodValueBand: Array<any> = [];
 
   // CHART DATA VARIABLES
@@ -249,6 +248,7 @@ export class AudioService {
     public audioCfgService: AudioCfgService,
     public graficiService: GraficiService,
     public filesystemService: FilesystemService,
+    private datetimeService: DatetimeService,
   ) {
 
   }
@@ -276,14 +276,14 @@ export class AudioService {
   checkPermessi() {
     // First check whether we already have permission to access the microphone.
     var this_copy = this
-    audioinput.checkMicrophonePermission(function (hasPermission) {
+    audioinput.checkMicrophonePermission(function (hasPermission: any) {
       if (hasPermission) {
         console.log("We already have permission to record.");
         this_copy.startCapture();
       }
       else {
         // Ask the user for permission to access the microphone
-        audioinput.getMicrophonePermission(function (hasPermission, message) {
+        audioinput.getMicrophonePermission(function (hasPermission: any, message: any) {
           if (hasPermission) {
             console.log("User granted us permission to record.");
             this_copy.startCapture();
@@ -410,9 +410,9 @@ export class AudioService {
       // console.log("this_copy.date_now",this_copy.date_now)
       this_copy.countInterval++
 
-      var date_now_date = moment(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format)
-      var date_now_date_server = moment(this_copy.date_now).format("YYYY-MM-DD")
-      var date_now_time = moment(this_copy.date_now).format("HH:mm:ss")
+      var date_now_date = this_copy.datetimeService.newDate(this_copy.date_now).format(this_copy.variabiliService.saveOptions.date_format)
+      var date_now_date_server = this_copy.datetimeService.newDate(this_copy.date_now).format("yyyy-MM-dd")
+      var date_now_time = this_copy.datetimeService.newDate(this_copy.date_now).format("HH:mm:ss")
 
       if (!this_copy.pause) {
         console.log("this_copy.numberFftTime", this_copy.numberFftTime)
@@ -582,7 +582,7 @@ export class AudioService {
               }
             }
             if (this_copy.variabiliService.saveOptions.debug) {
-              data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+              data = data + this_copy.variabiliService.saveOptions.field + this_copy.datetimeService.newDate(this_copy.date_now_debug).format("HH:mm:ss.SSS")
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
               data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
@@ -620,7 +620,7 @@ export class AudioService {
           data = data + this_copy.variabiliService.saveOptions.field
           data = data + this_copy.variabiliService.saveOptions.field + 'PAUSE'
           if (this_copy.variabiliService.saveOptions.debug) {
-            data = data + this_copy.variabiliService.saveOptions.field + moment(this_copy.date_now_debug).format("HH:mm:ss.SSS")
+            data = data + this_copy.variabiliService.saveOptions.field + this_copy.datetimeService.newDate(this_copy.date_now_debug).format("HH:mm:ss.SSS")
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.countInterval
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTime
             data = data + this_copy.variabiliService.saveOptions.field + this_copy.numberFftTotal
@@ -654,12 +654,12 @@ export class AudioService {
     console.log("writeStatus", status)
 
     if (this.filesystemService.saveData) {
-      let data = moment().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss")
+      let data = this.datetimeService.newDate().format(this.variabiliService.saveOptions.date_format) + this.variabiliService.saveOptions.field + this.datetimeService.newDate().format("HH:mm:ss")
       data = data + this.variabiliService.saveOptions.field
       data = data + this.variabiliService.saveOptions.field
       data = data + this.variabiliService.saveOptions.field + status
       if (this.variabiliService.saveOptions.debug) {
-        data = data + this.variabiliService.saveOptions.field + moment().format("HH:mm:ss.SSS")
+        data = data + this.variabiliService.saveOptions.field + this.datetimeService.newDate().format("HH:mm:ss.SSS")
         data = data + this.variabiliService.saveOptions.field + this.countInterval
         data = data + this.variabiliService.saveOptions.field + this.numberFftTime
         data = data + this.variabiliService.saveOptions.field + this.numberFftTotal

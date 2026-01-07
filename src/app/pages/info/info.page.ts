@@ -1,7 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ToastController } from '@ionic/angular';
+import { 
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonContent, 
+  IonFooter,
+  IonHeader, 
+  IonIcon,
+  IonItem,
+  IonItemGroup,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+  IonModal,
+  IonRow,
+  IonTitle, 
+  IonToggle,
+  IonToolbar 
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { 
+  arrowBackOutline, 
+  buildOutline, 
+  gitMergeOutline, 
+  logoGithub, 
+  mailOutline, 
+  peopleOutline, 
+  ribbonOutline, 
+  warningOutline 
+} from 'ionicons/icons';
+
+import { ToastController } from '@ionic/angular/standalone';
 
 import { App } from '@capacitor/app';
 import { Clipboard } from '@capacitor/clipboard';
@@ -10,18 +48,47 @@ import { VariabiliService } from 'src/app/services/variabili.service';
 import { PreferencesService } from 'src/app/services/preferences.service';
 //import { TranslateService } from '@ngx-translate/core';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
+
 @Component({
   selector: 'app-info',
-  templateUrl: 'info.page.html',
-  styleUrls: ['info.page.scss']
+  templateUrl: './info.page.html',
+  styleUrls: ['./info.page.scss'],
+  standalone: true,
+  imports: [
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonContent, 
+    IonFooter,
+    IonHeader, 
+    IonIcon,
+    IonItem,
+    IonItemGroup,
+    IonItemDivider,
+    IonLabel,
+    IonList,
+    IonModal,
+    IonRow,
+    IonTitle, 
+    IonToggle,
+    IonToolbar,
+    CommonModule, 
+    FormsModule,
+    PdfViewerModule
+  ]
 })
-export class InfoPage {
-
+export class InfoPage implements OnInit {
   versionNumber = ''
   isModalOpen = false;
   modalArgument = ''
 
-  cards = []
+  cards: any = []
 
   pdfSrc = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
@@ -34,9 +101,20 @@ export class InfoPage {
     private toastController: ToastController,
     public variabiliService: VariabiliService,
     public preferencesService: PreferencesService,
-  ) { }
+  ){
+    addIcons({
+      arrowBackOutline,
+      buildOutline,
+      gitMergeOutline,
+      logoGithub,
+      mailOutline,
+      peopleOutline,
+      ribbonOutline,
+      warningOutline,
+    });
+   }
 
-  async getAppVersion() {
+   async getAppVersion() {
     try {
       const info = await App.getInfo();
       console.log("plugin App", info);
@@ -56,7 +134,7 @@ export class InfoPage {
     // console.log(this.variabiliService.translation["INFO"][input])
     if (this.modalArgument != "CREDITS") {
       for (let c of this.variabiliService.translation["INFO"][input]) {
-        let card = {}
+        let card: any = {}
         for (let property in c) {
           // console.log("property", property)
           if (property.includes("TITLE")) {
@@ -93,10 +171,10 @@ export class InfoPage {
     console.log("ionModalDidPresent caricaPdf")
     if (this.modalArgument === "PRIVACY") {
       if (this.variabiliService.language == 'it') {
-        this.urlPDF = ''
-        // this.urlPDF = ''
+        this.urlPDF = 'https://webgis.arpa.piemonte.it/openoise/openoise_privacy_it.pdf'
+        // this.urlPDF = 'https://webgis.arpa.piemonte.it/openoise/informativa.pdf'
       } else {
-        this.urlPDF = ''
+        this.urlPDF = 'https://webgis.arpa.piemonte.it/openoise/openoise_privacy_en.pdf'
       }
     }
     console.log("this.urlPDF", this.urlPDF)

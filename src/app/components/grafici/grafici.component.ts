@@ -1,4 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { 
+  IonCard,
+  IonCol,
+  IonLabel,
+  IonRow,
+  IonSegment,
+  IonSegmentButton,
+} from '@ionic/angular/standalone';
+
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 import { GraficiService } from '../../services/grafici.service';
 import { VariabiliService } from 'src/app/services/variabili.service';
@@ -7,8 +22,18 @@ import { VariabiliService } from 'src/app/services/variabili.service';
   selector: 'app-grafici',
   templateUrl: './grafici.component.html',
   styleUrls: ['./grafici.component.scss'],
+  imports: [
+    IonCard,
+    IonCol,
+    IonLabel,
+    IonRow,
+    IonSegment,
+    IonSegmentButton,
+    CommonModule,
+    PlotlyModule
+  ]
 })
-export class GraficiComponent implements OnInit {
+export class GraficiComponent  implements OnInit {
 
 
   visualizzaGrafico = 'chartLAeqTimeRunning'
@@ -38,5 +63,6 @@ export class GraficiComponent implements OnInit {
 
   ngOnDestroy() {
   }
+
 
 }

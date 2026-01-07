@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 
-//import { PickerController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular/standalone';
 
 import { Geolocation } from '@capacitor/geolocation';
 import { Network } from '@capacitor/network';
@@ -49,7 +48,7 @@ export class VariabiliService {
   chartVisibiltyGlobalsLAeq1s: boolean = true
   chartVisibiltyGlobalsLAeqt: boolean = true
 
-  chartParameters = {
+  chartParameters: any = {
     "GLOBALS_LAEQ1s": true,
     "GLOBALS_LAEQt": true,
     "OCTAVES_LZEQ1s": true,
@@ -66,11 +65,12 @@ export class VariabiliService {
     "decimal": ".",
     "field": ";",
     "extension": ".txt",
-    "date_format": "YYYY-MM-DD",
+    "date_format": "yyyy-MM-dd",
     "debug": false
   }
 
   mainLevel = 'LAeq(1s)'
+  autoStart: Boolean = true
   countdownNumber: string = '3'
 
   rangeFreqHz = {
