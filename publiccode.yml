@@ -1,4 +1,4 @@
-publiccodeYmlVersion: 0.5.0
+publiccodeYmlVersion: '0'
 name: OpeNoise Meter - Android and iOS app
 applicationSuite: OpeNoise
 url: https://github.com/Arpapiemonte/openoise-meter
